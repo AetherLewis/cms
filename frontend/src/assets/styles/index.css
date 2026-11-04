@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-star-50 text-star-900 antialiased;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-md border border-white/40 rounded-xl shadow-sm;
+  }
+  .btn-primary {
+    @apply px-4 py-2 bg-star-600 text-white rounded-lg font-medium transition-colors hover:bg-star-700 focus:outline-none focus:ring-2 focus:ring-star-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply px-4 py-2 bg-white text-star-700 border border-star-200 rounded-lg font-medium transition-colors hover:bg-star-50 focus:outline-none focus:ring-2 focus:ring-star-600 focus:ring-offset-2;
+  }
+  .btn-danger {
+    @apply px-4 py-2 bg-red-600 text-white rounded-lg font-medium transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .input {
+    @apply w-full px-4 py-2 bg-white border border-star-200 rounded-lg text-star-900 placeholder-star-400 focus:outline-none focus:ring-2 focus:ring-star-600 focus:border-transparent transition-all;
+  }
+  .select {
+    @apply w-full px-4 py-2 bg-white border border-star-200 rounded-lg text-star-900 focus:outline-none focus:ring-2 focus:ring-star-600 focus:border-transparent cursor-pointer;
+  }
+  .table-cell {
+    @apply px-6 py-4 border-b border-star-100 text-star-700;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
