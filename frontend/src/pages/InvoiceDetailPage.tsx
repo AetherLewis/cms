@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { formatCurrency, formatDate } from '../utils/format'
-import { Download, Mail, ArrowLeft, Edit, Clock, DollarSign, CreditCard } from 'lucide-react'
+import { Download, Mail, ArrowLeft, Edit, Clock, Calendar, DollarSign, CreditCard } from 'lucide-react'
 
 export function InvoiceDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -142,4 +142,3 @@ export function InvoiceDetailPage() {
   )
 }
 
-import { Calendar, Clock, CreditCard } from 'lucide-react'

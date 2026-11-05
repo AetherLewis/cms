@@ -7,7 +7,7 @@ import { Input } from '../components/ui/Input'
 import { Select } from '../components/ui/Select'
 import { Mail, Phone, Building } from 'lucide-react'
 
-export function ClientFormPage() {
+export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void; onCancel?: () => void }) {
   const { clientId } = useParams<{ clientId?: string }>()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)

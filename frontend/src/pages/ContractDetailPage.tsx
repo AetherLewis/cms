@@ -4,10 +4,10 @@ import { getContract, getContractStats } from '../utils/api'
 import { toast } from 'react-hot-toast'
 import { Badge } from '../components/ui/Badge'
 import { Breadcrumbs } from '../components/Breadcrumbs'
-import { SummaryStatistic, DetailRow, ActionButtons } from '../components/SummaryCard'
+import { DetailRow } from '../components/SummaryCard'
 import { Button } from '../components/ui/Button'
-import { User, MailBuilding, Calendar, DollarSign, FileText, PlusCircle, History } from 'lucide-react'
-import { currency, formatDate, formatCurrency } from '../utils/format'
+import { User, Building, Calendar, DollarSign, PlusCircle, History } from 'lucide-react'
+import { formatDate, formatCurrency } from '../utils/format'
 
 export function ContractDetailPage() {
   const { id } = useParams<{ id: string }>()

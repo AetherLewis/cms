@@ -10,12 +10,12 @@ async function request<T>(
   path: string,
   options: RequestInit = {}
 ): Promise<T> {
-  const token = localStorage.getItem('starcore_token')
+  const { data: { session } } = await supabase.auth.getSession()
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...options.headers,
+    ...(options.headers instanceof Headers ? Object.fromEntries(options.headers.entries()) : (options.headers as Record<string, string> | undefined) || {}),
   }
-  if (token) headers.Authorization = `Bearer ${token}`
+  if (session?.access_token) headers.Authorization = `Bearer ${session.access_token}`
 
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers })
 
@@ -47,7 +47,7 @@ export async function signup(email: string, password: string, fullName: string) 
 
 export async function logout() {
   await supabase.auth.signOut()
-  localStorage.removeItem('starcore_token')
+  // Supabase manages the access token lifecycle.
 }
 
 /** ---------- Clients ---------- */

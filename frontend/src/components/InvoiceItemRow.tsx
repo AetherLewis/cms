@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { ArrowUpDown } from 'lucide-react'
 import { formatCurrency } from '../utils/format'
 
 export function InvoiceItemRow({ item, index, onUpdate, onRemove }: any) {

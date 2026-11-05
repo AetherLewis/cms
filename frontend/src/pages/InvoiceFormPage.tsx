@@ -8,7 +8,7 @@ import { Select } from '../components/ui/Select'
 import { Textarea } from '../components/ui/Textarea'
 import { Badge } from '../components/ui/Badge'
 import { InvoiceItemRow } from '../components/InvoiceItemRow'
-import { Add, Trash2 } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 import { formatCurrency } from '../utils/format'
 
 export function InvoiceFormPage() {
@@ -36,7 +36,7 @@ export function InvoiceFormPage() {
       ;(async () => {
         try {
           const res = await fetch(`/api/invoices/${id}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('starcore_token')}` },
+            headers: { 'Content-Type': 'application/json' },
           })
           if (res.ok) {
             const data = await res.json()
@@ -58,6 +58,7 @@ export function InvoiceFormPage() {
 
   function updateItem(index: number, field: string, value: any) {
     const newItems = [...form.items]
+    if (!newItems[index]) return
     newItems[index] = { ...newItems[index], [field]: value }
     setForm({ ...form, items: newItems })
   }
@@ -165,7 +166,7 @@ export function InvoiceFormPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-star-700 mb-1">Tax rate (%)</label>
-              <Input type="number" step="0.1" min="0" value={form.tax_rate} onChange={(e) => setForm({ ...form, tax_rate: e.target.value })} placeholder="0" />
+              <Input type="number" step="0.1" min="0" value={form.tax_rate} onChange={(e) => setForm({ ...form, tax_rate: Number(e.target.value) })} placeholder="0" />
             </div>
             <div>
               <label className="block text-sm font-medium text-star-700 mb-1">Payment terms</label>
@@ -177,7 +178,7 @@ export function InvoiceFormPage() {
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-star-700">Line Items</h3>
               <Button type="button" variant="outline" size="sm" onClick={addItem}>
-                <Add className="w-4 h-4 mr-1" /> Add item
+                <Plus className="w-4 h-4 mr-1" /> Add item
               </Button>
             </div>
             <div className="space-y-3">

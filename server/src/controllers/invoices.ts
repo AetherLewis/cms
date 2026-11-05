@@ -37,7 +37,7 @@ export async function createInvoice(req: AuthRequest, res: any): Promise<void> {
     // Compute from items
     const items: Partial<InvoiceItem>[] = body.items || []
     const subtotal = items.reduce(
-      (sum, item) => sum + (item.quantity || 0) * (item.unitPrice || 0),
+      (sum, item) => sum + (item.quantity || 0) * (item.unit_price || 0),
       0
     )
     const taxRate = body.taxRate || 0
@@ -69,8 +69,8 @@ export async function createInvoice(req: AuthRequest, res: any): Promise<void> {
         invoice_id: data.id,
         description: item.description || '',
         quantity: item.quantity || 1,
-        unit_price: item.unitPrice || 0,
-        total: item.quantity * item.unitPrice,
+        unit_price: item.unit_price || 0,
+        total: (item.quantity || 0) * (item.unit_price || 0),
       }))
       await supabase.from('invoice_items').insert(itemRows)
     }

@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { Button } from '../components/ui/Button'
 import { Badge } from '../components/ui/Badge'
 import { formatCurrency } from '../utils/format'
-import { DollarSign, TrendingUp, TrendingDown, AlertCircle, ArrowUpRight, FileContract, Users, Mail } from 'lucide-react'
+import { DollarSign, TrendingUp, TrendingDown, AlertCircle, ArrowUpRight, FileText, Users, Mail } from 'lucide-react'
 
 const COLORS = ['#3d8091', '#96bfc9', '#e5f2f5', '#f3fafc', '#c7dce2']
 
@@ -51,7 +51,7 @@ export function DashboardPage() {
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Contracts" value={stats?.active_contracts || 0} change="+12%" icon={<FileContract className="w-6 h-6 text-star-600" />} positive={true} />
+        <StatCard label="Contracts" value={stats?.active_contracts || 0} change="+12%" icon={<FileText className="w-6 h-6 text-star-600" />} positive={true} />
         <StatCard label="Invoiced" value={formatCurrency(stats?.total_invoiced)} change="+8.2%" icon={<DollarSign className="w-6 h-6 text-star-600" />} positive={true} />
         <StatCard label="Paid" value={formatCurrency(stats?.total_paid)} change="+3.5%" icon={<ArrowUpRight className="w-6 h-6 text-green-600" />} positive={true} />
         <StatCard label="Outstanding" value={formatCurrency(stats?.total_outstanding || 0)} change="—" icon={<AlertCircle className="w-6 h-6 text-amber-500" />} positive={false} />

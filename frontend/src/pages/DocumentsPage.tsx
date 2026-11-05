@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { Badge } from '../components/ui/Badge'
-import { FileArrowLeft, Plus, Trash2, Download, Eye } from 'lucide-react'
+import { FolderOpen, Plus, Trash2, Download, Eye } from 'lucide-react'
 import { formatDate } from '../utils/format'
 
 export function DocumentsPage() {
