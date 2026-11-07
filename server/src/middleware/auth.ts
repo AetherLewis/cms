@@ -6,27 +6,16 @@ export interface AuthRequest extends Request {
   user?: { id: string; email: string; role: string }
 }
 
-<<<<<<< HEAD
-export function authenticate(
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): void {
-  const JWT_SECRET = process.env.JWT_SECRET
-  if (!JWT_SECRET) {
-    throw new Error('Missing JWT_SECRET. Set it in .env')
-  }
-
-=======
-/**
- * Verify the Supabase access token sent as a Bearer token in the Authorization header.
- */
 export async function authenticate(
   req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> {
->>>>>>> bd369c0752ce6d7f9d8d853b1fa14164b6f2c7e2
+  const JWT_SECRET = process.env.JWT_SECRET
+  if (!JWT_SECRET) {
+    throw new Error('Missing JWT_SECRET. Set it in .env')
+  }
+
   const header = req.headers.authorization
   if (!header?.startsWith('Bearer ')) {
     unauthorized(res, 'Missing or invalid Authorization header')
