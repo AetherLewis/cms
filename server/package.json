@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "prebuild": "npm install --include=dev",
     "build": "tsc",
     "start": "node dist/server.js",
     "migrate": "psql -f migrations/schema.sql"
