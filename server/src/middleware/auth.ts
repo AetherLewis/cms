@@ -6,20 +6,16 @@ export interface AuthRequest extends Request {
   user?: { id: string; email: string; role: string }
 }
 
-const JWT_SECRET = process.env.JWT_SECRET
-
-if (!JWT_SECRET) {
-  throw new Error('Missing JWT_SECRET. Set it in .env')
-}
-
-/**
- * Verify the access token sent as a Bearer token in the Authorization header.
- */
 export function authenticate(
   req: AuthRequest,
   res: Response,
   next: NextFunction
 ): void {
+  const JWT_SECRET = process.env.JWT_SECRET
+  if (!JWT_SECRET) {
+    throw new Error('Missing JWT_SECRET. Set it in .env')
+  }
+
   const header = req.headers.authorization
   if (!header?.startsWith('Bearer ')) {
     unauthorized(res, 'Missing or invalid Authorization header')
