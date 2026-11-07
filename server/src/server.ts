@@ -10,7 +10,7 @@ app.use(cors({
   origin: process.env.FRONTEND_URL?.split(',').map((origin) => origin.trim()) || true,
   credentials: true,
 }))
-app.use(express.json())
+app.use(express.json({ limit: '2mb' }))
 
 app.use('/api', routes)
 

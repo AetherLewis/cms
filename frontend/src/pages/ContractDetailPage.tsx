@@ -52,7 +52,7 @@ export function ContractDetailPage() {
           </div>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={() => navigate(`/contracts/${contract.id}`)}>Edit</Button>
-            <Button variant="outline" size="sm" onClick={() => navigate(`/contracts/${contract.id}/new`)}>
+            <Button variant="outline" size="sm" onClick={() => navigate(`/invoices/new?contractId=${contract.id}`)}>
               <PlusCircle className="w-4 h-4 mr-1" /> Add invoice
             </Button>
           </div>
@@ -61,7 +61,7 @@ export function ContractDetailPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <DetailRow icon={<Calendar className="w-4 h-4 text-star-600" />} label="Start date" value={formatDate(contract.start_date)} />
           <DetailRow icon={<Calendar className="w-4 h-4 text-star-600" />} label="End date" value={formatDate(contract.end_date)} />
-          <DetailRow icon={<User className="w-4 h-4 text-star-600" />} label="Client" value={contract.clients?.[0]?.name || '—'} sub={`${contract.clients?.[0]?.email || ''}`} />
+          <DetailRow icon={<User className="w-4 h-4 text-star-600" />} label="Client" value={(Array.isArray(contract.clients) ? contract.clients[0]?.name : contract.clients?.name) || '—'} sub={(Array.isArray(contract.clients) ? contract.clients[0]?.email : contract.clients?.email) || ''} />
           <DetailRow icon={<DollarSign className="w-4 h-4 text-star-600" />} label="Value" value={contract.value ? formatCurrency(contract.value) : '—'} />
           <DetailRow icon={<DollarSign className="w-4 h-4 text-star-600" />} label="Invoiced" value={stats ? formatCurrency(stats.total_invoiced) : '—'} />
           <DetailRow icon={<DollarSign className="w-4 h-4 text-star-600" />} label="Paid" value={stats ? formatCurrency(stats.total_paid) : '—'} />
@@ -82,7 +82,7 @@ export function ContractDetailPage() {
               <p className="text-sm text-red-600">Some invoices may need attention.</p>
             </div>
           </div>
-          <Button variant="danger" size="sm">Check now</Button>
+          <Button variant="danger" size="sm" onClick={() => navigate('/invoices?status=overdue')}>Check now</Button>
         </div>
       )}
 

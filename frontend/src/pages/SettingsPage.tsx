@@ -1,115 +1,76 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getSettings, updateSettings } from '../utils/api'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { toast } from 'react-hot-toast'
-import { Settings2, Building, Mail, CreditCard } from 'lucide-react'
+import { Building, FileText, Mail, Save, Settings2 } from 'lucide-react'
+
+type SettingsForm = {
+  company_name: string
+  company_address: string
+  company_email: string
+  company_logo: string
+  tax_pin: string
+  invoice_prefix: string
+  currency: string
+  tax_rate: number
+  payment_terms: string
+}
+
+const initialForm: SettingsForm = {
+  company_name: '', company_address: '', company_email: '', company_logo: '', tax_pin: '',
+  invoice_prefix: 'INV', currency: 'USD', tax_rate: 0, payment_terms: 'Net 30',
+}
 
 export function SettingsPage() {
-  const [form, setForm] = useState({
-    company_name: '',
-    company_address: '',
-    company_email: '',
-    company_logo: '',
-    invoice_prefix: 'INV',
-    currency: 'USD',
-    tax_rate: 0,
-    payment_terms: 'Net 30',
-  })
+  const [form, setForm] = useState<SettingsForm>(initialForm)
   const [saving, setSaving] = useState(false)
+  const [tab, setTab] = useState<'company' | 'billing'>('company')
 
   useEffect(() => {
-    ;(async () => {
-      try {
-        const data = await getSettings()
-        setForm({ ...form, ...data })
-      } catch (e: any) {
-        console.error('Failed to load settings:', e)
-      }
-    })()
+    getSettings().then((data) => setForm((current) => ({ ...current, ...data }))).catch(() => undefined)
   }, [])
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault()
     setSaving(true)
     try {
       await updateSettings(form)
-      toast.success('Settings saved')
-    } catch (e: any) {
-      toast.error(e.message || 'Save failed')
+      toast.success('Company settings saved')
+    } catch (error: any) {
+      toast.error(error.message || 'Save failed')
     } finally {
       setSaving(false)
     }
   }
 
+  const update = (key: keyof SettingsForm, value: string | number) => setForm((current) => ({ ...current, [key]: value }))
+
   return (
-    <div className="space-y-6 max-w-3xl mx-auto">
-      <div>
-        <h1 className="text-2xl font-bold text-star-900">Settings</h1>
-        <p className="text-star-500 mt-1">Business details, tax settings, and invoice defaults.</p>
-      </div>
-
-      <form onSubmit={handleSubmit} className="rounded-xl border border-star-100 bg-white p-6 shadow-sm space-y-4">
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-star-700 mb-1">Company Name</label>
-            <div className="relative">
-              <Building className="absolute left-3 top-3 w-4 h-4 text-star-400" />
-              <Input value={form.company_name} onChange={(e) => setForm({ ...form, company_name: e.target.value })} className="pl-10" placeholder="StarCore Inc" />
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-star-700 mb-1">Company Email</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-3 w-4 h-4 text-star-400" />
-              <Input type="email" value={form.company_email} onChange={(e) => setForm({ ...form, company_email: e.target.value })} className="pl-10" placeholder="hello@starcore.com" />
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-star-700 mb-1">Address</label>
-            <Input value={form.company_address} onChange={(e) => setForm({ ...form, company_address: e.target.value })} placeholder="123 Innovation Dr, San Francisco, CA" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-star-700 mb-1">Logo URL</label>
-            <Input value={form.company_logo} onChange={(e) => setForm({ ...form, company_logo: e.target.value })} placeholder="https://..." />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-star-700 mb-1">Invoice Number Prefix</label>
-            <Input value={form.invoice_prefix} onChange={(e) => setForm({ ...form, invoice_prefix: e.target.value })} placeholder="INV" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-star-700 mb-1">Currency</label>
-            <Input value={form.currency} onChange={(e) => setForm({ ...form, currency: e.target.value })} placeholder="USD" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-star-700 mb-1">Tax Rate (%)</label>
-            <Input type="number" step="0.1" min="0" value={form.tax_rate} onChange={(e) => setForm({ ...form, tax_rate: Number(e.target.value) })} placeholder="0" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-star-700 mb-1">Payment Terms</label>
-            <Input value={form.payment_terms} onChange={(e) => setForm({ ...form, payment_terms: e.target.value })} placeholder="Net 30" />
-          </div>
-        </div>
-        <div className="flex justify-end pt-4 border-t border-star-100">
-          <Button type="submit" disabled={saving}>
-            {saving ? 'Saving…' : 'Save Settings'}
-          </Button>
-        </div>
-      </form>
-
-      <div className="rounded-xl border border-star-100 bg-gradient-to-br from-star-700 to-star-950 p-6 shadow-lg text-white">
-        <div className="flex items-start gap-4">
-          <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
-            <Settings2 className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h3 className="text-lg font-bold">Connect Supabase</h3>
-            <p className="text-star-200 text-sm mb-3">Add your <code className="bg-white/10 px-1 rounded text-xs">SUPABASE_URL</code> and <code className="bg-white/10 px-1 rounded text-xs">SUPABASE_ANON_KEY</code> to <code className="bg-white/10 px-1 rounded text-xs">.env</code> in the server directory, then restart the app.</p>
-            <Button variant="outline" className="bg-white text-star-900 border-white hover:bg-star-50" asChild>
-              <a href="/settings">Go to Settings</a>
-            </Button>
-          </div>
-        </div>
+    <div className="mx-auto max-w-5xl space-y-6">
+      <header><p className="text-xs font-semibold uppercase tracking-[0.14em] text-indigo-700">Workspace administration</p><h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">Company settings</h1><p className="mt-1 text-sm text-slate-500">Manage your organization profile, tax details, and invoice defaults.</p></header>
+      <div className="grid gap-5 lg:grid-cols-[220px_1fr]">
+        <nav aria-label="Settings sections" className="flex gap-2 overflow-x-auto lg:flex-col">
+          <button type="button" aria-current={tab === 'company' ? 'page' : undefined} onClick={() => setTab('company')} className={`flex shrink-0 items-center gap-3 rounded-md px-4 py-3 text-left text-sm font-medium ${tab === 'company' ? 'bg-indigo-50 text-indigo-800' : 'bg-white text-slate-600 hover:bg-slate-50'}`}><Building className="h-4 w-4" />Company profile</button>
+          <button type="button" aria-current={tab === 'billing' ? 'page' : undefined} onClick={() => setTab('billing')} className={`flex shrink-0 items-center gap-3 rounded-md px-4 py-3 text-left text-sm font-medium ${tab === 'billing' ? 'bg-indigo-50 text-indigo-800' : 'bg-white text-slate-600 hover:bg-slate-50'}`}><FileText className="h-4 w-4" />Invoicing defaults</button>
+        </nav>
+        <form onSubmit={handleSubmit} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+          <div className="border-b border-slate-100 px-6 py-5"><h2 className="font-semibold text-slate-900">{tab === 'company' ? 'Legal entity & business profile' : 'Invoice defaults & payment terms'}</h2><p className="mt-1 text-sm text-slate-500">{tab === 'company' ? 'These details appear on client facing documents.' : 'Choose the defaults used when new invoices are prepared.'}</p></div>
+          {tab === 'company' ? <div className="grid gap-5 p-6 sm:grid-cols-2">
+            <label className="text-sm font-medium text-slate-700">Legal company name<Input className="mt-1.5" value={form.company_name} onChange={(event) => update('company_name', event.target.value)} placeholder="StarCore Solutions Ltd" /></label>
+            <label className="text-sm font-medium text-slate-700">Company email<div className="relative mt-1.5"><Mail className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" /><Input type="email" className="pl-10" value={form.company_email} onChange={(event) => update('company_email', event.target.value)} placeholder="billing@company.com" /></div></label>
+            <label className="text-sm font-medium text-slate-700 sm:col-span-2">Registered address<Input className="mt-1.5" value={form.company_address} onChange={(event) => update('company_address', event.target.value)} placeholder="Street, city, country" /></label>
+            <label className="text-sm font-medium text-slate-700">Tax PIN / VAT number<Input className="mt-1.5" value={form.tax_pin} onChange={(event) => update('tax_pin', event.target.value)} placeholder="Tax registration number" /></label>
+            <label className="text-sm font-medium text-slate-700">Logo URL<Input className="mt-1.5" value={form.company_logo} onChange={(event) => update('company_logo', event.target.value)} placeholder="https://..." /></label>
+          </div> : <div className="grid gap-5 p-6 sm:grid-cols-2">
+            <label className="text-sm font-medium text-slate-700">Invoice number prefix<Input className="mt-1.5" value={form.invoice_prefix} onChange={(event) => update('invoice_prefix', event.target.value)} placeholder="INV" /></label>
+            <label className="text-sm font-medium text-slate-700">Default currency<select className="mt-1.5 w-full rounded-md border border-slate-200 bg-white px-3 py-2.5" value={form.currency} onChange={(event) => update('currency', event.target.value)}><option value="KES">KES · Kenyan Shilling</option><option value="USD">USD · US Dollar</option><option value="EUR">EUR · Euro</option><option value="GBP">GBP · Pound Sterling</option></select></label>
+            <label className="text-sm font-medium text-slate-700">Default tax rate (%)<Input className="mt-1.5" type="number" step="0.1" min="0" value={form.tax_rate} onChange={(event) => update('tax_rate', Number(event.target.value))} /></label>
+            <label className="text-sm font-medium text-slate-700">Payment terms<Input className="mt-1.5" value={form.payment_terms} onChange={(event) => update('payment_terms', event.target.value)} placeholder="Net 30" /></label>
+            <div className="rounded-md bg-indigo-50 p-4 text-sm text-indigo-900 sm:col-span-2"><Settings2 className="mb-2 h-4 w-4" />These defaults are available when creating invoices. Existing invoices keep their saved terms and tax.</div>
+          </div>}
+          <footer className="flex justify-end border-t border-slate-100 px-6 py-4"><Button type="submit" disabled={saving}><Save className="mr-2 h-4 w-4" />{saving ? 'Saving…' : 'Save settings'}</Button></footer>
+        </form>
       </div>
     </div>
   )

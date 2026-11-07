@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { createContract, updateContract } from '../utils/api'
+import { createContract, updateContract, getContract, listClients } from '../utils/api'
 import { toast } from 'react-hot-toast'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
@@ -15,6 +15,7 @@ export function ContractFormPage() {
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
   const [clientId, setClientId] = useState('')
+  const [clients, setClients] = useState<any[]>([])
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -29,22 +30,19 @@ export function ContractFormPage() {
   })
 
   useEffect(() => {
+    listClients().then((data) => setClients(data || [])).catch((error) => toast.error(error.message || 'Could not load clients'))
     if (id) {
       // fetch existing contract
       ;(async () => {
         try {
-          const res = await fetch(`/api/contracts/${id}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('starcore_token')}` },
-          })
-          if (res.ok) {
-            const data = await res.json()
+          const data = await getContract(id)
+            setClientId(data.client_id || data.clients?.id || data.clients?.[0]?.id || '')
             setForm({
               ...data,
               value: String(data.value ?? ''),
               start_date: data.start_date?.split('T')[0] || '',
               end_date: data.end_date?.split('T')[0] || '',
             })
-          }
         } catch {}
       })()
     }
@@ -55,15 +53,32 @@ export function ContractFormPage() {
     setSaving(true)
     try {
       const payload: any = {
-        ...form,
+        title: form.title,
+        description: form.description,
+        contractType: form.contract_type,
+        status: form.status,
+        startDate: form.start_date ? new Date(form.start_date).toISOString() : undefined,
+        endDate: form.end_date ? new Date(form.end_date).toISOString() : undefined,
+        paymentTerms: form.payment_terms,
+        clientId,
         value: Number(form.value) || undefined,
-        start_date: form.start_date ? new Date(form.start_date).toISOString() : undefined,
-        end_date: form.end_date ? new Date(form.end_date).toISOString() : undefined,
         currency: form.currency,
+        fileUrl: form.file_url || undefined,
       }
-      delete payload.file_url
       if (id) {
-        await updateContract(id, payload)
+        await updateContract(id, {
+          title: form.title,
+          description: form.description,
+          client_id: clientId,
+          contract_type: form.contract_type,
+          status: form.status,
+          start_date: payload.startDate,
+          end_date: payload.endDate,
+          value: payload.value,
+          currency: form.currency,
+          payment_terms: form.payment_terms,
+          file_url: form.file_url || null,
+        })
       } else {
         await createContract(payload)
       }
@@ -101,9 +116,7 @@ export function ContractFormPage() {
             <label className="block text-sm font-medium text-star-700 mb-1">Client *</label>
             <Select value={clientId} onChange={(e) => setClientId(e.target.value)} required>
               <option value="" disabled>Select a client</option>
-              {/* fetch clients */}
-              <option value="client1">Acme Corp</option>
-              <option value="client2">Globex Inc</option>
+              {clients.map((client) => <option key={client.id} value={client.id}>{client.name} · {client.email}</option>)}
             </Select>
           </div>
           <div>
@@ -114,6 +127,10 @@ export function ContractFormPage() {
               <option>Subscription / SaaS</option>
               <option>Royalty / Revenue Share</option>
             </Select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-star-700 mb-1">Lifecycle status</label>
+            <Select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}><option value="draft">Draft</option><option value="active">Active</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option><option value="expired">Expired</option></Select>
           </div>
           <div className="col-span-2 grid grid-cols-2 gap-4">
             <div>

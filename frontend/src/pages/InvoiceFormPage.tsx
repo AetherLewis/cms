@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { createInvoice, updateInvoice } from '../utils/api'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { createInvoice, updateInvoice, getInvoice, listClients, listContracts } from '../utils/api'
 import { toast } from 'react-hot-toast'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
@@ -14,8 +14,12 @@ import { formatCurrency } from '../utils/format'
 export function InvoiceFormPage() {
   const { id } = useParams<{ id?: string }>()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const linkedContractId = searchParams.get('contractId') || ''
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [clients, setClients] = useState<any[]>([])
+  const [contracts, setContracts] = useState<any[]>([])
 
   const [form, setForm] = useState({
     invoice_number: '',
@@ -32,16 +36,16 @@ export function InvoiceFormPage() {
   })
 
   useEffect(() => {
+    listClients().then((data) => setClients(data || [])).catch((error) => toast.error(error.message || 'Could not load clients'))
+    listContracts().then((data) => setContracts(data || [])).catch(() => undefined)
     if (id) {
       ;(async () => {
         try {
-          const res = await fetch(`/api/invoices/${id}`, {
-            headers: { 'Content-Type': 'application/json' },
-          })
-          if (res.ok) {
-            const data = await res.json()
+          const data = await getInvoice(id)
             setForm({
               ...data,
+              client_id: data.client_id || data.clients?.id || data.clients?.[0]?.id || '',
+              contract_id: data.contract_id || data.contracts?.id || data.contracts?.[0]?.id || '',
               issued_date: data.issued_date?.split('T')[0] || '',
               due_date: data.due_date?.split('T')[0] || '',
               items: data.items?.map((it: any) => ({
@@ -50,11 +54,16 @@ export function InvoiceFormPage() {
                 unit_price: it.unit_price,
               })) || [{ description: '', quantity: 1, unit_price: 0 }],
             })
-          }
         } catch {}
       })()
     }
   }, [id])
+
+  useEffect(() => {
+    if (id || !linkedContractId) return
+    const contract = contracts.find((item) => item.id === linkedContractId)
+    if (contract) setForm((current) => ({ ...current, contract_id: contract.id, client_id: contract.client_id || contract.clients?.id || contract.clients?.[0]?.id || current.client_id }))
+  }, [contracts, id, linkedContractId])
 
   function updateItem(index: number, field: string, value: any) {
     const newItems = [...form.items]
@@ -87,10 +96,13 @@ export function InvoiceFormPage() {
     setSaving(true)
     try {
       const payload = {
-        ...form,
-        client_id: form.client_id,
-        contract_id: form.contract_id || undefined,
-        tax_rate: Number(form.tax_rate) || 0,
+        invoiceNumber: form.invoice_number,
+        clientId: form.client_id,
+        contractId: form.contract_id || undefined,
+        status: form.status,
+        issuedDate: form.issued_date,
+        dueDate: form.due_date || undefined,
+        taxRate: Number(form.tax_rate) || 0,
         items: form.items.map((it) => ({
           description: it.description,
           quantity: Number(it.quantity) || 1,
@@ -98,7 +110,19 @@ export function InvoiceFormPage() {
         })),
       }
       if (id) {
-        await updateInvoice(id, payload)
+        await updateInvoice(id, {
+          invoice_number: form.invoice_number,
+          client_id: form.client_id,
+          contract_id: form.contract_id || null,
+          status: form.status,
+          issued_date: form.issued_date,
+          due_date: form.due_date || null,
+          tax_rate: Number(form.tax_rate) || 0,
+          subtotal: subtotal(),
+          tax_amount: tax(),
+          total: total(),
+          items: payload.items,
+        })
       } else {
         await createInvoice(payload)
       }
@@ -135,15 +159,14 @@ export function InvoiceFormPage() {
               <label className="block text-sm font-medium text-star-700 mb-1">Client *</label>
               <Select value={form.client_id} onChange={(e) => setForm({ ...form, client_id: e.target.value })} required>
                 <option value="">Select client</option>
-                <option value="client1">Acme Corp</option>
-                <option value="client2">Globex Inc</option>
+                {clients.map((client) => <option key={client.id} value={client.id}>{client.name} · {client.email}</option>)}
               </Select>
             </div>
             <div>
               <label className="block text-sm font-medium text-star-700 mb-1">Contract</label>
               <Select value={form.contract_id} onChange={(e) => setForm({ ...form, contract_id: e.target.value })}>
                 <option value="">— Link to contract —</option>
-                <option value="contract1">CRM Module — Q3 License</option>
+                {contracts.filter((contract) => !form.client_id || contract.client_id === form.client_id).map((contract) => <option key={contract.id} value={contract.id}>{contract.title}</option>)}
               </Select>
             </div>
             <div>

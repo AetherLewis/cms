@@ -30,8 +30,8 @@ export function InvoiceDetailPage() {
   if (loading) return <div className="p-8 text-center text-star-400">Loading invoice…</div>
   if (!invoice) return <div className="p-8 text-center text-star-400">Invoice not found.</div>
 
-  const client = invoice.clients?.[0]
-  const contract = invoice.contracts?.[0]
+  const client = Array.isArray(invoice.clients) ? invoice.clients[0] : invoice.clients
+  const contract = Array.isArray(invoice.contracts) ? invoice.contracts[0] : invoice.contracts
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -43,7 +43,7 @@ export function InvoiceDetailPage() {
           <Button variant="outline" onClick={() => navigate(`/invoices/${invoice.id}`)}>
             <Edit className="w-4 h-4 mr-1" /> Edit
           </Button>
-          <Button variant="primary">
+          <Button variant="primary" onClick={() => window.print()}>
             <Download className="w-4 h-4 mr-1" /> Export PDF
           </Button>
         </div>

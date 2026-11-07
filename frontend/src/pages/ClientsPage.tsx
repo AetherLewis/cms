@@ -17,6 +17,7 @@ export function ClientsPage() {
   const [clients, setClients] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
   const [query, setQuery] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
   const [editing, setEditing] = useState<string | null>(null)
 
   useEffect(() => {
@@ -46,9 +47,10 @@ export function ClientsPage() {
     }
   }
 
-  const filtered = clients.filter((c) =>
-    c.name.toLowerCase().includes(query.toLowerCase())
-  )
+  const filtered = clients.filter((c) => {
+    const haystack = [c.name, c.company, c.email].filter(Boolean).join(' ').toLowerCase()
+    return haystack.includes(query.toLowerCase()) && (statusFilter === 'all' || c.status === statusFilter)
+  })
 
   return (
     <div className="space-y-6">
@@ -57,7 +59,7 @@ export function ClientsPage() {
           <h1 className="text-2xl font-bold text-star-900">Clients</h1>
           <p className="text-star-500">Manage your client relationships and billing contacts.</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <input
             type="text"
             placeholder="Search clients..."
@@ -65,6 +67,7 @@ export function ClientsPage() {
             onChange={(e) => setQuery(e.target.value)}
             className="w-full md:w-64 px-4 py-2 bg-white border border-star-200 rounded-lg text-star-900 focus:ring-2 focus:ring-star-600 outline-none"
           />
+          <Select aria-label="Filter clients by status" value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)} className="w-36"><option value="all">All statuses</option><option value="active">Active</option><option value="inactive">Inactive</option></Select>
           <Button onClick={() => setEditing('new')}>
             <User className="w-4 h-4 mr-2" /> Add Client
           </Button>
@@ -131,7 +134,7 @@ export function ClientsPage() {
       {editing && (
         <ClientFormPage
           clientId={editing === 'new' ? undefined : editing}
-          onSave={loadClients}
+          onSave={() => { setEditing(null); void loadClients() }}
           onCancel={() => setEditing(null)}
         />
       )}

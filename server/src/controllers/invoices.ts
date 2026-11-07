@@ -115,15 +115,32 @@ export async function updateInvoice(req: AuthRequest, res: any): Promise<void> {
     const userId = req.user?.id
     const body = req.body
 
+    const { items, ...invoiceFields } = body
     const { data, error } = await supabase
       .from('invoices')
-      .update({ ...body, updated_at: new Date().toISOString() })
+      .update({ ...invoiceFields, updated_at: new Date().toISOString() })
       .eq('id', id)
       .eq('user_id', userId)
       .select()
       .single()
 
     if (error) throw error
+
+    if (Array.isArray(items)) {
+      const { error: deleteError } = await supabase.from('invoice_items').delete().eq('invoice_id', id)
+      if (deleteError) throw deleteError
+      if (items.length) {
+        const rows = items.map((item: Partial<InvoiceItem>) => ({
+          invoice_id: id,
+          description: item.description || '',
+          quantity: item.quantity ?? 1,
+          unit_price: item.unit_price ?? 0,
+          total: (item.quantity ?? 1) * (item.unit_price ?? 0),
+        }))
+        const { error: itemsError } = await supabase.from('invoice_items').insert(rows)
+        if (itemsError) throw itemsError
+      }
+    }
     ok(res, data as Invoice)
   } catch (e: any) {
     serverError(res, e.message)

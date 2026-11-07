@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { createClient, updateClient } from '../utils/api'
+import { createClient, getClient, updateClient } from '../utils/api'
 import { toast } from 'react-hot-toast'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { Select } from '../components/ui/Select'
 import { Mail, Phone, Building } from 'lucide-react'
 
-export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void; onCancel?: () => void }) {
-  const { clientId } = useParams<{ clientId?: string }>()
+export function ClientFormPage(props?: { clientId?: string; onSave?: () => void; onCancel?: () => void }) {
+  const { id } = useParams<{ id?: string }>()
+  const clientId = props?.clientId || id
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
@@ -26,12 +27,7 @@ export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void
       // fetch existing client
       ;(async () => {
         try {
-          // We need a getClient helper - inline fetch
-          const res = await fetch(`/api/clients/${clientId}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('starcore_token')}` },
-          })
-          if (res.ok) {
-            const data = await res.json()
+          const data = await getClient(clientId)
             setForm({
               name: data.name || '',
               email: data.email || '',
@@ -41,7 +37,6 @@ export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void
               tax_id: data.tax_id || '',
               status: data.status || 'active',
             })
-          }
         } catch {}
       })()
     }
@@ -57,7 +52,8 @@ export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void
         await createClient(form)
       }
       toast.success(clientId ? 'Client updated' : 'Client created')
-      navigate('/clients')
+      if (props?.onSave) props.onSave()
+      else navigate('/clients')
     } catch (e: any) {
       toast.error(e.message || 'Save failed')
     } finally {
@@ -66,11 +62,11 @@ export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className={props?.onCancel ? 'fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-slate-950/40 p-4' : 'max-w-2xl mx-auto'}>
+      {props?.onCancel && <button className="absolute inset-0 cursor-default" aria-label="Close client form" onClick={props.onCancel} />}
+      <div className={props?.onCancel ? 'relative z-10 max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-[#f8f9ff] p-4' : 'w-full'}>
       <div className="flex items-center gap-2 mb-6">
-        <Button variant="outline" asChild>
-          <a href="/clients">Back to clients</a>
-        </Button>
+        <Button variant="outline" type="button" onClick={() => props?.onCancel ? props.onCancel() : navigate('/clients')}>Back to clients</Button>
       </div>
       <div className="rounded-xl border border-star-100 bg-white p-6 shadow-sm">
         <h2 className="text-xl font-bold text-star-900 mb-4">
@@ -79,7 +75,7 @@ export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void
         <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
           <div className="col-span-2">
             <label className="block text-sm font-medium text-star-700 mb-1">Full name</label>
-            <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" />
+            <Input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" />
           </div>
           <div>
             <label className="block text-sm font-medium text-star-700 mb-1">Email</label>
@@ -87,6 +83,8 @@ export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void
               <Mail className="absolute left-3 top-3 w-4 h-4 text-star-400" />
               <Input
                 value={form.email}
+                required
+                type="email"
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="john@example.com"
                 className="pl-10"
@@ -121,7 +119,7 @@ export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void
             </Select>
           </div>
           <div className="col-span-2 flex justify-end gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={() => navigate('/clients')}>
+            <Button type="button" variant="outline" onClick={() => props?.onCancel ? props.onCancel() : navigate('/clients')}>
               Cancel
             </Button>
             <Button type="submit" disabled={loading}>
@@ -129,6 +127,7 @@ export function ClientFormPage(_props?: { clientId?: string; onSave?: () => void
             </Button>
           </div>
         </form>
+      </div>
       </div>
     </div>
   )

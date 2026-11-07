@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
   listInvoices,
   getInvoice,
@@ -19,7 +19,8 @@ export function InvoicesPage() {
   const [invoices, setInvoices] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
   const [query, setQuery] = useState('')
-  const [statusFilter, setStatusFilter] = useState('all')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [statusFilter, setStatusFilter] = useState(searchParams.get('status') || 'all')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -82,7 +83,7 @@ export function InvoicesPage() {
             className="pl-10"
           />
         </div>
-        <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-40">
+        <Select value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); if (e.target.value === 'all') setSearchParams({}); else setSearchParams({ status: e.target.value }) }} className="w-40">
           <option value="all">All statuses</option>
           <option value="draft">Draft</option>
           <option value="sent">Sent</option>

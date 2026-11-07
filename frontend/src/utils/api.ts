@@ -153,8 +153,8 @@ export async function listRecurring() {
 export async function createRecurring(payload: any) {
   return request<any>('/recurring', { method: 'POST', body: JSON.stringify(payload) })
 }
-export async function toggleRecurring(id: string) {
-  return request<any>(`/recurring/${id}/toggle`, { method: 'PATCH' })
+export async function toggleRecurring(id: string, active: boolean) {
+  return request<any>(`/recurring/${id}/toggle`, { method: 'PUT', body: JSON.stringify({ active }) })
 }
 
 /** ---------- Stats ---------- */

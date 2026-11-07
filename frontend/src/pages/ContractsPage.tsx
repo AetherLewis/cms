@@ -20,6 +20,7 @@ export function ContractsPage() {
   const [contracts, setContracts] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
   const [query, setQuery] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
   const [statsByClient, setStatsByClient] = useState<Record<string, any>>({})
   const navigate = useNavigate()
 
@@ -54,8 +55,9 @@ export function ContractsPage() {
     }).catch((e) => toast.error(e.message))
   }
 
-  const filtered = contracts.filter(
-    (c) => c.title?.toLowerCase().includes(query.toLowerCase())
+  const statuses = ['all', 'draft', 'active', 'completed', 'cancelled', 'expired']
+  const filtered = contracts.filter((c) =>
+    c.title?.toLowerCase().includes(query.toLowerCase()) && (statusFilter === 'all' || c.status === statusFilter)
   )
 
   return (
@@ -72,6 +74,7 @@ export function ContractsPage() {
         </div>
       </div>
 
+      <div className="flex flex-wrap items-center gap-2">
       <div className="relative">
         <Search className="absolute left-3 top-3.5 w-5 h-5 text-star-400" />
         <Input
@@ -81,6 +84,10 @@ export function ContractsPage() {
           onChange={(e) => setQuery(e.target.value)}
           className="pl-10 w-full md:w-72"
         />
+      </div>
+      <div className="flex flex-wrap gap-1 rounded-lg border border-slate-200 bg-white p-1">
+        {statuses.map((status) => <button key={status} type="button" onClick={() => setStatusFilter(status)} className={`rounded-md px-3 py-1.5 text-xs font-medium capitalize transition-colors ${statusFilter === status ? 'bg-indigo-700 text-white' : 'text-slate-600 hover:bg-slate-100'}`}>{status}{status === 'all' ? ` · ${contracts.length}` : ` · ${contracts.filter((contract) => contract.status === status).length}`}</button>)}
+      </div>
       </div>
 
       <div className="rounded-xl border border-star-100 bg-white overflow-hidden">
