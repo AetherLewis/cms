@@ -33,7 +33,7 @@ export function DashboardPage() {
   return (
     <div className="space-y-7">
       <div className="flex flex-wrap items-end justify-between gap-4">
-        <div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-indigo-700">Workspace overview</p><h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">Dashboard</h1><p className="mt-1 text-sm text-slate-500">Your contracts, billing, collections, and client activity.</p></div>
+        <div className="border-l-4 border-indigo-600 pl-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-indigo-700">Workspace overview</p><h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">Dashboard</h1><p className="mt-1 text-sm text-slate-500">Your contracts, billing, collections, and client activity.</p></div>
         <div className="flex gap-2"><Button asChild variant="outline"><Link to="/contracts/new">New contract</Link></Button><Button asChild><Link to="/invoices/new">New invoice</Link></Button></div>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
