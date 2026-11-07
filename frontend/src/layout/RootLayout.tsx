@@ -31,21 +31,21 @@ export function RootLayout({ children }: { children: ReactNode }) {
   ]
 
   return (
-    <div className="min-h-screen bg-star-50">
-      <header className="border-b border-star-200 bg-white/80 backdrop-blur sticky top-0 z-20">
-        <div className="flex items-center justify-between px-6 py-3">
+    <div className="min-h-screen bg-[#f8f9ff] text-[#0b1c30]">
+      <header className="border-b border-[#e2e8f0] bg-white sticky top-0 z-20">
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-3 lg:px-8">
           <NavLink
             to="/"
-            className="flex items-center gap-2 font-bold text-xl text-star-700 hover:text-star-600"
+            className="flex shrink-0 items-center gap-2 font-bold text-lg tracking-tight text-slate-900 hover:text-indigo-700"
             end
           >
-            <div className="w-8 h-8 bg-star-600 rounded-lg flex items-center justify-center text-white font-bold">
+            <div className="w-8 h-8 bg-indigo-700 rounded-md flex items-center justify-center text-white font-bold text-sm">
               SC
             </div>
             <span>StarCore CMS</span>
           </NavLink>
 
-          <nav className="flex items-center gap-6">
+          <nav className="order-3 flex w-full items-center gap-1 overflow-x-auto pb-0.5 lg:order-none lg:w-auto">
             {navItems.map((item) => {
               const Icon = item.icon
               return (
@@ -53,8 +53,8 @@ export function RootLayout({ children }: { children: ReactNode }) {
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
-                    `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-star-600 transition-colors ${
-                      isActive ? 'bg-star-100 text-star-600 font-semibold' : 'hover:bg-star-100 hover:text-star-700'
+                    `flex shrink-0 items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      isActive ? 'bg-indigo-50 text-indigo-800 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                     }`
                   }
                 >
@@ -66,8 +66,8 @@ export function RootLayout({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-star-50 rounded-full border border-star-200">
-              <div className="w-8 h-8 bg-star-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+              <div className="hidden md:flex items-center gap-3 pl-3">
+              <div className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white text-xs font-bold">
                 {user?.full_name?.charAt(0) || user?.email?.charAt(0) || 'U'}
               </div>
               <div className="text-right hidden sm:block">
@@ -76,7 +76,7 @@ export function RootLayout({ children }: { children: ReactNode }) {
               </div>
               <button
                 onClick={() => logout()}
-                className="text-xs text-red-500 hover:text-red-600 font-medium underline hover:no-underline"
+                className="text-xs text-slate-500 hover:text-red-600 font-medium"
               >
                 Sign out
               </button>
@@ -88,7 +88,7 @@ export function RootLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="flex-1 p-6 lg:p-8">{children}</main>
+      <main className="mx-auto w-full max-w-[1600px] p-4 sm:p-6 lg:p-8">{children}</main>
     </div>
   )
 }

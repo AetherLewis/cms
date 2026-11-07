@@ -1,0 +1,737 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-container":"#5c647a","on-tertiary-container":"#69d6c9","surface-dim":"#cbdbf5","on-secondary-fixed":"#131b2e","on-background":"#0b1c30","inverse-on-surface":"#eaf1ff","surface-container-high":"#dce9ff","on-primary-fixed":"#100069","on-surface":"#0b1c30","on-error-container":"#93000a","tertiary-fixed-dim":"#6bd8cb","surface-variant":"#d3e4fe","error":"#ba1a1a","primary-fixed":"#e3dfff","surface":"#f8f9ff","primary-container":"#4338ca","primary":"#2a14b4","outline":"#777586","secondary-fixed-dim":"#bec6e0","secondary-container":"#dae2fd","on-error":"#ffffff","on-surface-variant":"#464554","on-secondary-fixed-variant":"#3f465c","on-secondary":"#ffffff","on-tertiary-fixed":"#00201d","surface-container":"#e5eeff","tertiary":"#00423c","secondary":"#565e74","on-tertiary-fixed-variant":"#005049","tertiary-container":"#005c54","on-primary-container":"#c1beff","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","inverse-primary":"#c3c0ff","tertiary-fixed":"#89f5e7","background":"#f8f9ff","on-primary":"#ffffff","surface-bright":"#f8f9ff","primary-fixed-dim":"#c3c0ff","outline-variant":"#c7c4d7","error-container":"#ffdad6","on-primary-fixed-variant":"#372abf","surface-tint":"#5148d7","inverse-surface":"#213145","secondary-fixed":"#dae2fd","surface-container-highest":"#d3e4fe","surface-container-low":"#eff4ff"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"margin":"2rem","space-lg":"1.5rem","space-xs":"0.25rem","margin-mobile":"1rem","space-sm":"0.5rem","space-xl":"2rem","space-2xl":"3rem","gutter-mobile":"1rem","gutter":"1.5rem","space-md":"1rem"},fontFamily:{"label-md":["JetBrains Mono"],"headline-xl":["Hanken Grotesk"],"body-sm":["Hanken Grotesk"],"body-lg":["Hanken Grotesk"],"display-lg":["Hanken Grotesk"],"body-md":["Hanken Grotesk"],"headline-md":["Hanken Grotesk"],"label-sm":["JetBrains Mono"],"display-lg-mobile":["Hanken Grotesk"],"headline-lg":["Hanken Grotesk"]},fontSize:{"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-xl":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"18px",letterSpacing:"0.005em",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"display-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}],"headline-md":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.03em",fontWeight:"500"}],"display-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-lg":["20px",{lineHeight:"28px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="p-space-md flex items-center justify-between"><div class="flex items-center"><img src="https://lh3.googleusercontent.com/aida/ALJJyrAW_gbQyFSokjYlFM1BRHzSE-qXuPRxGlJhmV4ijbJnJf2YjlAhZk1fPq7ei6ejeflaeO_qJf7zZDR8U-bBw66dotiLzVa0jYK5mcnSAms9nSoPsBwf9SSLsq6Dp7oIbm7CcZypXBoA8a6Ag8_feeQUa1U1R3UOfQDjWdqJndlGiQHvh-9k3-KaCxvK0ouX56oBePDLR5hv36_LZM1clP4X50gsrELd5j2IsNU1G4q3" alt="Hero 6 Core CMS Enterprise" class="h-9 w-auto object-contain"></div></div><div class="px-space-md py-space-xs"><div class="flex items-center justify-between bg-surface-container-low px-space-sm py-space-xs rounded-lg cursor-pointer hover:bg-surface-container hover:text-on-surface transition-colors"><div class="flex flex-col overflow-hidden"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-tertiary shrink-0"></span><span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Acme Group Ltd</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">StarCore Pro Instance</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">unfold_more</span></div></div><div class="px-space-md pt-space-sm"><button class="w-full flex items-center justify-center gap-space-xs bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary py-space-xs px-space-sm rounded-lg font-headline-md text-headline-md transition-all shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span class="">New Invoice</span></button></div><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Operations</span></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="dashboard" href="#">Dashboard</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="clients" href="#">Clients</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="contracts" href="#">Contracts</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="invoices-and-billing" href="#">Invoices &amp; Billing</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="payments" href="#">Payments</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="recurring-billing" href="#">Recurring Billing</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="documents" href="#">Documents</a></nav><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Governance</span></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="audit-log" href="#">Audit Log</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="settings" href="#">Settings</a></nav></div><div class="p-space-md"><div class="flex items-center justify-between bg-surface-container-low p-space-xs rounded-full"><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQjG3A6PK2f0Z5JZ0uZoDI84XavSYVyQAgh7riKJewEWBlmGfm9eg0UuBaOrbSnkDHnBSY3YhyF-241g4YLxWRCO9lYdC4gYIoBXNEgo2AbHFqMihcHdZ8COkLgRRz2mvB_JqiZegljS0cofFgb70RvG8448TIe-iB0fAYltfYBV-I2Ls_HqGNayrItsYulbjRQpOQBYnQeCSS-foD6M9C6FP6QxfOL-dIabPc0V9"><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">E. Vance</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Operations Admin</span></div></div><button class="text-on-surface-variant hover:text-on-surface p-space-xs" type="button"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-sm w-96"><div class="relative w-full flex items-center"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px]">search</span><input class="w-full h-9 pl-10 pr-16 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Search clients, contracts, invoices..." type="text"><kbd class="absolute right-3 font-label-sm text-label-sm bg-surface-container-highest text-on-surface px-1.5 py-0.5 rounded">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-0.5"><button class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container-lowest text-on-surface font-semibold shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]" type="button">USD</button><button class="font-label-sm text-label-sm px-space-xs py-0.5 text-on-surface-variant hover:text-on-surface transition-colors" type="button">KES</button><button class="font-label-sm text-label-sm px-space-xs py-0.5 text-on-surface-variant hover:text-on-surface transition-colors" type="button">EUR</button></div><a class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="">Support</span></a><div class="relative flex items-center"><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button></div><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQjG3A6PK2f0Z5JZ0uZoDI84XavSYVyQAgh7riKJewEWBlmGfm9eg0UuBaOrbSnkDHnBSY3YhyF-241g4YLxWRCO9lYdC4gYIoBXNEgo2AbHFqMihcHdZ8COkLgRRz2mvB_JqiZegljS0cofFgb70RvG8448TIe-iB0fAYltfYBV-I2Ls_HqGNayrItsYulbjRQpOQBYnQeCSS-foD6M9C6FP6QxfOL-dIabPc0V9"><div class="flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-none">Acme Admin</span><span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 leading-none">Live Node</span></div></div></div></header><main class="relative pt-16 w-full px-gutter bg-surface"><div class="flex flex-col w-full pb-space-2xl">
+<!-- TOP SUB-HEADER & BREADCRUMB -->
+<div class="flex flex-col gap-space-sm pt-space-md pb-space-lg">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<span class="">Governance &amp; Architecture</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="">System Configuration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">API Keys, Webhooks &amp; Developer Infrastructure</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-md mt-1">
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Developer Infrastructure &amp; APIs</h1>
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-surface-container-high text-tertiary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+            Production Environment • TLS 1.3 • HMAC-SHA256 Enforced
+          </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-space-xs bg-surface-container-lowest text-on-surface hover:bg-surface-container-low px-space-md py-space-xs rounded-lg font-headline-md text-headline-md shadow-sm transition-all" id="openWebhookModal" type="button">
+<span class="material-symbols-outlined text-[18px]">add_link</span>
+<span class="">+ Create Webhook Endpoint</span>
+</button>
+<button class="flex items-center gap-space-xs bg-primary text-on-primary hover:bg-primary-container px-space-md py-space-xs rounded-lg font-headline-md text-headline-md shadow-md transition-all" id="openKeyModal" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span class="">+ Generate API Key</span>
+</button>
+</div>
+</div>
+<!-- SETTINGS SUB-NAV TABS -->
+<div class="flex items-center gap-space-xs overflow-x-auto pt-space-sm scrollbar-none">
+<a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm transition-colors whitespace-nowrap" href="#">
+        Company Profile
+      </a>
+<a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm transition-colors whitespace-nowrap" href="#">
+        Invoice Defaults &amp; Tax (VAT/PIN)
+      </a>
+<a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm transition-colors whitespace-nowrap" href="#">
+        Payment Gateways &amp; Rails
+      </a>
+<a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm transition-colors whitespace-nowrap" href="#">
+        Team &amp; Role Access (RBAC)
+      </a>
+<a class="px-space-md py-space-xs rounded-lg bg-secondary-container text-on-secondary-fixed font-semibold font-body-sm text-body-sm shadow-sm whitespace-nowrap flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+        API Keys &amp; Webhooks
+      </a>
+</div>
+</div>
+<!-- KPI RIBBON: 4 METRIC CARDS -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-xl">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Active API Tokens</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">key</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-on-surface">5</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Keys Provisioned</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-1 text-tertiary font-label-sm text-label-sm bg-surface-container-high px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="">99.98% ok</span>
+</div>
+<span class="font-label-sm text-label-sm font-mono">482k req / 24h</span>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full w-3/5 rounded-full"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Webhook Endpoints</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">sync_alt</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-on-surface">4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active Endpoints</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm text-tertiary bg-surface-container-high px-1.5 py-0.5 rounded">0 Failed Dispatches</span>
+<span class="font-label-sm text-label-sm font-mono">18 Events Watched</span>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-tertiary h-full w-full rounded-full"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dispatch Latency (p95)</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">speed</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-on-surface font-mono">34<span class="text-headline-lg font-headline-lg font-normal ml-0.5">ms</span></span>
+<span class="font-label-sm text-label-sm text-tertiary">Realtime SSE</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Kafka Queue Sync</span>
+<span class="font-label-sm text-label-sm font-mono">p99: 58ms</span>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary-container h-full w-4/5 rounded-full"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Rate Limit Consumption</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">data_usage</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-on-surface font-mono">42.8<span class="text-headline-lg font-headline-lg font-normal ml-0.5">%</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">of 10k req/min</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm text-tertiary">Burst Capacity OK</span>
+<span class="font-label-sm text-label-sm font-mono">4,280 / 10,000</span>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-secondary h-full w-2/5 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- TWO-COLUMN WORKSPACE -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT MAIN COLUMN: API KEYS & WEBHOOK SUBSCRIBERS (8 Cols) -->
+<div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-space-xl min-w-0">
+<!-- SECTION 1: API KEYS -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="p-space-md flex flex-wrap items-center justify-between gap-space-sm bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">vpn_key</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Active Secret &amp; Public API Keys</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cryptographic credentials for direct server-to-server and client runtime communication.</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 bg-surface-container text-on-surface rounded-full">3 Live / 1 Sandbox</span>
+</div>
+<!-- Security Callout Box -->
+<div class="mx-space-md my-space-xs p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">shield</span>
+<div class="font-body-sm text-body-sm text-on-surface leading-tight">
+            API keys are granted organization-level row-level security (RLS) privileges based on assigned scopes. 
+            <span class="font-semibold text-error">Never share secret keys in public client-side repositories or frontend bundles.</span>
+</div>
+</div>
+<!-- Table of Keys -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-space-sm px-space-md font-semibold">Key Identifier / Name</th>
+<th class="py-space-sm px-space-md font-semibold">Environment</th>
+<th class="py-space-sm px-space-md font-semibold">Privilege Scopes</th>
+<th class="py-space-sm px-space-md font-semibold">Audit Meta</th>
+<th class="py-space-sm px-space-md font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<!-- Key 1 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">StarCore Prod Backend Worker</span>
+<div class="flex items-center gap-1.5 mt-0.5 font-label-sm text-label-sm font-mono text-on-surface-variant">
+<span class="bg-surface-container px-1 py-0.2 rounded select-all">sc_live_9f82••••••••c7a1</span>
+<button class="hover:text-primary transition-colors" onclick="navigator.clipboard.writeText('sc_live_9f82c7a19984b')" title="Copy Key">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container-high px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Production (Live)
+                  </span>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-surface-container text-on-surface rounded font-mono">invoices:write</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-surface-container text-on-surface rounded font-mono">payments:read</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-surface-container text-on-surface rounded font-mono">contracts:all</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">Oct 12, 2024</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Used 2m ago</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors" title="Rotate Key">Roll</button>
+<button class="px-2 py-1 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-sm text-label-sm font-medium transition-colors">Revoke</button>
+</div>
+</td>
+</tr>
+<!-- Key 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors bg-surface-container-lowest">
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Stripe &amp; Banking Reconciliation</span>
+<div class="flex items-center gap-1.5 mt-0.5 font-label-sm text-label-sm font-mono text-on-surface-variant">
+<span class="bg-surface-container px-1 py-0.2 rounded select-all">sc_live_3b11••••••••99e4</span>
+<button class="hover:text-primary transition-colors" onclick="navigator.clipboard.writeText('sc_live_3b1199e4431a')" title="Copy Key">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container-high px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Production (Live)
+                  </span>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-surface-container text-on-surface rounded font-mono">billing:read</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-surface-container text-on-surface rounded font-mono">ledger:write</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">Sep 28, 2024</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Used 14s ago</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Roll</button>
+<button class="px-2 py-1 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-sm text-label-sm font-medium transition-colors">Revoke</button>
+</div>
+</td>
+</tr>
+<!-- Key 3 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Client Portal iOS/Web Integration</span>
+<div class="flex items-center gap-1.5 mt-0.5 font-label-sm text-label-sm font-mono text-on-surface-variant">
+<span class="bg-surface-container px-1 py-0.2 rounded select-all">sc_live_7d42••••••••120f</span>
+<button class="hover:text-primary transition-colors" onclick="navigator.clipboard.writeText('sc_live_7d42120f8812')" title="Copy Key">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container-high px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Production (Live)
+                  </span>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-surface-container text-on-surface rounded font-mono">client:portal_read</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-surface-container text-on-surface rounded font-mono">invoices:read</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">Aug 15, 2024</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Used 1m ago</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Roll</button>
+<button class="px-2 py-1 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-sm text-label-sm font-medium transition-colors">Revoke</button>
+</div>
+</td>
+</tr>
+<!-- Key 4 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors bg-surface-container-lowest">
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Staging Sandbox Test Suite</span>
+<div class="flex items-center gap-1.5 mt-0.5 font-label-sm text-label-sm font-mono text-on-surface-variant">
+<span class="bg-surface-container px-1 py-0.2 rounded select-all">sc_test_88a9••••••••ff31</span>
+<button class="hover:text-primary transition-colors" onclick="navigator.clipboard.writeText('sc_test_88a9ff319982')" title="Copy Key">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-secondary-container bg-surface-container px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Sandbox / Staging
+                  </span>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-wrap gap-1">
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-surface-container text-on-surface rounded font-mono">all:sandbox</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">Yesterday</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Used 4h ago</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Roll</button>
+<button class="px-2 py-1 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-sm text-label-sm font-medium transition-colors">Revoke</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- SECTION 2: WEBHOOK SUBSCRIPTIONS & ENDPOINTS -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="p-space-md flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">webhook</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Webhook Subscriptions &amp; Delivery Endpoints</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Dispatched events signed with HMAC-SHA256 headers for immediate ledger sync.</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 bg-surface-container-high text-tertiary rounded-full font-medium">3 Active Targets</span>
+</div>
+<!-- Endpoints List -->
+<div class="p-space-md pt-0 flex flex-col gap-space-md">
+<!-- Endpoint 1 -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-sm hover:shadow-sm transition-all">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs font-mono font-semibold text-body-md text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-[18px]">dns</span>
+<span class="">https://api.omnicorp.internal/webhooks/starcore</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-tertiary font-label-sm text-label-sm font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Healthy (100%)
+                </span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="text-on-surface font-label-sm text-label-sm">Events:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm text-on-surface">invoice.created</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm text-on-surface">invoice.paid</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm text-on-surface">contract.signed</span>
+</div>
+<div class="font-label-sm text-label-sm font-mono">
+                Secret: <span class="bg-surface-container-lowest px-1 py-0.5 rounded text-on-surface">whsec_884f••••••••991a</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between pt-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Primary ERP Sync • 2,410 delivered (0 retries in 24h)</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Send Test Ping</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Edit</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:text-error text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors">Disable</button>
+</div>
+</div>
+</div>
+<!-- Endpoint 2 -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-sm hover:shadow-sm transition-all">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs font-mono font-semibold text-body-md text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[18px]">forum</span>
+<span class="">https://hooks.slack.com/services/T01/B99/finance-alerts</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-tertiary font-label-sm text-label-sm font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  99.8% Healthy
+                </span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="text-on-surface font-label-sm text-label-sm">Events:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm text-on-surface">payment.failed</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm text-on-surface">dunning.alert</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm text-on-surface">dispute.opened</span>
+</div>
+<div class="font-label-sm text-label-sm font-mono">
+                Secret: <span class="bg-surface-container-lowest px-1 py-0.5 rounded text-on-surface">whsec_slack••••••••b10a</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between pt-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Slack Finance Channel Alerts • 412 dispatched (1 retry handled)</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Send Test Ping</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Edit</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:text-error text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors">Disable</button>
+</div>
+</div>
+</div>
+<!-- Endpoint 3 -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-sm hover:shadow-sm transition-all">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs font-mono font-semibold text-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary text-[18px]">storage</span>
+<span class="">https://data-lake.starcore-analytics.io/ingest/v1</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-tertiary font-label-sm text-label-sm font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Healthy (100%)
+                </span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="text-on-surface font-label-sm text-label-sm">Events:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest font-mono font-label-sm text-label-sm text-primary font-bold">* (All Events Stream)</span>
+</div>
+<div class="font-label-sm text-label-sm font-mono">
+                Secret: <span class="bg-surface-container-lowest px-1 py-0.5 rounded text-on-surface">whsec_dlake••••••••47bc</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between pt-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm">BigQuery Operations Lake • 48,920 delivered in 24h</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Send Test Ping</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-colors">Edit</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:text-error text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors">Disable</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: LIVE LOG INSPECTOR & SECURITY PARAMS (4 Cols) -->
+<div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-space-xl min-w-0">
+<!-- CARD 1: LIVE DELIVERY INSPECTOR -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="p-space-md bg-inverse-surface text-inverse-on-surface flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+<span class="font-headline-md text-headline-md tracking-tight">Live Webhook Inspector</span>
+</div>
+<span class="font-label-sm text-label-sm font-mono bg-white/10 px-2 py-0.5 rounded">Event evt_wh_904128</span>
+</div>
+<div class="p-space-md flex flex-col gap-space-md">
+<!-- Event Status Bar -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm font-mono px-1.5 py-0.5 rounded bg-surface-container-high text-tertiary font-bold">200 OK</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">invoice.payment_succeeded</span>
+</div>
+<span class="font-label-sm text-label-sm font-mono text-tertiary font-medium">42ms latency</span>
+</div>
+<!-- Metadata Properties -->
+<div class="flex flex-col gap-1.5 font-label-sm text-label-sm">
+<div class="flex justify-between text-on-surface-variant">
+<span class="">Timestamp:</span>
+<span class="font-mono text-on-surface">2024-10-24 16:42:19 UTC</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="">Target:</span>
+<span class="font-mono text-on-surface truncate ml-2">api.omnicorp.internal/webhooks</span>
+</div>
+</div>
+<!-- Headers Section -->
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface uppercase tracking-wider">Signed Delivery Headers</span>
+<div class="p-space-sm bg-surface-container rounded-lg font-mono text-label-sm text-on-surface space-y-1">
+<div class="truncate text-on-secondary-fixed">StarCore-Signature: t=1729788139,v1=9f82...b3c1</div>
+<div class="truncate text-on-secondary-fixed">Content-Type: application/json</div>
+<div class="truncate text-on-secondary-fixed">X-StarCore-Event-ID: evt_wh_904128</div>
+</div>
+</div>
+<!-- JSON Payload Syntax Box -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface uppercase tracking-wider">Dispatched Payload</span>
+<button class="text-primary hover:underline font-label-sm text-label-sm flex items-center gap-0.5" onclick="navigator.clipboard.writeText(document.getElementById('rawPayload').innerText)">
+<span class="material-symbols-outlined text-[14px]">content_copy</span> Copy JSON
+              </button>
+</div>
+<pre class="bg-inverse-surface text-inverse-on-surface p-space-sm rounded-lg font-mono text-label-sm overflow-x-auto leading-relaxed scrollbar-none" id="rawPayload">{
+  <span class="text-tertiary-fixed">"id"</span>: <span class="text-on-primary-container">"evt_wh_904128"</span>,
+  <span class="text-tertiary-fixed">"event"</span>: <span class="text-on-primary-container">"invoice.payment_succeeded"</span>,
+  <span class="text-tertiary-fixed">"timestamp"</span>: <span class="text-on-primary-container">"2024-10-24T16:42:19Z"</span>,
+  <span class="text-tertiary-fixed">"data"</span>: {
+    <span class="text-tertiary-fixed">"invoice_id"</span>: <span class="text-on-primary-container">"INV-2024-0092"</span>,
+    <span class="text-tertiary-fixed">"client_id"</span>: <span class="text-on-primary-container">"SC-90422"</span>,
+    <span class="text-tertiary-fixed">"amount_cents"</span>: <span class="text-secondary-fixed">1450000</span>,
+    <span class="text-tertiary-fixed">"currency"</span>: <span class="text-on-primary-container">"USD"</span>,
+    <span class="text-tertiary-fixed">"payment_method"</span>: <span class="text-on-primary-container">"stripe_card"</span>,
+    <span class="text-tertiary-fixed">"settled_at"</span>: <span class="text-on-primary-container">"2024-10-24T16:42:18Z"</span>
+  }
+}</pre>
+</div>
+<!-- Inspector Action Buttons -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<button class="flex items-center justify-center gap-1.5 py-space-xs px-space-sm rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-headline-md text-headline-md text-center transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">replay</span>
+<span class="">Resend Payload</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 py-space-xs px-space-sm rounded-lg bg-surface-container-low text-primary hover:bg-surface-container font-headline-md text-headline-md text-center transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span class="">Copy cURL</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CARD 2: SECURITY & REPLAY PREVENTION POLICIES -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="p-space-md flex items-center gap-space-sm bg-surface-container-lowest">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Webhook Security &amp; Guardrails</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Defense-in-depth cryptographic rules</p>
+</div>
+</div>
+<div class="px-space-md pb-space-md flex flex-col gap-space-sm">
+<!-- Parameter 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-0.5">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Timestamp Tolerance</span>
+<span class="font-label-sm text-label-sm font-mono text-tertiary">300s (5 min)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Prevents unauthorized replay vectors outside acceptable drift.</span>
+</div>
+<!-- Parameter 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-0.5">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Retry Backoff Policy</span>
+<span class="font-label-sm text-label-sm font-mono text-primary">5 Tries / 24h</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Exponential backoff (10s, 30s, 5m, 1h, 24h) upon HTTP 5xx responses.</span>
+</div>
+<!-- Parameter 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-0.5">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Mutual TLS (mTLS)</span>
+<span class="font-label-sm text-label-sm font-mono px-1.5 py-0.5 rounded bg-surface-container-high text-tertiary font-bold">Enabled</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Client certs authenticated using StarCore Root CA v2.</span>
+</div>
+<!-- Parameter 4 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-0.5">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Outbound Origin CIDRs</span>
+<button class="text-primary hover:underline font-label-sm text-label-sm">Download</button>
+</div>
+<div class="flex flex-wrap gap-1 mt-1 font-mono font-label-sm text-label-sm">
+<span class="bg-surface-container px-1.5 py-0.5 rounded text-on-surface">198.51.100.0/24</span>
+<span class="bg-surface-container px-1.5 py-0.5 rounded text-on-surface">34.201.8.99/32</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- BOTTOM COMPLIANCE STRIP -->
+<div class="mt-space-xl p-space-md rounded-xl bg-surface-container flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">policy</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface">Developer SLA &amp; Infrastructure Governance</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          Enterprise API SLA 99.99% • End-to-End HMAC Signatures • Rate-Limited Token Buckets • ISO 27001 Certified Infrastructure
+        </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<a class="px-space-md py-space-xs rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm font-medium transition-colors shadow-sm flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+        Developer Docs
+      </a>
+<a class="px-space-md py-space-xs rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm font-medium transition-colors shadow-sm flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">health_and_safety</span>
+        Audit Log
+      </a>
+</div>
+</div>
+<!-- INTERACTIVE MODAL: CREATE API KEY (Hidden by default) -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 flex items-center justify-center p-space-md hidden" id="apiKeyModal">
+<div class="bg-surface-container-lowest rounded-xl shadow-xl max-w-lg w-full p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">key</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Provision New API Key</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" id="closeKeyModal" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">Key Friendly Name</label>
+<input class="h-9 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:bg-surface-container-lowest" placeholder="e.g. ERP Invoicing Automation Worker" type="text">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">Execution Environment</label>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="px-space-sm py-space-xs rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-semibold text-center" type="button">Production (Live)</button>
+<button class="px-space-sm py-space-xs rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm text-center" type="button">Sandbox (Test Mode)</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">Scope Permissions</label>
+<div class="grid grid-cols-2 gap-2 text-body-sm">
+<label class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg cursor-pointer">
+<input checked="" class="rounded text-primary" type="checkbox">
+<span class="">invoices:write</span>
+</label>
+<label class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg cursor-pointer">
+<input checked="" class="rounded text-primary" type="checkbox">
+<span class="">invoices:read</span>
+</label>
+<label class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg cursor-pointer">
+<input checked="" class="rounded text-primary" type="checkbox">
+<span class="">payments:read</span>
+</label>
+<label class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg cursor-pointer">
+<input class="rounded text-primary" type="checkbox">
+<span class="">contracts:all</span>
+</label>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-headline-md text-headline-md" id="cancelKeyModal" type="button">Cancel</button>
+<button class="px-space-md py-space-xs rounded-lg bg-primary text-on-primary hover:bg-primary-container font-headline-md text-headline-md shadow-md" type="button">Generate Secret Key</button>
+</div>
+</div>
+</div>
+<!-- INTERACTIVE MODAL: CREATE WEBHOOK ENDPOINT (Hidden by default) -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 flex items-center justify-center p-space-md hidden" id="webhookModal">
+<div class="bg-surface-container-lowest rounded-xl shadow-xl max-w-lg w-full p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">add_link</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Add Webhook Delivery Endpoint</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" id="closeWebhookModal" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">HTTPS Target URL</label>
+<input class="h-9 px-3 rounded-lg bg-surface-container-low text-on-surface font-mono text-body-sm focus:outline-none focus:bg-surface-container-lowest" placeholder="https://your-domain.internal/webhooks/receive" type="url">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">Description / Target Service</label>
+<input class="h-9 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:bg-surface-container-lowest" placeholder="e.g. Accounting Ledgers &amp; NetSuite Bridge" type="text">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">Select Events to Send</label>
+<div class="grid grid-cols-2 gap-2 text-body-sm">
+<label class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg cursor-pointer">
+<input checked="" class="rounded text-tertiary" type="checkbox">
+<span class="">invoice.created</span>
+</label>
+<label class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg cursor-pointer">
+<input checked="" class="rounded text-tertiary" type="checkbox">
+<span class="">invoice.paid</span>
+</label>
+<label class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg cursor-pointer">
+<input class="rounded text-tertiary" type="checkbox">
+<span class="">payment.failed</span>
+</label>
+<label class="flex items-center gap-2 p-2 bg-surface-container-low rounded-lg cursor-pointer">
+<input class="rounded text-tertiary" type="checkbox">
+<span class="">contract.signed</span>
+</label>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-headline-md text-headline-md" id="cancelWebhookModal" type="button">Cancel</button>
+<button class="px-space-md py-space-xs rounded-lg bg-tertiary text-on-tertiary hover:bg-tertiary-container font-headline-md text-headline-md shadow-md" type="button">Register Endpoint</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interactions for modals
+  const keyModal = document.getElementById('apiKeyModal');
+  const openKeyBtn = document.getElementById('openKeyModal');
+  const closeKeyBtn = document.getElementById('closeKeyModal');
+  const cancelKeyBtn = document.getElementById('cancelKeyModal');
+
+  const webhookModal = document.getElementById('webhookModal');
+  const openWebhookBtn = document.getElementById('openWebhookModal');
+  const closeWebhookBtn = document.getElementById('closeWebhookModal');
+  const cancelWebhookBtn = document.getElementById('cancelWebhookModal');
+
+  const toggleModal = (modal, show) => {
+    if (show) {
+      modal.classList.remove('hidden');
+    } else {
+      modal.classList.add('hidden');
+    }
+  };
+
+  if (openKeyBtn && keyModal) openKeyBtn.addEventListener('click', () => toggleModal(keyModal, true));
+  if (closeKeyBtn && keyModal) closeKeyBtn.addEventListener('click', () => toggleModal(keyModal, false));
+  if (cancelKeyBtn && keyModal) cancelKeyBtn.addEventListener('click', () => toggleModal(keyModal, false));
+
+  if (openWebhookBtn && webhookModal) openWebhookBtn.addEventListener('click', () => toggleModal(webhookModal, true));
+  if (closeWebhookBtn && webhookModal) closeWebhookBtn.addEventListener('click', () => toggleModal(webhookModal, false));
+  if (cancelWebhookBtn && webhookModal) cancelWebhookBtn.addEventListener('click', () => toggleModal(webhookModal, false));
+</script></main></div>
+
+</body></html>

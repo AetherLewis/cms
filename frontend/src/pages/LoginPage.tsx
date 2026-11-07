@@ -14,8 +14,9 @@ export function LoginPage() {
     e.preventDefault()
     setLoading(true)
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password })
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) throw error
+      if (data.session?.access_token) localStorage.setItem('starcore_token', data.session.access_token)
       toast.success('Welcome back')
       navigate('/')
     } catch (err: any) {

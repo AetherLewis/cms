@@ -15,7 +15,8 @@ async function request<T>(
     'Content-Type': 'application/json',
     ...(options.headers instanceof Headers ? Object.fromEntries(options.headers.entries()) : (options.headers as Record<string, string> | undefined) || {}),
   }
-  if (session?.access_token) headers.Authorization = `Bearer ${session.access_token}`
+  const token = session?.access_token || localStorage.getItem('starcore_token')
+  if (token) headers.Authorization = `Bearer ${token}`
 
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers })
 

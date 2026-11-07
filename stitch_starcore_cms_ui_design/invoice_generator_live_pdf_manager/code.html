@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#2a14b4","on-tertiary-fixed":"#00201d","on-error":"#ffffff","primary-fixed":"#e3dfff","secondary-fixed-dim":"#bec6e0","primary-container":"#4338ca","secondary-container":"#dae2fd","inverse-on-surface":"#eaf1ff","tertiary-fixed-dim":"#6bd8cb","tertiary":"#00423c","on-background":"#0b1c30","on-tertiary-fixed-variant":"#005049","secondary-fixed":"#dae2fd","on-primary":"#ffffff","inverse-surface":"#213145","on-secondary-fixed":"#131b2e","error-container":"#ffdad6","on-tertiary":"#ffffff","error":"#ba1a1a","on-error-container":"#93000a","outline":"#777586","on-secondary":"#ffffff","surface-container-high":"#dce9ff","surface-container-highest":"#d3e4fe","primary-fixed-dim":"#c3c0ff","surface-container-low":"#eff4ff","on-primary-container":"#c1beff","tertiary-fixed":"#89f5e7","on-secondary-container":"#5c647a","outline-variant":"#c7c4d7","surface-variant":"#d3e4fe","surface-dim":"#cbdbf5","on-primary-fixed-variant":"#372abf","on-secondary-fixed-variant":"#3f465c","inverse-primary":"#c3c0ff","on-surface-variant":"#464554","tertiary-container":"#005c54","secondary":"#565e74","surface-bright":"#f8f9ff","surface-tint":"#5148d7","on-surface":"#0b1c30","surface-container":"#e5eeff","surface-container-lowest":"#ffffff","background":"#f8f9ff","on-primary-fixed":"#100069","on-tertiary-container":"#69d6c9","surface":"#f8f9ff"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-sm":"0.5rem","space-md":"1rem","gutter-mobile":"1rem","margin":"2rem","space-xl":"2rem","gutter":"1.5rem","space-2xl":"3rem","space-xs":"0.25rem","margin-mobile":"1rem","space-lg":"1.5rem"},fontFamily:{"body-lg":["Hanken Grotesk"],"headline-lg":["Hanken Grotesk"],"headline-xl":["Hanken Grotesk"],"label-md":["JetBrains Mono"],"label-sm":["JetBrains Mono"],"display-lg":["Hanken Grotesk"],"display-lg-mobile":["Hanken Grotesk"],"headline-md":["Hanken Grotesk"],"body-sm":["Hanken Grotesk"],"body-md":["Hanken Grotesk"]},fontSize:{"body-lg":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"headline-lg":["20px",{lineHeight:"28px",letterSpacing:"-0.015em",fontWeight:"600"}],"headline-xl":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.03em",fontWeight:"500"}],"display-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"700"}],"display-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-md":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"18px",letterSpacing:"0.005em",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="p-space-md flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="StarCore Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrCUDDu5rOREsQ05gwQqiIC0JeK73mrIi6IJIDQZQC5o_rWhIoT2ILa1xSnvRjdFGRAjOFiCDNd5mmQTLDyrqALONPXtN9nJglUQINWRbj91cIoMIH6ONz2YI2mEI4apOtIMPA_LquJrul0RT0m51ZmdnoizNBN7JyLadSkMwKxD55wYJ30GH3oddQgWrycQxHgmWXtFsRmPuZNh_K8Nt4EGxBMXjwV9ILhkcaRS8JDn"/><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight text-on-surface">StarCore CMS</span><span class="font-label-sm text-label-sm text-on-surface-variant">ENTERPRISE</span></div></div></div><div class="px-space-md py-space-xs"><div class="flex items-center justify-between bg-surface-container-low px-space-sm py-space-xs rounded-lg cursor-pointer hover:bg-surface-container hover:text-on-surface transition-colors"><div class="flex flex-col overflow-hidden"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-tertiary shrink-0"></span><span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Acme Group Ltd</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">StarCore Pro Instance</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">unfold_more</span></div></div><div class="px-space-md pt-space-sm"><button class="w-full flex items-center justify-center gap-space-xs bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary py-space-xs px-space-sm rounded-lg font-headline-md text-headline-md transition-all shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span>New Invoice</span></button></div><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Operations</span></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="clients" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-md text-body-md">Clients</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="contracts" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span class="font-body-md text-body-md">Contracts</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg transition-all bg-secondary-container text-on-secondary-fixed font-semibold" data-path="invoices-and-billing" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-md text-body-md">Invoices &amp; Billing</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="payments" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span class="font-body-md text-body-md">Payments</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="recurring-billing" href="#"><span class="material-symbols-outlined text-[20px]">autorenew</span><span class="font-body-md text-body-md">Recurring Billing</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="documents" href="#"><span class="material-symbols-outlined text-[20px]">folder_shared</span><span class="font-body-md text-body-md">Documents</span></a></nav><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Governance</span></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="audit-log" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span class="font-body-md text-body-md">Audit Log</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-md text-body-md">Settings</span></a></nav></div><div class="p-space-md"><div class="flex items-center justify-between bg-surface-container-low p-space-xs rounded-full"><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQjG3A6PK2f0Z5JZ0uZoDI84XavSYVyQAgh7riKJewEWBlmGfm9eg0UuBaOrbSnkDHnBSY3YhyF-241g4YLxWRCO9lYdC4gYIoBXNEgo2AbHFqMihcHdZ8COkLgRRz2mvB_JqiZegljS0cofFgb70RvG8448TIe-iB0fAYltfYBV-I2Ls_HqGNayrItsYulbjRQpOQBYnQeCSS-foD6M9C6FP6QxfOL-dIabPc0V9"/><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">E. Vance</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Operations Admin</span></div></div><button class="text-on-surface-variant hover:text-on-surface p-space-xs" type="button"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-sm w-96"><div class="relative w-full flex items-center"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px]">search</span><input class="w-full h-9 pl-10 pr-16 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Search clients, contracts, invoices..." type="text"/><kbd class="absolute right-3 font-label-sm text-label-sm bg-surface-container-highest text-on-surface px-1.5 py-0.5 rounded">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-0.5"><button class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container-lowest text-on-surface font-semibold shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]" type="button">USD</button><button class="font-label-sm text-label-sm px-space-xs py-0.5 text-on-surface-variant hover:text-on-surface transition-colors" type="button">KES</button><button class="font-label-sm text-label-sm px-space-xs py-0.5 text-on-surface-variant hover:text-on-surface transition-colors" type="button">EUR</button></div><a class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span>Support</span></a><div class="relative flex items-center"><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button></div><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQjG3A6PK2f0Z5JZ0uZoDI84XavSYVyQAgh7riKJewEWBlmGfm9eg0UuBaOrbSnkDHnBSY3YhyF-241g4YLxWRCO9lYdC4gYIoBXNEgo2AbHFqMihcHdZ8COkLgRRz2mvB_JqiZegljS0cofFgb70RvG8448TIe-iB0fAYltfYBV-I2Ls_HqGNayrItsYulbjRQpOQBYnQeCSS-foD6M9C6FP6QxfOL-dIabPc0V9"/><div class="flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-none">Acme Admin</span><span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 leading-none">Live Node</span></div></div></div></header><main class="relative pt-16 w-full px-gutter bg-surface"><div class="flex flex-col w-full">
+<div class="py-space-md flex flex-col gap-space-lg">
+<!-- Top Action & Navigation Row -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span>FINANCE ENGINE</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">INVOICE GENERATOR &amp; LEDGER</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Invoices &amp; Billing</h1>
+</div>
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">download_for_offline</span>
+<span>Export PDF Batch</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">sync_alt</span>
+<span>Sync ERP</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-primary text-on-primary hover:bg-primary-container font-headline-md text-headline-md transition-all shadow-md" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Create Invoice</span>
+</button>
+</div>
+</div>
+<!-- Status Tabs Strip -->
+<div class="flex items-center overflow-x-auto gap-space-xs pb-space-xs">
+<button class="px-space-md py-space-xs rounded-full bg-secondary-container text-on-secondary-fixed font-headline-md text-headline-md whitespace-nowrap shadow-sm" type="button">
+        All Invoices <span class="ml-1 font-label-sm text-label-sm text-on-secondary-container">284</span>
+</button>
+<button class="px-space-md py-space-xs rounded-full hover:bg-surface-container-high text-on-surface-variant font-body-md text-body-md whitespace-nowrap transition-colors" type="button">
+        Drafts <span class="ml-1 font-label-sm text-label-sm text-on-surface-variant">14</span>
+</button>
+<button class="px-space-md py-space-xs rounded-full hover:bg-surface-container-high text-on-surface-variant font-body-md text-body-md whitespace-nowrap transition-colors" type="button">
+        Sent <span class="ml-1 font-label-sm text-label-sm text-on-surface-variant">42</span>
+</button>
+<button class="px-space-md py-space-xs rounded-full hover:bg-surface-container-high text-tertiary font-body-md text-body-md whitespace-nowrap transition-colors" type="button">
+        Paid <span class="ml-1 font-label-sm text-label-sm text-on-tertiary-container">198</span>
+</button>
+<button class="px-space-md py-space-xs rounded-full hover:bg-surface-container-high text-error font-body-md text-body-md whitespace-nowrap transition-colors" type="button">
+        Overdue <span class="ml-1 font-label-sm text-label-sm text-error">8</span>
+</button>
+<button class="px-space-md py-space-xs rounded-full hover:bg-surface-container-high text-on-surface-variant font-body-md text-body-md whitespace-nowrap transition-colors" type="button">
+        Void <span class="ml-1 font-label-sm text-label-sm text-on-surface-variant">22</span>
+</button>
+</div>
+<!-- KPI Summary Micro-Bento Banner -->
+<div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-space-md">
+<!-- KPI 1 -->
+<div class="relative overflow-hidden p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Billed this month</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl font-bold tracking-tight text-on-surface">$74,200</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">USD</span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs">
+<span class="inline-flex items-center text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +14.8%
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">vs last month</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="relative overflow-hidden p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Collected Capital</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl font-bold tracking-tight text-on-surface">$62,100</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">USD</span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs">
+<span class="inline-flex items-center text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">account_balance_wallet</span> 83.7%
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">settlement rate</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="relative overflow-hidden p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Total Overdue</span>
+<div class="w-8 h-8 rounded-lg bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[20px]">priority_high</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl font-bold tracking-tight text-error">$12,100</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">USD</span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs">
+<span class="inline-flex items-center text-error font-label-sm text-label-sm font-semibold">8 accounts</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">requiring escalation</span>
+</div>
+</div>
+<!-- KPI 4 (Mini Velocity Visualizer) -->
+<div class="hidden xl:flex relative overflow-hidden p-space-md bg-surface-container rounded-xl shadow-sm flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">DSO Metric</span>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-semibold">Optimal</span>
+</div>
+<div class="flex items-end justify-between mt-space-xs">
+<div>
+<span class="font-headline-xl text-headline-xl font-bold text-on-surface">19.4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Days avg.</span>
+</div>
+<!-- Sparkline Mini SVG -->
+<svg class="w-24 h-10 text-primary" fill="none" viewbox="0 0 100 40">
+<path d="M0 32 L20 28 L40 35 L60 18 L80 22 L100 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<path d="M0 32 L20 28 L40 35 L60 18 L80 22 L100 8 L100 40 L0 40 Z" fill="currentColor" fill-opacity="0.08"></path>
+</svg>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Automated chasing active</span>
+</div>
+</div>
+<!-- Master-Detail Split-Screen Workspace -->
+<div class="grid grid-cols-1 2xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT PANE: Interactive Invoice Editor (7 cols on 2xl) -->
+<div class="2xl:col-span-7 flex flex-col gap-space-md">
+<!-- Section: Invoice Head & Controls -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Editor &amp; Parameters</h2>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-container font-label-sm text-label-sm text-on-secondary-fixed">LIVE SYNC ON</span>
+</div>
+<!-- Metadata 3-Column Flow -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Invoice Number -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Invoice Number</label>
+<div class="flex items-center bg-surface-container-low px-space-sm py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant mr-1">tag</span>
+<input class="w-full bg-transparent font-label-md text-label-md text-on-surface font-semibold focus:outline-none" id="inputInvoiceNum" type="text" value="INV-2024-0089"/>
+</div>
+</div>
+<!-- Currency -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Settlement Currency</label>
+<select class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-sm py-1.5 rounded-lg focus:outline-none cursor-pointer" id="selectCurrency">
+<option value="USD">USD - US Dollar ($)</option>
+<option value="KES">KES - Kenya Shilling (KSh)</option>
+<option value="EUR">EUR - Euro (€)</option>
+</select>
+</div>
+<!-- Payment Terms -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Payment Terms</label>
+<select class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-sm py-1.5 rounded-lg focus:outline-none cursor-pointer">
+<option>Net 30 (Default)</option>
+<option>Net 15</option>
+<option>Due On Receipt</option>
+<option>Net 60</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Issue Date -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Issue Date</label>
+<div class="flex items-center bg-surface-container-low px-space-sm py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant mr-1">event</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface focus:outline-none" id="inputIssueDate" type="date" value="2024-10-24"/>
+</div>
+</div>
+<!-- Due Date -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Payment Due Date</label>
+<div class="flex items-center bg-surface-container-low px-space-sm py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant mr-1">event_available</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface focus:outline-none" id="inputDueDate" type="date" value="2024-11-23"/>
+</div>
+</div>
+</div>
+<!-- Entity Selection -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Target Client Entity</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-sm py-2 rounded-lg focus:outline-none cursor-pointer appearance-none" id="selectClient">
+<option value="Vertex Media Group">Vertex Media Group (San Francisco, CA)</option>
+<option value="Solaris Cloud Infrastructure">Solaris Cloud Infrastructure (Austin, TX)</option>
+<option value="Quantum Frontier Analytics">Quantum Frontier Analytics (Boston, MA)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Associated Contract</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-sm py-2 rounded-lg focus:outline-none cursor-pointer appearance-none">
+<option>Retainer Agreement Q3 (MSA-2024-912)</option>
+<option>Enterprise Cloud Expansion (SLA-902)</option>
+<option>Custom Engineering Scope of Work #4</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Dynamic Line Items Grid -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Deliverables &amp; Line Items</h3>
+<button class="inline-flex items-center gap-space-xs text-primary font-headline-md text-headline-md hover:underline" id="addLineItemBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Add Line Item</span>
+</button>
+</div>
+<!-- Items Table Wrapper -->
+<div class="overflow-x-auto">
+<table class="w-full text-left" id="lineItemsTable">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase">
+<th class="py-space-xs px-space-sm rounded-l-lg">Item Description</th>
+<th class="py-space-xs px-space-sm w-20 text-center">Qty</th>
+<th class="py-space-xs px-space-sm w-32 text-right">Unit Price</th>
+<th class="py-space-xs px-space-sm w-28 text-center">Tax Rate</th>
+<th class="py-space-xs px-space-sm w-32 text-right">Line Total</th>
+<th class="py-space-xs px-space-xs w-10 text-center rounded-r-lg"></th>
+</tr>
+</thead>
+<tbody class="divide-y-0" id="lineItemsBody">
+<!-- Item 1 -->
+<tr class="item-row group hover:bg-surface-container-low transition-colors">
+<td class="py-space-xs px-space-sm">
+<input class="row-desc w-full bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none" type="text" value="Enterprise Cloud CMS Instance License (Monthly Q4)"/>
+</td>
+<td class="py-space-xs px-space-sm">
+<input class="row-qty w-full bg-surface-container-low rounded px-1 text-center font-label-md text-label-md text-on-surface focus:outline-none" min="1" type="number" value="1"/>
+</td>
+<td class="py-space-xs px-space-sm">
+<input class="row-price w-full bg-surface-container-low rounded px-1.5 text-right font-label-md text-label-md text-on-surface focus:outline-none" step="0.01" type="number" value="10000.00"/>
+</td>
+<td class="py-space-xs px-space-sm text-center">
+<select class="row-tax bg-surface-container-low rounded px-1 py-0.5 text-center font-label-sm text-label-sm text-on-surface focus:outline-none">
+<option value="0.16">VAT 16%</option>
+<option value="0.00">Zero (0%)</option>
+</select>
+</td>
+<td class="py-space-xs px-space-sm text-right font-label-md text-label-md text-on-surface font-semibold row-total">
+                    $10,000.00
+                  </td>
+<td class="py-space-xs px-space-xs text-center">
+<button class="del-row-btn text-on-surface-variant hover:text-error opacity-60 hover:opacity-100 transition-opacity" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Item 2 -->
+<tr class="item-row group hover:bg-surface-container-low transition-colors">
+<td class="py-space-xs px-space-sm">
+<input class="row-desc w-full bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none" type="text" value="Dedicated SLA Escalation &amp; DevOps Monitoring Support"/>
+</td>
+<td class="py-space-xs px-space-sm">
+<input class="row-qty w-full bg-surface-container-low rounded px-1 text-center font-label-md text-label-md text-on-surface focus:outline-none" min="1" type="number" value="1"/>
+</td>
+<td class="py-space-xs px-space-sm">
+<input class="row-price w-full bg-surface-container-low rounded px-1.5 text-right font-label-md text-label-md text-on-surface focus:outline-none" step="0.01" type="number" value="2500.00"/>
+</td>
+<td class="py-space-xs px-space-sm text-center">
+<select class="row-tax bg-surface-container-low rounded px-1 py-0.5 text-center font-label-sm text-label-sm text-on-surface focus:outline-none">
+<option value="0.16">VAT 16%</option>
+<option value="0.00">Zero (0%)</option>
+</select>
+</td>
+<td class="py-space-xs px-space-sm text-right font-label-md text-label-md text-on-surface font-semibold row-total">
+                    $2,500.00
+                  </td>
+<td class="py-space-xs px-space-xs text-center">
+<button class="del-row-btn text-on-surface-variant hover:text-error opacity-60 hover:opacity-100 transition-opacity" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Bottom Totals preview summary inside form -->
+<div class="mt-space-sm p-space-md bg-surface-container-low rounded-lg flex flex-col gap-space-xs ml-auto w-full max-w-xs">
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Subtotal:</span>
+<span class="font-label-md text-label-md text-on-surface font-medium" id="formSubtotal">$12,500.00</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>VAT (16% Computed):</span>
+<span class="font-label-md text-label-md text-on-surface font-medium" id="formTax">$2,000.00</span>
+</div>
+<div class="flex justify-between font-headline-md text-headline-md text-on-surface font-bold pt-space-xs">
+<span>Total Payable:</span>
+<span class="text-primary font-label-md text-label-md font-bold" id="formTotal">$14,500.00</span>
+</div>
+</div>
+</div>
+<!-- Section: Instructions & Settlement Routing -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Payment Rails &amp; Remittance Notes</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">M-Pesa / Mobile Gateway Details</label>
+<textarea class="w-full bg-surface-container-low rounded-lg p-space-sm font-label-sm text-label-sm text-on-surface focus:outline-none resize-none h-24" id="notesMpesa">Paybill: 882001
+Account: INV-2024-0089
+Instant settlement clearance via Safaricom Daraja API</textarea>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Bank Wire / IBAN Clearance</label>
+<textarea class="w-full bg-surface-container-low rounded-lg p-space-sm font-label-sm text-label-sm text-on-surface focus:outline-none resize-none h-24" id="notesWire">Bank: Standard Chartered Private
+IBAN: US82 SCBL 0004 8839 2018 90
+SWIFT/BIC: SCBLUS33
+Routing: 026002574</textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT PANE: Live PDF Preview Canvas (5 cols on 2xl, sticky) -->
+<div class="2xl:col-span-5 flex flex-col gap-space-md 2xl:sticky 2xl:top-20">
+<!-- Live Preview Header Toolbar -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex items-center justify-between gap-space-xs flex-wrap">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">CANVAS RENDERER (A4)</span>
+</div>
+<!-- Canvas Fast Actions -->
+<div class="flex items-center gap-space-xs">
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Print" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Record Payment" type="button">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span>Send</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-headline-md text-headline-md transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download PDF</span>
+</button>
+</div>
+</div>
+<!-- Rendered Virtual Paper (High-fidelity invoice document layout) -->
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-xl p-space-xl flex flex-col gap-space-lg overflow-hidden border border-surface-container-high/30">
+<!-- Subtle Top Branding Color Accent -->
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-primary-container to-tertiary"></div>
+<!-- Invoice Header -->
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<img alt="StarCore Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrCUDDu5rOREsQ05gwQqiIC0JeK73mrIi6IJIDQZQC5o_rWhIoT2ILa1xSnvRjdFGRAjOFiCDNd5mmQTLDyrqALONPXtN9nJglUQINWRbj91cIoMIH6ONz2YI2mEI4apOtIMPA_LquJrul0RT0m51ZmdnoizNBN7JyLadSkMwKxD55wYJ30GH3oddQgWrycQxHgmWXtFsRmPuZNh_K8Nt4EGxBMXjwV9ILhkcaRS8JDn"/>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">StarCore Systems</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex flex-col">
+<span>StarCore Enterprise Headquarters Ltd</span>
+<span>Westlands Commercial Plaza, Fl 8</span>
+<span>Nairobi, KE • Delaware Inc, USA</span>
+<span class="font-label-sm text-label-sm">tax-id: KRA-P051283991C</span>
+</div>
+</div>
+<!-- Invoice Reference Tag & Barcode-like visual -->
+<div class="flex flex-col items-end text-right">
+<span class="font-display-lg text-display-lg text-primary font-extrabold tracking-tighter leading-none">INVOICE</span>
+<span class="font-label-md text-label-md font-bold text-on-surface mt-1" id="canvasInvoiceNum">INV-2024-0089</span>
+<span class="mt-2 inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+                PAYMENT PENDING
+              </span>
+</div>
+</div>
+<!-- Client & Metadata Grid -->
+<div class="p-space-md bg-surface-container-low rounded-xl grid grid-cols-2 gap-space-md">
+<!-- Billed To -->
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">BILLED TO</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold" id="canvasClientName">Vertex Media Group</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex flex-col">
+<span>555 Mission Street, Suite 1200</span>
+<span>San Francisco, CA 94105</span>
+<span>finance@vertexmedia.com</span>
+</div>
+</div>
+<!-- Invoicing Dates -->
+<div class="flex flex-col gap-1 text-right">
+<div class="flex justify-between md:justify-end gap-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Issue Date:</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface" id="canvasIssueDate">2024-10-24</span>
+</div>
+<div class="flex justify-between md:justify-end gap-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Payment Due:</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface" id="canvasDueDate">2024-11-23</span>
+</div>
+<div class="flex justify-between md:justify-end gap-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Payment Terms:</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Net 30 Days</span>
+</div>
+<div class="flex justify-between md:justify-end gap-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Currency:</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary" id="canvasCurrency">USD ($)</span>
+</div>
+</div>
+</div>
+<!-- Document Itemized Table -->
+<div class="flex flex-col">
+<div class="grid grid-cols-12 py-space-xs font-label-sm text-label-sm uppercase text-on-surface-variant bg-surface-container px-space-sm rounded-t-lg">
+<span class="col-span-6">Description</span>
+<span class="col-span-2 text-center">Qty</span>
+<span class="col-span-2 text-right">Rate</span>
+<span class="col-span-2 text-right">Amount</span>
+</div>
+<div class="flex flex-col divide-y-0" id="canvasItemsList">
+<!-- Item 1 Canvas -->
+<div class="grid grid-cols-12 py-2 px-space-sm text-body-sm font-body-sm text-on-surface items-center">
+<div class="col-span-6 flex flex-col">
+<span class="font-semibold text-on-surface">Enterprise Cloud CMS Instance License</span>
+<span class="text-on-surface-variant text-[11px]">Monthly recurring billing seat</span>
+</div>
+<span class="col-span-2 text-center font-label-sm text-label-sm">1</span>
+<span class="col-span-2 text-right font-label-sm text-label-sm">$10,000.00</span>
+<span class="col-span-2 text-right font-label-sm text-label-sm font-bold">$10,000.00</span>
+</div>
+<!-- Item 2 Canvas -->
+<div class="grid grid-cols-12 py-2 px-space-sm text-body-sm font-body-sm text-on-surface items-center bg-surface-container-low/40">
+<div class="col-span-6 flex flex-col">
+<span class="font-semibold text-on-surface">Dedicated SLA Escalation &amp; DevOps Monitoring</span>
+<span class="text-on-surface-variant text-[11px]">Tier-1 continuous response agreement</span>
+</div>
+<span class="col-span-2 text-center font-label-sm text-label-sm">1</span>
+<span class="col-span-2 text-right font-label-sm text-label-sm">$2,500.00</span>
+<span class="col-span-2 text-right font-label-sm text-label-sm font-bold">$2,500.00</span>
+</div>
+</div>
+</div>
+<!-- Document Bottom Calculation & QR Code Integration -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg items-end pt-space-xs">
+<!-- Payment QR & Direct Checkout Rail -->
+<div class="p-space-sm bg-surface-container-low rounded-xl flex items-center gap-space-md">
+<!-- Decorative Inline QR Code SVG -->
+<div class="w-16 h-16 bg-surface-container-lowest p-1 rounded-lg shrink-0 flex items-center justify-center shadow-sm">
+<svg class="w-full h-full text-on-surface fill-current" viewbox="0 0 100 100">
+<rect fill="currentColor" height="30" rx="3" width="30" x="0" y="0"></rect>
+<rect fill="white" height="20" rx="2" width="20" x="5" y="5"></rect>
+<rect fill="currentColor" height="10" width="10" x="10" y="10"></rect>
+<rect fill="currentColor" height="30" rx="3" width="30" x="70" y="0"></rect>
+<rect fill="white" height="20" rx="2" width="20" x="75" y="5"></rect>
+<rect fill="currentColor" height="10" width="10" x="80" y="10"></rect>
+<rect fill="currentColor" height="30" rx="3" width="30" x="0" y="70"></rect>
+<rect fill="white" height="20" rx="2" width="20" x="5" y="75"></rect>
+<rect fill="currentColor" height="10" width="10" x="10" y="80"></rect>
+<!-- Data grid pixels -->
+<rect fill="currentColor" height="8" width="8" x="40" y="10"></rect>
+<rect fill="currentColor" height="8" width="8" x="52" y="10"></rect>
+<rect fill="currentColor" height="8" width="8" x="40" y="24"></rect>
+<rect fill="currentColor" height="20" width="20" x="40" y="40"></rect>
+<rect fill="currentColor" height="10" width="10" x="70" y="50"></rect>
+<rect fill="currentColor" height="12" width="12" x="85" y="70"></rect>
+<rect fill="currentColor" height="10" width="10" x="70" y="85"></rect>
+<rect fill="currentColor" height="10" width="10" x="40" y="70"></rect>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Scan to Pay Online</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Supports Card, M-Pesa &amp; Stripe SEPA transfer</span>
+</div>
+</div>
+<!-- Financial Recap -->
+<div class="flex flex-col gap-space-xs text-right">
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Subtotal</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold" id="canvasSubtotal">$12,500.00</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>VAT (16%)</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold" id="canvasTax">$2,000.00</span>
+</div>
+<div class="flex justify-between items-baseline font-headline-xl text-headline-xl font-bold text-on-surface pt-space-xs">
+<span>Total Due</span>
+<span class="text-primary font-display-lg text-display-lg font-black tracking-tight leading-none" id="canvasTotal">$14,500.00</span>
+</div>
+</div>
+</div>
+<!-- Document Footer Legal Notice -->
+<div class="mt-space-md pt-space-md bg-surface-container-low/50 p-space-sm rounded-lg flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Notice: Payment terms apply. Late payments subject to 1.5% monthly service charge.</span>
+<span>Ref: 7f8a92-SC-2024</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic Real-time Calculations and DOM Binding
+  function recalculateInvoice() {
+    const rows = document.querySelectorAll('.item-row');
+    let subtotal = 0;
+    let totalTax = 0;
+    const canvasItemsList = document.getElementById('canvasItemsList');
+    
+    // Clear live PDF Canvas table
+    canvasItemsList.innerHTML = '';
+
+    rows.forEach((row, index) => {
+      const descInput = row.querySelector('.row-desc');
+      const qtyInput = row.querySelector('.row-qty');
+      const priceInput = row.querySelector('.row-price');
+      const taxSelect = row.querySelector('.row-tax');
+      const rowTotalSpan = row.querySelector('.row-total');
+
+      const desc = descInput ? descInput.value : 'Deliverable item';
+      const qty = parseFloat(qtyInput ? qtyInput.value : 1) || 0;
+      const price = parseFloat(priceInput ? priceInput.value : 0) || 0;
+      const taxRate = parseFloat(taxSelect ? taxSelect.value : 0) || 0;
+
+      const lineNet = qty * price;
+      const lineTax = lineNet * taxRate;
+
+      subtotal += lineNet;
+      totalTax += lineTax;
+
+      if (rowTotalSpan) {
+        rowTotalSpan.textContent = '$' + lineNet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      // Append row to Live PDF canvas preview
+      const canvasRow = document.createElement('div');
+      const bgClass = index % 2 === 1 ? 'bg-surface-container-low/40' : '';
+      canvasRow.className = `grid grid-cols-12 py-2 px-space-sm text-body-sm font-body-sm text-on-surface items-center ${bgClass}`;
+      canvasRow.innerHTML = `
+        <div class="col-span-6 flex flex-col">
+          <span class="font-semibold text-on-surface">${desc}</span>
+        </div>
+        <span class="col-span-2 text-center font-label-sm text-label-sm">${qty}</span>
+        <span class="col-span-2 text-right font-label-sm text-label-sm">$${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+        <span class="col-span-2 text-right font-label-sm text-label-sm font-bold">$${lineNet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+      `;
+      canvasItemsList.appendChild(canvasRow);
+    });
+
+    const grandTotal = subtotal + totalTax;
+
+    const formattedSub = '$' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formattedTax = '$' + totalTax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formattedTotal = '$' + grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    // Update Form Totals
+    document.getElementById('formSubtotal').textContent = formattedSub;
+    document.getElementById('formTax').textContent = formattedTax;
+    document.getElementById('formTotal').textContent = formattedTotal;
+
+    // Update Live Canvas Totals
+    document.getElementById('canvasSubtotal').textContent = formattedSub;
+    document.getElementById('canvasTax').textContent = formattedTax;
+    document.getElementById('canvasTotal').textContent = formattedTotal;
+  }
+
+  // Bind Listeners to Existing Rows
+  function bindRowListeners(row) {
+    row.querySelectorAll('input, select').forEach(input => {
+      input.addEventListener('input', recalculateInvoice);
+      input.addEventListener('change', recalculateInvoice);
+    });
+
+    const delBtn = row.querySelector('.del-row-btn');
+    if (delBtn) {
+      delBtn.addEventListener('click', () => {
+        const totalRows = document.querySelectorAll('.item-row').length;
+        if (totalRows > 1) {
+          row.remove();
+          recalculateInvoice();
+        }
+      });
+    }
+  }
+
+  // Initialize Row Bindings
+  document.querySelectorAll('.item-row').forEach(bindRowListeners);
+
+  // Add Line Item Interaction
+  document.getElementById('addLineItemBtn').addEventListener('click', () => {
+    const tbody = document.getElementById('lineItemsBody');
+    const newRow = document.createElement('tr');
+    newRow.className = 'item-row group hover:bg-surface-container-low transition-colors';
+    newRow.innerHTML = `
+      <td class="py-space-xs px-space-sm">
+        <input type="text" value="New Professional Service Deliverable" class="row-desc w-full bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none">
+      </td>
+      <td class="py-space-xs px-space-sm">
+        <input type="number" min="1" value="1" class="row-qty w-full bg-surface-container-low rounded px-1 text-center font-label-md text-label-md text-on-surface focus:outline-none">
+      </td>
+      <td class="py-space-xs px-space-sm">
+        <input type="number" step="0.01" value="1500.00" class="row-price w-full bg-surface-container-low rounded px-1.5 text-right font-label-md text-label-md text-on-surface focus:outline-none">
+      </td>
+      <td class="py-space-xs px-space-sm text-center">
+        <select class="row-tax bg-surface-container-low rounded px-1 py-0.5 text-center font-label-sm text-label-sm text-on-surface focus:outline-none">
+          <option value="0.16">VAT 16%</option>
+          <option value="0.00">Zero (0%)</option>
+        </select>
+      </td>
+      <td class="py-space-xs px-space-sm text-right font-label-md text-label-md text-on-surface font-semibold row-total">
+        $1,500.00
+      </td>
+      <td class="py-space-xs px-space-xs text-center">
+        <button type="button" class="del-row-btn text-on-surface-variant hover:text-error opacity-60 hover:opacity-100 transition-opacity">
+          <span class="material-symbols-outlined text-[18px]">delete</span>
+        </button>
+      </td>
+    `;
+    tbody.appendChild(newRow);
+    bindRowListeners(newRow);
+    recalculateInvoice();
+  });
+
+  // Client and Metadata Canvas Live Update
+  document.getElementById('inputInvoiceNum').addEventListener('input', (e) => {
+    document.getElementById('canvasInvoiceNum').textContent = e.target.value;
+  });
+
+  document.getElementById('selectClient').addEventListener('change', (e) => {
+    document.getElementById('canvasClientName').textContent = e.target.value;
+  });
+
+  document.getElementById('inputIssueDate').addEventListener('change', (e) => {
+    document.getElementById('canvasIssueDate').textContent = e.target.value;
+  });
+
+  document.getElementById('inputDueDate').addEventListener('change', (e) => {
+    document.getElementById('canvasDueDate').textContent = e.target.value;
+  });
+
+  document.getElementById('selectCurrency').addEventListener('change', (e) => {
+    document.getElementById('canvasCurrency').textContent = e.target.value + ' (' + (e.target.value === 'USD' ? '$' : e.target.value === 'KES' ? 'KSh' : '€') + ')';
+  });
+</script></main></div></body></html>

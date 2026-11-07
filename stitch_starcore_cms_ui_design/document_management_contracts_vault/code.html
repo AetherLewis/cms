@@ -1,0 +1,746 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-on-surface":"#eaf1ff","on-secondary-fixed-variant":"#3f465c","tertiary-container":"#005c54","inverse-primary":"#c3c0ff","on-error-container":"#93000a","on-tertiary":"#ffffff","primary":"#2a14b4","on-surface-variant":"#464554","error":"#ba1a1a","primary-container":"#4338ca","background":"#f8f9ff","error-container":"#ffdad6","surface":"#f8f9ff","on-tertiary-fixed-variant":"#005049","tertiary-fixed":"#89f5e7","on-secondary-fixed":"#131b2e","surface-container":"#e5eeff","on-primary-fixed-variant":"#372abf","outline":"#777586","on-background":"#0b1c30","surface-bright":"#f8f9ff","primary-fixed-dim":"#c3c0ff","secondary-container":"#dae2fd","surface-dim":"#cbdbf5","outline-variant":"#c7c4d7","surface-variant":"#d3e4fe","on-error":"#ffffff","surface-container-low":"#eff4ff","tertiary":"#00423c","tertiary-fixed-dim":"#6bd8cb","on-primary-fixed":"#100069","on-tertiary-fixed":"#00201d","on-primary-container":"#c1beff","surface-tint":"#5148d7","on-secondary-container":"#5c647a","surface-container-lowest":"#ffffff","on-surface":"#0b1c30","primary-fixed":"#e3dfff","secondary":"#565e74","surface-container-high":"#dce9ff","on-secondary":"#ffffff","on-primary":"#ffffff","inverse-surface":"#213145","on-tertiary-container":"#69d6c9","secondary-fixed":"#dae2fd","surface-container-highest":"#d3e4fe","secondary-fixed-dim":"#bec6e0"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-xl":"2rem","margin-mobile":"1rem","gutter-mobile":"1rem","space-xs":"0.25rem","space-md":"1rem","margin":"2rem","gutter":"1.5rem","space-sm":"0.5rem","space-lg":"1.5rem","space-2xl":"3rem"},fontFamily:{"body-sm":["Hanken Grotesk"],"headline-xl":["Hanken Grotesk"],"display-lg-mobile":["Hanken Grotesk"],"label-sm":["JetBrains Mono"],"display-lg":["Hanken Grotesk"],"body-md":["Hanken Grotesk"],"body-lg":["Hanken Grotesk"],"headline-md":["Hanken Grotesk"],"headline-lg":["Hanken Grotesk"],"label-md":["JetBrains Mono"]},fontSize:{"body-sm":["13px",{lineHeight:"18px",letterSpacing:"0.005em",fontWeight:"400"}],"headline-xl":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.03em",fontWeight:"500"}],"display-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"headline-md":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["20px",{lineHeight:"28px",letterSpacing:"-0.015em",fontWeight:"600"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="p-space-md flex items-center justify-between"><div class="flex items-center gap-space-sm"><img src="https://lh3.googleusercontent.com/aida/ALJJyrAW_gbQyFSokjYlFM1BRHzSE-qXuPRxGlJhmV4ijbJnJf2YjlAhZk1fPq7ei6ejeflaeO_qJf7zZDR8U-bBw66dotiLzVa0jYK5mcnSAms9nSoPsBwf9SSLsq6Dp7oIbm7CcZypXBoA8a6Ag8_feeQUa1U1R3UOfQDjWdqJndlGiQHvh-9k3-KaCxvK0ouX56oBePDLR5hv36_LZM1clP4X50gsrELd5j2IsNU1G4q3" alt="Big Hero 6 Inspired Brand Logo" class="h-9 w-auto object-contain"></div></div><div class="px-space-md py-space-xs"><div class="flex items-center justify-between bg-surface-container-low px-space-sm py-space-xs rounded-lg cursor-pointer hover:bg-surface-container hover:text-on-surface transition-colors"><div class="flex flex-col overflow-hidden"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-tertiary shrink-0"></span><span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Acme Group Ltd</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">StarCore Pro Instance</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">unfold_more</span></div></div><div class="px-space-md pt-space-sm"><button class="w-full flex items-center justify-center gap-space-xs bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary py-space-xs px-space-sm rounded-lg font-headline-md text-headline-md transition-all shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span class="">New Invoice</span></button></div><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Operations</span></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="font-body-md text-body-md">Dashboard</span></a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="clients" href="#"><span class="font-body-md text-body-md">Clients</span></a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="contracts" href="#"><span class="font-body-md text-body-md">Contracts</span></a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="invoices-and-billing" href="#"><span class="font-body-md text-body-md">Invoices &amp; Billing</span></a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="payments" href="#"><span class="font-body-md text-body-md">Payments</span></a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="recurring-billing" href="#"><span class="font-body-md text-body-md">Recurring Billing</span></a><a class="flex items-center px-space-sm py-space-xs rounded-lg bg-secondary-container text-on-secondary-fixed font-semibold transition-all" data-path="documents" href="#"><span class="font-body-md text-body-md">Documents</span></a></nav><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Governance</span></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="audit-log" href="#"><span class="font-body-md text-body-md">Audit Log</span></a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="settings" href="#"><span class="font-body-md text-body-md">Settings</span></a></nav></div><div class="p-space-md"><div class="flex items-center justify-between bg-surface-container-low p-space-xs rounded-full"><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQjG3A6PK2f0Z5JZ0uZoDI84XavSYVyQAgh7riKJewEWBlmGfm9eg0UuBaOrbSnkDHnBSY3YhyF-241g4YLxWRCO9lYdC4gYIoBXNEgo2AbHFqMihcHdZ8COkLgRRz2mvB_JqiZegljS0cofFgb70RvG8448TIe-iB0fAYltfYBV-I2Ls_HqGNayrItsYulbjRQpOQBYnQeCSS-foD6M9C6FP6QxfOL-dIabPc0V9"><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">E. Vance</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Operations Admin</span></div></div><button class="text-on-surface-variant hover:text-on-surface p-space-xs" type="button"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant"><span class="hover:text-on-surface transition-colors cursor-pointer">WORKSPACE &amp; ASSETS</span><span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span><span class="text-primary font-semibold">DOCUMENT REPOSITORY &amp; COMPLIANCE VAULT</span></div><div class="relative w-80 flex items-center"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px]">search</span><input class="w-full h-9 pl-10 pr-16 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Search clients, contracts, invoices..." type="text"><kbd class="absolute right-3 font-label-sm text-label-sm bg-surface-container-highest text-on-surface px-1.5 py-0.5 rounded">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-0.5"><button class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container-lowest text-on-surface font-semibold shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]" type="button">USD</button><button class="font-label-sm text-label-sm px-space-xs py-0.5 text-on-surface-variant hover:text-on-surface transition-colors" type="button">KES</button><button class="font-label-sm text-label-sm px-space-xs py-0.5 text-on-surface-variant hover:text-on-surface transition-colors" type="button">EUR</button></div><a class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="">Support</span></a><div class="relative flex items-center"><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button></div><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQjG3A6PK2f0Z5JZ0uZoDI84XavSYVyQAgh7riKJewEWBlmGfm9eg0UuBaOrbSnkDHnBSY3YhyF-241g4YLxWRCO9lYdC4gYIoBXNEgo2AbHFqMihcHdZ8COkLgRRz2mvB_JqiZegljS0cofFgb70RvG8448TIe-iB0fAYltfYBV-I2Ls_HqGNayrItsYulbjRQpOQBYnQeCSS-foD6M9C6FP6QxfOL-dIabPc0V9"><div class="flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-none">Acme Admin</span><span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 leading-none">Live Node</span></div></div></div></header><main class="relative pt-16 w-full px-gutter bg-surface"><div class="flex flex-col w-full pb-space-2xl space-y-space-lg">
+<!-- Section 1: Page Header & Quick Actions -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md pt-space-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm mb-1">
+<span class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Document Vault &amp; Compliance Repository</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high px-space-xs py-0.5 rounded-full font-label-sm text-label-sm text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+          ENCRYPTED AES-256
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+        Centralized file repository, tamper-evident contract attachments, NDA/SOW signed archives, and client-linked deliverables with cryptographic non-repudiation audit trails.
+      </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Storage Capacity Pill -->
+<div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm shadow-sm">
+<div class="flex flex-col">
+<div class="flex items-center justify-between gap-space-md">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Vault Usage</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">42.8%</span>
+</div>
+<div class="w-36 h-1.5 bg-surface-container-high rounded-full overflow-hidden mt-1">
+<div class="h-full bg-primary-container rounded-full" style="width: 42.8%;"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">42.8 GB / 100 GB</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 bg-surface-container-low hover:bg-surface-container text-on-surface font-headline-md text-headline-md rounded-lg shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">archive</span>
+<span class="">Batch Export ZIP</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 bg-primary hover:bg-primary-container text-on-primary font-headline-md text-headline-md rounded-lg shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+<span class="">Upload New Document</span>
+</button>
+</div>
+</div>
+<!-- Section 2: Top Metric & Health Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-gutter">
+<!-- Metric 1: Total Stored Assets -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="p-2 rounded-lg bg-surface-container-low text-primary material-symbols-outlined text-[20px]">folder_special</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Total Stored Assets</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary bg-surface-container-low px-1.5 py-0.5 rounded font-semibold">+14% QTD</span>
+</div>
+<div class="mt-space-md flex items-end justify-between">
+<div>
+<div class="font-headline-xl text-headline-xl font-bold text-on-surface">1,428</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Across 42 active client vaults</div>
+</div>
+<div class="w-16 h-8 flex items-end gap-1">
+<div class="w-2.5 bg-surface-container h-3 rounded-t"></div>
+<div class="w-2.5 bg-surface-container h-5 rounded-t"></div>
+<div class="w-2.5 bg-surface-container h-4 rounded-t"></div>
+<div class="w-2.5 bg-primary-container h-7 rounded-t"></div>
+<div class="w-2.5 bg-primary h-8 rounded-t"></div>
+</div>
+</div>
+</div>
+<!-- Metric 2: Executed Contracts & SOWs -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="p-2 rounded-lg bg-surface-container-low text-primary-container material-symbols-outlined text-[20px]">verified</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Executed Contracts &amp; SOWs</span>
+</div>
+<span class="p-1 rounded bg-surface-container-low text-on-surface-variant material-symbols-outlined text-[18px]">lock</span>
+</div>
+<div class="mt-space-md flex items-end justify-between">
+<div>
+<div class="font-headline-xl text-headline-xl font-bold text-on-surface">214</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">100% SHA-256 Checksum locked</div>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary bg-surface-container-low px-1.5 py-0.5 rounded font-semibold">VALIDATED</span>
+</div>
+</div>
+<!-- Metric 3: Pending Review / Missing Sign-off -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="p-2 rounded-lg bg-error-container text-on-error-container material-symbols-outlined text-[20px]">pending_actions</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pending Sign-off</span>
+</div>
+<span class="font-label-sm text-label-sm text-error font-semibold bg-error-container/40 px-1.5 py-0.5 rounded">Action Req.</span>
+</div>
+<div class="mt-space-md flex items-end justify-between">
+<div>
+<div class="font-headline-xl text-headline-xl font-bold text-on-surface">7 Files</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">$185k related contract pipeline</div>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline font-semibold" type="button">Inspect →</button>
+</div>
+</div>
+<!-- Metric 4: Compliance & Retention Health -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="p-2 rounded-lg bg-surface-container-low text-tertiary material-symbols-outlined text-[20px]">policy</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Compliance &amp; Retention</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-1.5 py-0.5 rounded">GDPR / SOC2</span>
+</div>
+<div class="mt-space-md flex items-end justify-between">
+<div>
+<div class="font-headline-xl text-headline-xl font-bold text-on-surface">99.8%</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Strict retention schedule active</div>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Auto-Purge
+        </span>
+</div>
+</div>
+</div>
+<!-- Section 3: Taxonomy Filter Navigation & Search Bar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- Category Tabs -->
+<div class="flex items-center justify-between overflow-x-auto pb-1 scrollbar-none">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-secondary-container text-on-secondary-fixed font-headline-md text-headline-md whitespace-nowrap shadow-sm" type="button">
+          All Documents (1,428)
+        </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-headline-md text-headline-md whitespace-nowrap transition-colors" type="button">
+          Contracts &amp; MSAs (312)
+        </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-headline-md text-headline-md whitespace-nowrap transition-colors" type="button">
+          Invoices &amp; Receipts (640)
+        </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-headline-md text-headline-md whitespace-nowrap transition-colors" type="button">
+          Proposals &amp; Pitch Decks (184)
+        </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-headline-md text-headline-md whitespace-nowrap transition-colors" type="button">
+          Tax &amp; Compliance (128)
+        </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-headline-md text-headline-md whitespace-nowrap transition-colors" type="button">
+          Deliverables (164)
+        </button>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-low p-0.5 rounded-lg shrink-0 ml-4">
+<button class="p-1 rounded bg-surface-container-lowest text-primary shadow-sm" title="List View" type="button">
+<span class="material-symbols-outlined text-[18px]">table_rows</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface" title="Grid View" type="button">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+</div>
+</div>
+<!-- Filter Dropdowns & Detailed Search Bar -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-sm pt-space-xs">
+<div class="md:col-span-5 relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary shadow-sm" placeholder="Search by document title, #DOC ID, client, or SHA hash..." type="text">
+</div>
+<div class="md:col-span-2 relative">
+<select class="w-full h-10 pl-3 pr-8 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg appearance-none cursor-pointer focus:outline-none focus:bg-surface-container-lowest shadow-sm">
+<option>Client: All Clients</option>
+<option>Omnicorp Global LLC</option>
+<option>Meridian Logistics Inc</option>
+<option>Beacon Health Systems</option>
+<option>Helios Energy Corp</option>
+<option>Kilifi AgriCorp</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+<div class="md:col-span-2 relative">
+<select class="w-full h-10 pl-3 pr-8 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg appearance-none cursor-pointer focus:outline-none focus:bg-surface-container-lowest shadow-sm">
+<option>File Type: All Types</option>
+<option>PDF (.pdf)</option>
+<option>Word (.docx)</option>
+<option>Sheets (.xlsx)</option>
+<option>Signed E-Docs</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+<div class="md:col-span-2 relative">
+<select class="w-full h-10 pl-3 pr-8 bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg appearance-none cursor-pointer focus:outline-none focus:bg-surface-container-lowest shadow-sm">
+<option>Security: Confidential</option>
+<option>Restricted</option>
+<option>Public Disclose</option>
+<option>Internal Only</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+<div class="md:col-span-1 flex items-center justify-end">
+<button class="w-full h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-lg transition-colors" title="Reset Filters" type="button">
+<span class="material-symbols-outlined text-[20px]">filter_alt_off</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Section 4 & 5: Split View - Main Ledger & Inspector Panel -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Main Area: High-Density Document Ledger (~68% width) -->
+<div class="lg:col-span-8 flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/70">
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant w-10">
+<input class="rounded text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Document Name &amp; ID</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Associated Entity</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Version</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Author / Timestamp</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Security</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<!-- Row 1: Selected Row -->
+<tr class="bg-secondary-container/40 hover:bg-secondary-container/60 transition-colors cursor-pointer group">
+<td class="py-3.5 px-space-md align-top">
+<input checked="" class="rounded text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex items-start gap-space-sm">
+<span class="p-1.5 rounded bg-error-container text-on-error-container material-symbols-outlined text-[18px] shrink-0">picture_as_pdf</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary font-semibold group-hover:underline">
+                      Master Services Agreement (MSA) - Enterprise Cloud Migration.pdf
+                    </span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">DOC-2024-089</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2.4 MB</span>
+<span class="font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed font-semibold px-1 rounded">ACTIVE</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">Omnicorp Global LLC</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">SC-90422 • CTR-2024-098</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface font-semibold">v2.1</span>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">E. Vance</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 24, 2024 14:22</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container-low px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">lock</span> SHA-256
+                </span>
+</td>
+<td class="py-3.5 px-space-md align-top text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Download" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface transition-colors" title="Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors cursor-pointer group">
+<td class="py-3.5 px-space-md align-top">
+<input class="rounded text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex items-start gap-space-sm">
+<span class="p-1.5 rounded bg-error-container text-on-error-container material-symbols-outlined text-[18px] shrink-0">picture_as_pdf</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+                      Q3 Retainer Tax Invoices &amp; Stamp Duty Receipt.pdf
+                    </span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">DOC-2024-084</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1.1 MB</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Meridian Logistics Inc</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">SC-90418 • INV-2024-0089</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface font-semibold">v1.0</span>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">Auto-Billing Cron</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 20, 2024 00:04</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-secondary-fixed bg-surface-container-low px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">shield</span> Confid.
+                </span>
+</td>
+<td class="py-3.5 px-space-md align-top text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Download" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface transition-colors" title="Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors cursor-pointer group">
+<td class="py-3.5 px-space-md align-top">
+<input class="rounded text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex items-start gap-space-sm">
+<span class="p-1.5 rounded bg-error-container text-on-error-container material-symbols-outlined text-[18px] shrink-0">picture_as_pdf</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+                      Mutual Non-Disclosure Agreement (NDA) Executed.pdf
+                    </span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">DOC-2024-079</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">840 KB</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Beacon Health Systems</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">SC-90412 • General Legal</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface font-semibold">v1.2</span>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">Legal Ops</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 14, 2024 16:45</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container-low px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">lock</span> SHA-256
+                </span>
+</td>
+<td class="py-3.5 px-space-md align-top text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Download" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface transition-colors" title="Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors cursor-pointer group">
+<td class="py-3.5 px-space-md align-top">
+<input class="rounded text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex items-start gap-space-sm">
+<span class="p-1.5 rounded bg-surface-container text-primary-container material-symbols-outlined text-[18px] shrink-0">description</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+                      Architecture Design Specification &amp; SOC2 Gap Analysis.docx
+                    </span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">DOC-2024-072</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5.6 MB</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Helios Energy Corp</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">SC-90405 • CTR-2024-110</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface font-semibold">v3.0</span>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">M. Sterling</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 08, 2024 11:15</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-error bg-error-container/40 px-1.5 py-0.5 rounded font-semibold">
+<span class="material-symbols-outlined text-[14px]">warning</span> Sign Pending
+                </span>
+</td>
+<td class="py-3.5 px-space-md align-top text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Download" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface transition-colors" title="Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors cursor-pointer group">
+<td class="py-3.5 px-space-md align-top">
+<input class="rounded text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex items-start gap-space-sm">
+<span class="p-1.5 rounded bg-error-container text-on-error-container material-symbols-outlined text-[18px] shrink-0">picture_as_pdf</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+                      KRA Tax Compliance Certificate &amp; Withholding Exemption.pdf
+                    </span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">DOC-2024-065</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">720 KB</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Kilifi AgriCorp</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">SC-90398 • Compliance</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface font-semibold">v2024</span>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">Finance Dept</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sep 29, 2024 09:30</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container-low px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">lock</span> Verified
+                </span>
+</td>
+<td class="py-3.5 px-space-md align-top text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Download" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface transition-colors" title="Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors cursor-pointer group">
+<td class="py-3.5 px-space-md align-top">
+<input class="rounded text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex items-start gap-space-sm">
+<span class="p-1.5 rounded bg-error-container text-on-error-container material-symbols-outlined text-[18px] shrink-0">picture_as_pdf</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+                      SOW Amendment #2 - DevOps SLA Escalation Matrix.pdf
+                    </span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">DOC-2024-058</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1.8 MB</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Vortex Telecom</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">SC-90382 • Amendment</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface font-semibold">v1.1</span>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">E. Vance</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sep 18, 2024 15:10</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md align-top">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container-low px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">lock</span> SHA-256
+                </span>
+</td>
+<td class="py-3.5 px-space-md align-top text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Download" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface transition-colors" title="Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-space-md bg-surface-container-low/40 flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+          Showing <span class="font-semibold text-on-surface">1 - 6</span> of <span class="font-semibold text-on-surface">1,428</span> documents
+        </span>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm shadow-sm disabled:opacity-50" disabled="" type="button">← Previous</button>
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary text-label-sm font-label-sm font-semibold shadow-sm" type="button">1</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface text-label-sm font-label-sm shadow-sm" type="button">2</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface text-label-sm font-label-sm shadow-sm" type="button">3</button>
+<span class="px-1 text-on-surface-variant text-label-sm font-label-sm">...</span>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface text-label-sm font-label-sm shadow-sm" type="button">238</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container text-label-sm font-label-sm shadow-sm" type="button">Next →</button>
+</div>
+</div>
+</div>
+<!-- Right Side: Deep Document Inspector Drawer (~32% width) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Main Inspector Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- Inspector Title & Badges -->
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Active Inspector</span>
+<span class="font-label-sm text-label-sm bg-surface-container px-1.5 py-0.5 rounded text-on-surface">DOC-2024-089</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface font-bold mt-1 leading-snug">
+              Master Services Agreement
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cloud Migration • Retainer Contract</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface" title="Full Screen" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface" title="Close Panel" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- High-Fidelity Document Visual Preview Frame -->
+<div class="relative bg-surface-container-low rounded-lg p-space-md flex flex-col items-center justify-center overflow-hidden group shadow-inner">
+<!-- Document Card Representation -->
+<div class="w-full max-w-[260px] bg-white rounded shadow-md p-4 relative flex flex-col space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<div class="w-4 h-4 bg-primary rounded-xs flex items-center justify-center text-white text-[10px] font-bold">S</div>
+<span class="font-label-sm text-label-sm tracking-wider font-semibold text-on-surface">STARCORE MSA</span>
+</div>
+<span class="font-label-sm text-[9px] text-on-surface-variant">Oct 2024</span>
+</div>
+<!-- Stylized Skeleton Lines for Legal Text -->
+<div class="space-y-1.5 pt-1">
+<div class="h-2 bg-surface-container-high rounded-full w-3/4"></div>
+<div class="h-1.5 bg-surface-container rounded-full w-full"></div>
+<div class="h-1.5 bg-surface-container rounded-full w-5/6"></div>
+<div class="h-1.5 bg-surface-container rounded-full w-4/6"></div>
+</div>
+<!-- DocuSign / Signatures Visual Stamp -->
+<div class="mt-4 pt-3 bg-surface-container-low/50 rounded p-2 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-[9px] text-tertiary font-bold tracking-wide flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[11px]">verified_user</span> SIGNED &amp; SEALED
+                </span>
+<span class="font-label-sm text-[9px] text-on-surface-variant">Omnicorp Executive Sign-off</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-tertiary">draw</span>
+</div>
+</div>
+<!-- Overlay Action on Hover -->
+<div class="absolute inset-0 bg-primary/10 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="px-space-sm py-1 bg-surface-container-lowest text-on-surface text-label-sm font-label-sm rounded shadow flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">visibility</span> Quick Preview
+            </button>
+</div>
+</div>
+<!-- Metadata Grid -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col space-y-space-sm">
+<div class="text-on-surface font-headline-md text-headline-md">Linked Architecture &amp; Metadata</div>
+<div class="grid grid-cols-2 gap-space-sm font-label-sm text-label-sm pt-1">
+<div class="flex flex-col">
+<span class="text-on-surface-variant">File Payload</span>
+<span class="text-on-surface font-semibold">2.4 MB (PDF/A-1a)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant">Retention Rule</span>
+<span class="text-on-surface font-semibold">7 Years (Oct 2031)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant">Client Ledger</span>
+<a class="text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+                Omnicorp Global <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant">Contract ID</span>
+<a class="text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+                CTR-2024-098 <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</div>
+<div class="flex flex-col col-span-2">
+<span class="text-on-surface-variant">Linked Retainer Invoice</span>
+<span class="text-on-surface font-semibold">INV-2024-0092 • $14,500.00 / month</span>
+</div>
+</div>
+</div>
+<!-- Cryptographic Ledger & Audit Hash -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary">fingerprint</span> SHA-256 Checksum
+            </span>
+<button class="text-primary hover:text-primary-container p-0.5" title="Copy Checksum" type="button">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+</div>
+<div class="p-2 bg-surface-container-lowest rounded font-label-sm text-[10px] break-all text-on-surface select-all leading-tight">
+            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+          </div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant pt-1">
+<span class="">Timestamp (UTC):</span>
+<span class="font-semibold text-on-surface">2024-10-24 14:22:09</span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span class="">Access Tier:</span>
+<span class="font-semibold text-tertiary">Ops Admin • Omnicorp Auth Reps</span>
+</div>
+</div>
+<!-- Version History List -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">Version Audit Trail</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">3 Revisions</span>
+</div>
+<div class="space-y-2 pt-1">
+<!-- Version 2.1 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm font-bold text-primary">v2.1</span>
+<span class="font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed px-1 rounded font-semibold">CURRENT</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface mt-0.5">Signed final execution by M. Sterling &amp; E. Vance</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 24, 2024 14:22</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+</div>
+<!-- Version 2.0 -->
+<div class="p-2.5 rounded-lg hover:bg-surface-container-low/50 flex items-start justify-between transition-colors">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">v2.0</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Legal redlines applied (GDPR retention clause updated)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 22, 2024 09:15</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+<!-- Version 1.0 -->
+<div class="p-2.5 rounded-lg hover:bg-surface-container-low/50 flex items-start justify-between transition-colors">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">v1.0</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Initial drafting dispatched for client legal review</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 18, 2024 17:40</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Inspector Action Buttons -->
+<div class="flex flex-col space-y-2 pt-space-xs">
+<button class="w-full flex items-center justify-center gap-space-xs py-2.5 px-space-md bg-primary hover:bg-primary-container text-on-primary font-headline-md text-headline-md rounded-lg shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span class="">Download Original PDF</span>
+</button>
+<button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md bg-surface-container-low hover:bg-surface-container text-on-surface font-headline-md text-headline-md rounded-lg shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span class="">Share Secure Link (Exp. 24h)</span>
+</button>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="flex items-center justify-center gap-1 py-1.5 px-space-sm bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm rounded-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">history_edu</span>
+<span class="">Full Audit Trail</span>
+</button>
+<button class="flex items-center justify-center gap-1 py-1.5 px-space-sm bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm rounded-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span class="">Replace Version</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 6: Security & Compliance Vault Status Banner -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col md:flex-row items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary shrink-0">
+<span class="material-symbols-outlined text-[20px]">encrypted</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">Encrypted at rest with AES-256 GCM Architecture</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          All uploaded artifacts are isolated in tenant-specific namespaces, scanned for malware via automated pipelines, and stamped with cryptographic non-repudiation hashes.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<div class="flex items-center gap-1 bg-surface-container-lowest px-space-sm py-1.5 rounded-lg shadow-sm font-label-sm text-label-sm text-on-surface">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="">SOC-2 TYPE II AUDITED</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-space-sm py-1.5 rounded-lg shadow-sm font-label-sm text-label-sm text-on-surface">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="">GDPR ARTICLE 28 COMPLIANT</span>
+</div>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

@@ -26,6 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession()
       if (data.session?.user) {
+        localStorage.setItem('starcore_token', data.session.access_token)
         setUser({
           id: data.session.user.id,
           email: data.session.user.email ?? '',
@@ -39,6 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const { data: sub } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
+        if (session.access_token) localStorage.setItem('starcore_token', session.access_token)
         setUser({
           id: session.user.id,
           email: session.user.email ?? '',
@@ -57,6 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) throw error
     if (data.session?.user) {
+      localStorage.setItem('starcore_token', data.session.access_token)
       setUser({
         id: data.session.user.id,
         email: data.session.user.email ?? '',

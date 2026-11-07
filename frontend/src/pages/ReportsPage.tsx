@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-export default function ReportsPage() {
-  return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-        Reports
-      </h1>
-      <p className="text-slate-600 dark:text-slate-400">
-        View and generate financial reports.
-      </p>
-    </div>
-  )
-}
-=======
 import { useEffect, useState } from 'react'
 import { getMonthlyReport } from '../utils/api'
 import { toast } from 'react-hot-toast'
@@ -68,4 +52,3 @@ export function ReportsPage() {
     </main>
   )
 }
->>>>>>> bd369c0752ce6d7f9d8d853b1fa14164b6f2c7e2

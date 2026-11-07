@@ -1,0 +1,660 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-container":"#5c647a","on-tertiary-container":"#69d6c9","surface-dim":"#cbdbf5","on-secondary-fixed":"#131b2e","on-background":"#0b1c30","inverse-on-surface":"#eaf1ff","surface-container-high":"#dce9ff","on-primary-fixed":"#100069","on-surface":"#0b1c30","on-error-container":"#93000a","tertiary-fixed-dim":"#6bd8cb","surface-variant":"#d3e4fe","error":"#ba1a1a","primary-fixed":"#e3dfff","surface":"#f8f9ff","primary-container":"#4338ca","primary":"#2a14b4","outline":"#777586","secondary-fixed-dim":"#bec6e0","secondary-container":"#dae2fd","on-error":"#ffffff","on-surface-variant":"#464554","on-secondary-fixed-variant":"#3f465c","on-secondary":"#ffffff","on-tertiary-fixed":"#00201d","surface-container":"#e5eeff","tertiary":"#00423c","secondary":"#565e74","on-tertiary-fixed-variant":"#005049","tertiary-container":"#005c54","on-primary-container":"#c1beff","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","inverse-primary":"#c3c0ff","tertiary-fixed":"#89f5e7","background":"#f8f9ff","on-primary":"#ffffff","surface-bright":"#f8f9ff","primary-fixed-dim":"#c3c0ff","outline-variant":"#c7c4d7","error-container":"#ffdad6","on-primary-fixed-variant":"#372abf","surface-tint":"#5148d7","inverse-surface":"#213145","secondary-fixed":"#dae2fd","surface-container-highest":"#d3e4fe","surface-container-low":"#eff4ff"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"margin":"2rem","space-lg":"1.5rem","space-xs":"0.25rem","margin-mobile":"1rem","space-sm":"0.5rem","space-xl":"2rem","space-2xl":"3rem","gutter-mobile":"1rem","gutter":"1.5rem","space-md":"1rem"},fontFamily:{"label-md":["JetBrains Mono"],"headline-xl":["Hanken Grotesk"],"body-sm":["Hanken Grotesk"],"body-lg":["Hanken Grotesk"],"display-lg":["Hanken Grotesk"],"body-md":["Hanken Grotesk"],"headline-md":["Hanken Grotesk"],"label-sm":["JetBrains Mono"],"display-lg-mobile":["Hanken Grotesk"],"headline-lg":["Hanken Grotesk"]},fontSize:{"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-xl":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"18px",letterSpacing:"0.005em",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"display-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}],"headline-md":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.03em",fontWeight:"500"}],"display-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-lg":["20px",{lineHeight:"28px",letterSpacing:"-0.015em",fontWeight:"600"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="p-space-md flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Hero6 Core CMS Enterprise" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrAW_gbQyFSokjYlFM1BRHzSE-qXuPRxGlJhmV4ijbJnJf2YjlAhZk1fPq7ei6ejeflaeO_qJf7zZDR8U-bBw66dotiLzVa0jYK5mcnSAms9nSoPsBwf9SSLsq6Dp7oIbm7CcZypXBoA8a6Ag8_feeQUa1U1R3UOfQDjWdqJndlGiQHvh-9k3-KaCxvK0ouX56oBePDLR5hv36_LZM1clP4X50gsrELd5j2IsNU1G4q3"></div></div><div class="px-space-md py-space-xs"><div class="flex items-center justify-between bg-surface-container-low px-space-sm py-space-xs rounded-lg cursor-pointer hover:bg-surface-container hover:text-on-surface transition-colors"><div class="flex flex-col overflow-hidden"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-tertiary shrink-0"></span><span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Acme Group Ltd</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">StarCore Pro Instance</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">unfold_more</span></div></div><div class="px-space-md pt-space-sm"><button class="w-full flex items-center justify-center gap-space-xs bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary py-space-xs px-space-sm rounded-lg font-headline-md text-headline-md transition-all shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span class="">New Invoice</span></button></div><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Operations</span></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="dashboard" href="#">Dashboard</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="clients" href="#">Clients</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="contracts" href="#">Contracts</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="invoices-and-billing" href="#">Invoices &amp; Billing</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="payments" href="#">Payments</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="recurring-billing" href="#">Recurring Billing</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="documents" href="#">Documents</a></nav><div class="px-space-md pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">Governance</span></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-semibold"><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md bg-secondary-container text-on-secondary-fixed font-semibold" data-path="audit-log" href="#">Audit Log</a><a class="flex items-center px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all font-body-md text-body-md" data-path="settings" href="#">Settings</a></nav></div><div class="p-space-md"><div class="flex items-center justify-between bg-surface-container-low p-space-xs rounded-full"><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQjG3A6PK2f0Z5JZ0uZoDI84XavSYVyQAgh7riKJewEWBlmGfm9eg0UuBaOrbSnkDHnBSY3YhyF-241g4YLxWRCO9lYdC4gYIoBXNEgo2AbHFqMihcHdZ8COkLgRRz2mvB_JqiZegljS0cofFgb70RvG8448TIe-iB0fAYltfYBV-I2Ls_HqGNayrItsYulbjRQpOQBYnQeCSS-foD6M9C6FP6QxfOL-dIabPc0V9"><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">E. Vance</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Operations Admin</span></div></div><button class="text-on-surface-variant hover:text-on-surface p-space-xs" type="button"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-sm w-96"><div class="relative w-full flex items-center"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px]">search</span><input class="w-full h-9 pl-10 pr-16 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Search clients, contracts, invoices..." type="text"><kbd class="absolute right-3 font-label-sm text-label-sm bg-surface-container-highest text-on-surface px-1.5 py-0.5 rounded">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-0.5"><button class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container-lowest text-on-surface font-semibold shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]" type="button">USD</button><button class="font-label-sm text-label-sm px-space-xs py-0.5 text-on-surface-variant hover:text-on-surface transition-colors" type="button">KES</button><button class="font-label-sm text-label-sm px-space-xs py-0.5 text-on-surface-variant hover:text-on-surface transition-colors" type="button">EUR</button></div><a class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="">Support</span></a><div class="relative flex items-center"><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button></div><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQjG3A6PK2f0Z5JZ0uZoDI84XavSYVyQAgh7riKJewEWBlmGfm9eg0UuBaOrbSnkDHnBSY3YhyF-241g4YLxWRCO9lYdC4gYIoBXNEgo2AbHFqMihcHdZ8COkLgRRz2mvB_JqiZegljS0cofFgb70RvG8448TIe-iB0fAYltfYBV-I2Ls_HqGNayrItsYulbjRQpOQBYnQeCSS-foD6M9C6FP6QxfOL-dIabPc0V9"><div class="flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-none">Acme Admin</span><span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 leading-none">Live Node</span></div></div></div></header><main class="relative pt-16 w-full px-gutter bg-surface"><div class="flex flex-col w-full pb-space-2xl">
+<!-- Dynamic Sidebar Highlight Sync (Client Behavior) -->
+<script>
+    (function syncSidebar() {
+      const auditLink = document.querySelector('nav a[data-path="audit-log"]');
+      if (auditLink) {
+        document.querySelectorAll('nav a').forEach(el => {
+          el.classList.remove('bg-secondary-container', 'text-on-secondary-fixed', 'font-semibold');
+        });
+        auditLink.classList.add('bg-secondary-container', 'text-on-secondary-fixed', 'font-semibold');
+      }
+    })();
+  </script>
+<!-- Top Breadcrumbs & Sub-Header -->
+<div class="flex flex-col gap-space-sm pt-space-lg mb-space-lg">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span class="">GOVERNANCE &amp; ARCHITECTURE</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="">FORENSICS &amp; SECURITY</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">IMMUTABLE AUDIT TRAIL (/audit)</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm tracking-tight text-on-surface-variant">
+          Production Instance • WORM Storage Enforced • SHA-256 Ledger Synchronized
+        </span>
+</div>
+</div>
+<!-- Title & Action Toolbar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mt-space-xs">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Audit Log &amp; Compliance Ledger</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+          Cryptographically immutable enterprise events, privileged escalation journals, and chain-of-custody proofs.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="inline-flex items-center gap-space-xs bg-surface-container-lowest hover:bg-surface-container-low text-on-surface px-space-sm py-2 rounded-lg font-headline-md text-headline-md shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">archive</span>
+<span class="">Export Signed Pack (ZIP)</span>
+</button>
+<button class="inline-flex items-center gap-space-xs bg-surface-container-lowest hover:bg-surface-container-low text-on-surface px-space-sm py-2 rounded-lg font-headline-md text-headline-md shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">verified_user</span>
+<span class="">Run Integrity Check</span>
+</button>
+<button class="inline-flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-md py-2 rounded-lg font-headline-md text-headline-md shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">settings_suggest</span>
+<span class="">Configure Retention &amp; Webhooks</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Executive Security & Compliance Metric Cards (4 Bento Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg">
+<!-- Metric 1: Total Recorded Events -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-semibold">
+          +8.4% mo
+        </span>
+</div>
+<div class="mt-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Total Recorded Events</span>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">248,912</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm">30-day ingest: 18.2k events</span>
+<!-- Inline Micro Sparkline -->
+<svg class="w-16 h-4 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 64 16">
+<path d="M1 12 L12 10 L22 13 L32 8 L44 9 L54 3 L63 5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- Metric 2: Cryptographic Integrity -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container font-semibold">
+          Sealed
+        </span>
+</div>
+<div class="mt-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Cryptographic Integrity</span>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">100.0%</span>
+<span class="font-label-md text-label-md text-tertiary font-semibold">Verified</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm truncate" title="Merkle Root #8841-FA • 0 Tamper alerts">Merkle Tree Root #8841-FA</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">0 Alerts</span>
+</div>
+</div>
+<!-- Metric 3: Privileged / Elevated Actions -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-semibold">
+          Warning High
+        </span>
+</div>
+<div class="mt-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Privileged / Elevated Actions</span>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">14</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-normal">Events (Past 24h)</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Super-admin &amp; sudo logged</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">lock_clock</span>
+</div>
+</div>
+<!-- Metric 4: Compliance & Retention -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">assured_workload</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-semibold">
+          Auto-Archive
+        </span>
+</div>
+<div class="mt-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Compliance Frameworks</span>
+<div class="flex items-baseline gap-space-xs mt-0.5">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">SOC-2 Type II</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm truncate">7-Year WORM Active (GDPR/HIPAA)</span>
+<span class="w-2 h-2 rounded-full bg-tertiary shrink-0"></span>
+</div>
+</div>
+</div>
+<!-- Filter & Search Bar Strip -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm mb-space-md flex flex-col gap-space-md">
+<!-- Category Tabs -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap items-center gap-1.5 p-1 bg-surface-container-low rounded-lg">
+<button class="px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface font-headline-md text-body-sm shadow-sm" type="button">
+          All Audit Events <span class="font-label-sm text-label-sm ml-1 text-on-surface-variant">248.9k</span>
+</button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-headline-md text-body-sm transition-colors" type="button">
+          Authentication &amp; Sessions <span class="font-label-sm text-label-sm ml-1">42.1k</span>
+</button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-headline-md text-body-sm transition-colors" type="button">
+          Financial &amp; Invoicing <span class="font-label-sm text-label-sm ml-1">86.4k</span>
+</button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-headline-md text-body-sm transition-colors" type="button">
+          Contract &amp; Legal <span class="font-label-sm text-label-sm ml-1">19.8k</span>
+</button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-headline-md text-body-sm transition-colors" type="button">
+          Data &amp; RLS Scopes <span class="font-label-sm text-label-sm ml-1">100.6k</span>
+</button>
+</div>
+<!-- Live Stream Pill -->
+<div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container-low rounded-full">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface">Live Tail (WebSocket • 0.2ms latency)</span>
+</div>
+</div>
+<!-- Filter Controls Row -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-sm items-center">
+<!-- Search Input -->
+<div class="md:col-span-5 relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-9 pl-9 pr-space-md bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm rounded-lg focus:outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Filter by Actor, Event Type, IP, SHA Hash, or Resource ID..." type="text" value="RBAC.ROLE_ELEVATED">
+</div>
+<!-- Date Range Select -->
+<div class="md:col-span-2">
+<div class="relative">
+<select class="w-full h-9 px-space-sm appearance-none bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none cursor-pointer">
+<option>Last 24 Hours</option>
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>Custom Epoch Range</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2 text-on-surface-variant text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Severity Select -->
+<div class="md:col-span-2">
+<div class="relative">
+<select class="w-full h-9 px-space-sm appearance-none bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none cursor-pointer">
+<option>All Severities</option>
+<option selected="">High / Elevated (14)</option>
+<option>Critical Only</option>
+<option>Informational</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2 text-on-surface-variant text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Actor Role Select -->
+<div class="md:col-span-2">
+<div class="relative">
+<select class="w-full h-9 px-space-sm appearance-none bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none cursor-pointer">
+<option>All Roles</option>
+<option selected="">Super Admin</option>
+<option>Finance Manager</option>
+<option>Compliance Officer</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2 text-on-surface-variant text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Reset / Filter Trigger -->
+<div class="md:col-span-1 flex justify-end">
+<button class="w-full h-9 flex items-center justify-center bg-surface-container-high hover:bg-surface-container text-on-surface rounded-lg transition-colors" title="Apply Ledger Filters" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Forensic Workspace (2-Column Ledger + Inspector) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column: Immutable Event Ledger Table (~68%) -->
+<div class="xl:col-span-8 flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">account_tree</span>
+<span class="font-headline-md text-headline-md text-on-surface">Cryptographic Append-Only Ledger</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">WORM Partition: node-east-ledger-09</span>
+</div>
+<!-- High Density Table Container -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-space-sm px-space-md font-medium">Timestamp (UTC) &amp; ID</th>
+<th class="py-space-sm px-space-md font-medium">Actor &amp; Credential</th>
+<th class="py-space-sm px-space-md font-medium">Action / Event Type</th>
+<th class="py-space-sm px-space-md font-medium">Target Resource</th>
+<th class="py-space-sm px-space-md font-medium text-right">Integrity Proof</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-sm text-body-sm">
+<!-- Row 1: Selected Event #EVT-904128 -->
+<tr class="bg-secondary-container/40 hover:bg-secondary-container/60 transition-colors cursor-pointer">
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">2024-10-24 16:42:19</span>
+<div class="flex items-center gap-1 text-primary">
+<span class="font-label-sm text-label-sm font-semibold">#EVT-904128</span>
+<span class="material-symbols-outlined text-[12px]">fiber_manual_record</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-label-sm shrink-0">
+                    EV
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-md text-body-sm text-on-surface truncate">E. Vance (Ops Admin)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">198.51.100.12 • FIDO2</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-semibold tracking-tight">
+                    RBAC.ROLE_ELEVATED
+                  </span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+<span class="">usr_99818fa2</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">M. Sterling</span>
+</td>
+<td class="py-3 px-space-md text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+<span class="">SHA-256 Stamped</span>
+</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">2024-10-24 16:39:04</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">#EVT-904127</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-headline-md text-label-sm shrink-0">
+                    SY
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-md text-body-sm text-on-surface truncate">Stripe Webhook (Worker)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">34.201.8.99 • TLS Sig</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-semibold tracking-tight">
+                  GATEWAY.PAYMENT_RECONCILED
+                </span>
+</td>
+<td class="py-3 px-space-md">
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+<span class="">INV-2024-0092</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">$48,500.00 USD</span>
+</td>
+<td class="py-3 px-space-md text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+<span class="">Merkle Verified</span>
+</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">2024-10-24 16:31:12</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">#EVT-904126</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-headline-md text-label-sm shrink-0">
+                    KL
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-md text-body-sm text-on-surface truncate">K. Lindqvist (Billing)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">192.0.2.84 • SSO + OTP</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-semibold tracking-tight">
+                  INVOICE.FINALIZED_SENT
+                </span>
+</td>
+<td class="py-3 px-space-md">
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+<span class="">INV-2024-0092</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Apex Holdings Corp</span>
+</td>
+<td class="py-3 px-space-md text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+<span class="">SHA-256 Stamped</span>
+</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">2024-10-24 16:18:45</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">#EVT-904125</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-label-sm shrink-0">
+                    SL
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-md text-body-sm text-on-surface truncate">S. Lauren (Legal Counsel)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">198.51.100.8 • FIDO2</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-semibold tracking-tight">
+                  CONTRACT.COUNTERSIGNED
+                </span>
+</td>
+<td class="py-3 px-space-md">
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+<span class="">CTR-2024-098</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Master Services Agmt</span>
+</td>
+<td class="py-3 px-space-md text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+<span class="">Merkle Verified</span>
+</span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">2024-10-24 16:04:30</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">#EVT-904124</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-headline-md text-label-sm shrink-0">
+                    DB
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-md text-body-sm text-on-surface truncate">StarCore Engine (RLS)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Internal Daemon</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-semibold tracking-tight">
+                  SYSTEM.RLS_POLICY_QUERY
+                </span>
+</td>
+<td class="py-3 px-space-md">
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+<span class="">tbl_client_ledgers</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Tenant isolation pass</span>
+</td>
+<td class="py-3 px-space-md text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+<span class="">SHA-256 Stamped</span>
+</span>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">2024-10-24 15:58:22</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">#EVT-904123</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-label-sm shrink-0">
+                    EV
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-md text-body-sm text-on-surface truncate">E. Vance (Ops Admin)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">198.51.100.12 • Session Re-auth</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-semibold tracking-tight">
+                  AUTH.MFA_CHALLENGE_SUCCESS
+                </span>
+</td>
+<td class="py-3 px-space-md">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">sess_88192a</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Hardware Token Pass</span>
+</td>
+<td class="py-3 px-space-md text-right">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary bg-surface-container px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+<span class="">SHA-256 Stamped</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-space-md py-space-sm bg-surface-container-lowest flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+          Showing <span class="font-semibold text-on-surface">1 to 6</span> of <span class="font-semibold text-on-surface">248,912</span> events
+        </span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center bg-primary text-on-primary font-label-sm text-label-sm font-semibold" type="button">1</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm transition-colors" type="button">2</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm transition-colors" type="button">3</button>
+<span class="px-1 text-on-surface-variant font-label-sm text-label-sm">...</span>
+<button class="w-16 h-8 rounded flex items-center justify-center bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm transition-colors" type="button">31,114</button>
+<button class="h-8 px-space-xs rounded flex items-center gap-1 bg-surface-container-low hover:bg-surface-container text-on-surface font-headline-md text-body-sm transition-colors" type="button">
+<span class="">Next</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Forensic Event Inspector Drawer (~32%) -->
+<div class="xl:col-span-4 flex flex-col gap-space-md">
+<!-- Selected Event Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md p-space-md flex flex-col gap-space-md">
+<!-- Inspector Header -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm font-bold text-primary tracking-wide">FORENSIC INSPECTOR</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">LIVE RECORD</span>
+</div>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="font-headline-lg text-headline-lg text-on-surface">#EVT-904128</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-semibold tracking-tight">
+            ELEVATED RISK
+          </span>
+</div>
+<!-- Event Summary Callout -->
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center gap-space-xs text-primary mb-1">
+<span class="material-symbols-outlined text-[16px]">security_update_warning</span>
+<span class="font-headline-md text-body-sm font-semibold">Privileged RBAC Scope Expansion</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+            Role membership for <strong class="text-on-surface">Marcus Sterling</strong> elevated to <span class="font-label-sm text-label-sm bg-surface-container-high px-1 py-0.5 rounded">Contracts &amp; Legal Lead</span> with organization-wide RLS scope bypass.
+          </p>
+</div>
+<!-- Actor Fingerprint & Context Grid -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-medium">Actor Fingerprint &amp; Origin</span>
+<div class="bg-surface p-space-sm rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Principal User</span>
+<span class="font-headline-md text-on-surface">E. Vance (ops@starcore.io)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Role at Invocation</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Super Admin (Elevation Ticket #SEC-41)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Origin Gateway IP</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">198.51.100.12 (San Francisco, US)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Client Device / Node</span>
+<span class="font-label-sm text-label-sm text-on-surface truncate max-w-[180px]">macOS Chrome 130 (fp_a9b1c04)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Hardware MFA Status</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                YubiKey 5C NFC Verified
+              </span>
+</div>
+</div>
+</div>
+<!-- Cryptographic Proof & Merkle Hash Block -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-medium">Cryptographic Proof &amp; Sealed Merkle</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">IMMUTABLE</span>
+</div>
+<div class="bg-surface p-space-sm rounded-lg flex flex-col gap-2 font-label-sm text-label-sm">
+<div>
+<span class="text-on-surface-variant block mb-1">SHA-256 Event Hash</span>
+<div class="flex items-center justify-between bg-surface-container-lowest px-2 py-1.5 rounded">
+<code class="text-on-surface truncate text-[11px]">8fa392cc94bb21f8a8409e1e776109c0b5514e82b79c3d4a02fc...</code>
+<button class="text-primary hover:text-primary-container p-0.5" title="Copy Hash" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<div class="bg-surface-container-lowest p-2 rounded">
+<span class="text-on-surface-variant block">Merkle Leaf Index</span>
+<span class="text-on-surface font-semibold">Leaf #184,902</span>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded">
+<span class="text-on-surface-variant block">Epoch Partition</span>
+<span class="text-on-surface font-semibold">2024-Q4-ACTIVE</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="text-on-surface-variant">Prev Block Checksum:</span>
+<span class="text-on-surface font-mono text-[10px]">007e21a8f901bca...</span>
+</div>
+</div>
+</div>
+<!-- State Diff / Mutation Payload (JSON syntax styling) -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-medium">State Mutation Payload Diff</span>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg overflow-x-auto text-[11px] font-label-sm">
+<div class="flex flex-col gap-1">
+<!-- Before state -->
+<div class="flex items-start gap-2">
+<span class="text-error font-bold select-none">-</span>
+<span class="text-on-surface-variant">{"role": "Contracts Specialist", "rls_scope": "tenant_assigned"}</span>
+</div>
+<!-- After state -->
+<div class="flex items-start gap-2 bg-secondary-container/30 px-1 py-0.5 rounded">
+<span class="text-tertiary font-bold select-none">+</span>
+<span class="text-on-surface font-semibold">{"role": "Contracts Lead", "rls_scope": "tenant_wide", "override_reason": "Executive Board SOW signoff"}</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Forensic Action Buttons -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<button class="w-full flex items-center justify-center gap-space-xs bg-surface-container-high hover:bg-surface-container text-on-surface py-2 rounded-lg font-headline-md text-body-sm transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span class="">Download Proof Certificate (.json/.sig)</span>
+</button>
+<button class="w-full flex items-center justify-center gap-space-xs bg-surface-container-lowest hover:bg-surface-container-low text-on-surface py-2 rounded-lg font-headline-md text-body-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="">Lock Event for Regulatory Audit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Full-Width Compliance & Custody Banner -->
+<div class="mt-space-lg bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container flex items-center justify-center text-on-tertiary-container shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface">Immutable Write-Once-Read-Many (WORM) Custody Assurance</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          Events are cryptographically sequenced onto append-only buckets compliant with SEC Rule 17a-4, GDPR Article 30 records, and FINRA standards.
+        </span>
+</div>
+</div>
+<!-- Regulatory Compliance Marks -->
+<div class="flex flex-wrap items-center gap-space-xs shrink-0">
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container-low text-on-surface font-semibold tracking-wider">
+        SOC-2 TYPE II
+      </span>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container-low text-on-surface font-semibold tracking-wider">
+        ISO 27001
+      </span>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container-low text-on-surface font-semibold tracking-wider">
+        HIPAA COMPLIANT
+      </span>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container-low text-on-surface font-semibold tracking-wider">
+        GDPR ART. 30
+      </span>
+</div>
+</div>
+</div></main></div>
+
+</body></html>
