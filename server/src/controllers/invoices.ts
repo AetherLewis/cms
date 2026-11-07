@@ -68,9 +68,15 @@ export async function createInvoice(req: AuthRequest, res: any): Promise<void> {
       const itemRows = items.map((item) => ({
         invoice_id: data.id,
         description: item.description || '',
+<<<<<<< HEAD
         quantity: item.quantity ?? 1,
         unit_price: item.unit_price ?? 0,
         total: (item.quantity ?? 1) * (item.unit_price ?? 0),
+=======
+        quantity: item.quantity || 1,
+        unit_price: item.unit_price || 0,
+        total: (item.quantity || 0) * (item.unit_price || 0),
+>>>>>>> bd369c0752ce6d7f9d8d853b1fa14164b6f2c7e2
       }))
       await supabase.from('invoice_items').insert(itemRows)
     }

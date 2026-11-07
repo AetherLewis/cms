@@ -3,6 +3,8 @@ export const formatCurrency = (n?: number | null) => {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
 }
 
+export const currency = formatCurrency
+
 export const formatDate = (d?: string | null, short = true) => {
   if (!d) return '—'
   const dt = new Date(d)

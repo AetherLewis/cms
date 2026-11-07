@@ -1,32 +1,29 @@
+import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import {
   LayoutDashboard,
   Users,
-  FileContract,
   FileText,
   CreditCard,
-  FileArrowLeft,
+  FolderOpen,
   FileSearch,
   Settings,
   LogOut,
-  Plus,
-  BookOpen,
   BarChart,
   ShieldCheck,
-  Mail,
 } from 'lucide-react'
 
-export function RootLayout() {
+export function RootLayout({ children }: { children: ReactNode }) {
   const { user, logout } = useAuth()
 
   const navItems = [
     { to: '/', label: 'Dashboard', icon: LayoutDashboard },
     { to: '/clients', label: 'Clients', icon: Users },
-    { to: '/contracts', label: 'Contracts', icon: FileContract },
+    { to: '/contracts', label: 'Contracts', icon: FileText },
     { to: '/invoices', label: 'Invoices', icon: FileText },
     { to: '/payments', label: 'Payments', icon: CreditCard },
-    { to: '/documents', label: 'Documents', icon: FileArrowLeft },
+    { to: '/documents', label: 'Documents', icon: FolderOpen },
     { to: '/recurring', label: 'Recurring', icon: FileSearch },
     { to: '/reports', label: 'Reports', icon: BarChart },
     { to: '/audit', label: 'Audit Log', icon: ShieldCheck },
@@ -91,7 +88,7 @@ export function RootLayout() {
         </div>
       </header>
 
-      <main className="flex-1 p-6 lg:p-8">{/* children via Outlet */}</main>
+      <main className="flex-1 p-6 lg:p-8">{children}</main>
     </div>
   )
 }

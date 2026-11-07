@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import { clsx } from 'clsx'
 
@@ -31,3 +32,10 @@ export function Select({
     </select>
   )
 }
+=======
+import type { SelectHTMLAttributes } from 'react'
+
+export function Select({ className = '', ...props }: SelectHTMLAttributes<HTMLSelectElement>) {
+  return <select className={`rounded-lg border border-star-200 bg-white px-3 py-2 text-sm text-star-900 outline-none focus:ring-2 focus:ring-star-600 ${className}`} {...props} />
+}
+>>>>>>> bd369c0752ce6d7f9d8d853b1fa14164b6f2c7e2

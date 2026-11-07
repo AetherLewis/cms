@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import { errorHandler } from './middleware/error'
@@ -5,7 +6,10 @@ import routes from './routes'
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: process.env.FRONTEND_URL?.split(',').map((origin) => origin.trim()) || true,
+  credentials: true,
+}))
 app.use(express.json())
 
 app.use('/api', routes)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 
 interface BreadcrumbsProps {
@@ -50,3 +51,10 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
     </nav>
   )
 }
+=======
+import { Link } from 'react-router-dom'
+
+export function Breadcrumbs({ path, onHome }: { path: { label: string }[]; onHome?: () => void }) {
+  return <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-star-500"><Link to="/" onClick={onHome} className="hover:text-star-700">Home</Link>{path.map((item, index) => <span key={`${item.label}-${index}`}>/ {item.label}</span>)}</nav>
+}
+>>>>>>> bd369c0752ce6d7f9d8d853b1fa14164b6f2c7e2

@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express'
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import { supabase } from '../config/supabase'
 import { unauthorized, forbidden } from '../utils/response'
 
 export interface AuthRequest extends Request {
   user?: { id: string; email: string; role: string }
 }
 
+<<<<<<< HEAD
 export function authenticate(
   req: AuthRequest,
   res: Response,
@@ -16,24 +17,34 @@ export function authenticate(
     throw new Error('Missing JWT_SECRET. Set it in .env')
   }
 
+=======
+/**
+ * Verify the Supabase access token sent as a Bearer token in the Authorization header.
+ */
+export async function authenticate(
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+>>>>>>> bd369c0752ce6d7f9d8d853b1fa14164b6f2c7e2
   const header = req.headers.authorization
   if (!header?.startsWith('Bearer ')) {
     unauthorized(res, 'Missing or invalid Authorization header')
     return
   }
 
-  const token = header.slice(7)
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload & {
-      id: string
-      email: string
-      role: string
-    }
-    req.user = { id: decoded.id, email: decoded.email, role: decoded.role }
-    next()
-  } catch {
+  const { data, error } = await supabase.auth.getUser(header.slice(7))
+  if (error || !data.user) {
     unauthorized(res, 'Invalid or expired token')
+    return
   }
+
+  req.user = {
+    id: data.user.id,
+    email: data.user.email ?? '',
+    role: typeof data.user.user_metadata?.role === 'string' ? data.user.user_metadata.role : 'viewer',
+  }
+  next()
 }
 
 /**
