@@ -53,11 +53,13 @@ export function ClientsPage() {
   })
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+    <div className="space-y-7">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="border-l-4 border-indigo-600 pl-4">
         <div>
           <h1 className="text-2xl font-bold text-star-900">Clients</h1>
           <p className="text-star-500">Manage your client relationships and billing contacts.</p>
+        </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <input

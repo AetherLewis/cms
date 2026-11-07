@@ -7,8 +7,14 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-[#f8f9ff] text-[#0b1c30] antialiased;
-    font-family: 'Hanken Grotesk', Inter, system-ui, sans-serif;
+    @apply bg-[#f7f9fc] text-slate-950 antialiased;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  }
+  button, input, select, textarea {
+    font: inherit;
+  }
+  ::selection {
+    @apply bg-indigo-100 text-indigo-950;
   }
 }
 
