@@ -32,6 +32,7 @@ export function InvoiceDetailPage() {
 
   const client = Array.isArray(invoice.clients) ? invoice.clients[0] : invoice.clients
   const contract = Array.isArray(invoice.contracts) ? invoice.contracts[0] : invoice.contracts
+  const attachedDocument = Array.isArray(invoice.documents) ? invoice.documents[0] : invoice.documents
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -40,6 +41,7 @@ export function InvoiceDetailPage() {
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to invoices
         </Button>
         <div className="flex gap-2">
+          {attachedDocument?.file_url && <Button variant="outline" onClick={() => window.open(attachedDocument.file_url, '_blank', 'noopener,noreferrer')}>View Supporting Document</Button>}
           <Button variant="outline" onClick={() => navigate(`/invoices/${invoice.id}`)}>
             <Edit className="w-4 h-4 mr-1" /> Edit
           </Button>

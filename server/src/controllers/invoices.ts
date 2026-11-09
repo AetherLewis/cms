@@ -13,7 +13,7 @@ export async function listInvoices(req: AuthRequest, res: any): Promise<void> {
 
     const { data, error } = await supabase
       .from('invoices')
-      .select('*, clients!inner(name, email), contracts!inner(title)')
+      .select('*, clients!inner(name, email), contracts(title), documents(id, title, file_url)')
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
 
@@ -34,6 +34,15 @@ export async function createInvoice(req: AuthRequest, res: any): Promise<void> {
       return
     }
 
+    const documentId = body.documentId || body.document_id || null
+    if (documentId) {
+      const { data: document, error: documentError } = await supabase.from('documents').select('id').eq('id', documentId).eq('user_id', userId).single()
+      if (documentError || !document) {
+        badRequest(res, 'Attached document not found')
+        return
+      }
+    }
+
     // Compute from items
     const items: Partial<InvoiceItem>[] = body.items || []
     const subtotal = items.reduce(
@@ -48,6 +57,7 @@ export async function createInvoice(req: AuthRequest, res: any): Promise<void> {
       user_id: userId,
       client_id: body.clientId,
       contract_id: body.contractId || null,
+      document_id: documentId,
       invoice_number: body.invoiceNumber,
       status: body.status || 'draft',
       subtotal,
@@ -88,7 +98,7 @@ export async function getInvoice(req: AuthRequest, res: any): Promise<void> {
 
     const { data, error } = await supabase
       .from('invoices')
-      .select('*, clients!inner(name, email), contracts!inner(title)')
+      .select('*, clients!inner(name, email), contracts(title), documents(id, title, file_url)')
       .eq('id', id)
       .eq('user_id', userId)
       .single()
@@ -116,6 +126,16 @@ export async function updateInvoice(req: AuthRequest, res: any): Promise<void> {
     const body = req.body
 
     const { items, ...invoiceFields } = body
+    const documentId = invoiceFields.document_id ?? invoiceFields.documentId
+    if (documentId) {
+      const { data: document, error: documentError } = await supabase.from('documents').select('id').eq('id', documentId).eq('user_id', userId).single()
+      if (documentError || !document) {
+        badRequest(res, 'Attached document not found')
+        return
+      }
+    }
+    delete invoiceFields.documentId
+    if ('document_id' in invoiceFields || 'documentId' in body) invoiceFields.document_id = documentId || null
     const { data, error } = await supabase
       .from('invoices')
       .update({ ...invoiceFields, updated_at: new Date().toISOString() })

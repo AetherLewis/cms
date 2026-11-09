@@ -9,6 +9,7 @@ import audit from './audit'
 import settings from './settings'
 import recurring from './recurring'
 import stats from './stats'
+import automations from './automations'
 
 const router = Router()
 
@@ -17,6 +18,7 @@ router.get('/health', (_req, res) => {
 })
 
 router.use(authenticate)
+router.use('/automations', automations)
 router.use('/clients', clients)
 router.use('/contracts', contracts)
 router.use('/invoices', invoices)

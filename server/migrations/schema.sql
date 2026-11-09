@@ -101,6 +101,10 @@ CREATE TABLE documents (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Optional links to uploaded files for contracts and invoices.
+ALTER TABLE contracts ADD COLUMN document_id UUID REFERENCES documents(id) ON DELETE SET NULL;
+ALTER TABLE invoices ADD COLUMN document_id UUID REFERENCES documents(id) ON DELETE SET NULL;
+
 -- Audit logs table
 CREATE TABLE audit_logs (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

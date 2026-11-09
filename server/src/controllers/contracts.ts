@@ -17,7 +17,7 @@ export async function listContracts(req: AuthRequest, res: any): Promise<void> {
 
     const { data, error } = await supabase
       .from('contracts')
-      .select('*, clients!inner(name, email)')
+      .select('*, clients!inner(name, email), documents(id, title, file_url)')
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
 
@@ -41,6 +41,15 @@ export async function createContract(req: AuthRequest, res: any): Promise<void> 
       return
     }
 
+    const documentId = body.documentId || body.document_id || null
+    if (documentId) {
+      const { data: document, error: documentError } = await supabase.from('documents').select('id').eq('id', documentId).eq('user_id', userId).single()
+      if (documentError || !document) {
+        badRequest(res, 'Attached document not found')
+        return
+      }
+    }
+
     const payload = {
       user_id: userId,
       client_id: body.clientId,
@@ -54,6 +63,7 @@ export async function createContract(req: AuthRequest, res: any): Promise<void> 
       currency: body.currency || 'USD',
       payment_terms: body.paymentTerms || null,
       file_url: body.fileUrl || null,
+      document_id: documentId,
       updated_at: new Date().toISOString(),
     }
 
@@ -75,7 +85,7 @@ export async function getContract(req: AuthRequest, res: any): Promise<void> {
 
     const { data, error } = await supabase
       .from('contracts')
-      .select('*, clients!inner(name, email)')
+      .select('*, clients!inner(name, email), documents(id, title, file_url)')
       .eq('id', id)
       .eq('user_id', userId)
       .single()
@@ -99,9 +109,21 @@ export async function updateContract(req: AuthRequest, res: any): Promise<void> 
     const userId = req.user?.id
     const body = req.body
 
+    const documentId = body.document_id ?? body.documentId
+    if (documentId) {
+      const { data: document, error: documentError } = await supabase.from('documents').select('id').eq('id', documentId).eq('user_id', userId).single()
+      if (documentError || !document) {
+        badRequest(res, 'Attached document not found')
+        return
+      }
+    }
+
+    const contractFields = { ...body }
+    delete contractFields.documentId
+    if ('document_id' in body || 'documentId' in body) contractFields.document_id = documentId || null
     const { data, error } = await supabase
       .from('contracts')
-      .update({ ...body, updated_at: new Date().toISOString() })
+      .update({ ...contractFields, updated_at: new Date().toISOString() })
       .eq('id', id)
       .eq('user_id', userId)
       .select()

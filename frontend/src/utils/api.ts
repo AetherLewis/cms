@@ -180,6 +180,24 @@ export async function getMonthlyReport(month: string) {
   return request<any>(`/stats/monthly?month=${month}`)
 }
 
+/** ---------- Automations ---------- */
+export type OutreachContact = { identifier: string; type: 'email' | 'phone'; name?: string }
+export type OutreachLog = {
+  id: string
+  run_id: string
+  contact: string
+  type: 'email' | 'phone'
+  generated_message: string | null
+  status: string
+  created_at: string
+}
+export async function runOutreach(payload: { contacts: OutreachContact[]; basePrompt: string; serviceConfig: Record<string, unknown> }) {
+  return request<{ runId: string; results: OutreachLog[] }>('/automations/outreach', { method: 'POST', body: JSON.stringify(payload) })
+}
+export async function listOutreachLogs() {
+  return request<OutreachLog[]>('/automations/logs')
+}
+
 /** ---------- Helper ---------- */
 export function currency(amount: number) {
   return new Intl.NumberFormat('en-US', {

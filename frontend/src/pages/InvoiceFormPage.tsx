@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { createInvoice, updateInvoice, getInvoice, listClients, listContracts } from '../utils/api'
+import { createInvoice, updateInvoice, getInvoice, listClients, listContracts, listDocuments } from '../utils/api'
 import { toast } from 'react-hot-toast'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
@@ -20,11 +20,13 @@ export function InvoiceFormPage() {
   const [saving, setSaving] = useState(false)
   const [clients, setClients] = useState<any[]>([])
   const [contracts, setContracts] = useState<any[]>([])
+  const [documents, setDocuments] = useState<any[]>([])
 
   const [form, setForm] = useState({
     invoice_number: '',
     client_id: '',
     contract_id: '',
+    document_id: '',
     status: 'draft',
     issued_date: new Date().toISOString().split('T')[0],
     due_date: '',
@@ -38,6 +40,7 @@ export function InvoiceFormPage() {
   useEffect(() => {
     listClients().then((data) => setClients(data || [])).catch((error) => toast.error(error.message || 'Could not load clients'))
     listContracts().then((data) => setContracts(data || [])).catch(() => undefined)
+    listDocuments().then((data) => setDocuments(data || [])).catch((error) => toast.error(error.message || 'Could not load documents'))
     if (id) {
       ;(async () => {
         try {
@@ -46,6 +49,7 @@ export function InvoiceFormPage() {
               ...data,
               client_id: data.client_id || data.clients?.id || data.clients?.[0]?.id || '',
               contract_id: data.contract_id || data.contracts?.id || data.contracts?.[0]?.id || '',
+              document_id: data.document_id || data.documents?.id || data.documents?.[0]?.id || '',
               issued_date: data.issued_date?.split('T')[0] || '',
               due_date: data.due_date?.split('T')[0] || '',
               items: data.items?.map((it: any) => ({
@@ -99,6 +103,7 @@ export function InvoiceFormPage() {
         invoiceNumber: form.invoice_number,
         clientId: form.client_id,
         contractId: form.contract_id || undefined,
+        documentId: form.document_id || undefined,
         status: form.status,
         issuedDate: form.issued_date,
         dueDate: form.due_date || undefined,
@@ -114,6 +119,7 @@ export function InvoiceFormPage() {
           invoice_number: form.invoice_number,
           client_id: form.client_id,
           contract_id: form.contract_id || null,
+          document_id: form.document_id || null,
           status: form.status,
           issued_date: form.issued_date,
           due_date: form.due_date || null,
@@ -194,6 +200,13 @@ export function InvoiceFormPage() {
             <div>
               <label className="block text-sm font-medium text-star-700 mb-1">Payment terms</label>
               <Input value={form.payment_terms} onChange={(e) => setForm({ ...form, payment_terms: e.target.value })} placeholder="Net 30" />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-star-700 mb-1">Attach Supporting Document</label>
+              <Select value={form.document_id} onChange={(e) => setForm({ ...form, document_id: e.target.value })}>
+                <option value="">— No document attached —</option>
+                {documents.map((document) => <option key={document.id} value={document.id}>{document.title} · {document.document_type}</option>)}
+              </Select>
             </div>
           </div>
 

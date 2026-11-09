@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { createContract, updateContract, getContract, listClients } from '../utils/api'
+import { createContract, updateContract, getContract, listClients, listDocuments } from '../utils/api'
 import { toast } from 'react-hot-toast'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
@@ -16,6 +16,7 @@ export function ContractFormPage() {
   const [saving, setSaving] = useState(false)
   const [clientId, setClientId] = useState('')
   const [clients, setClients] = useState<any[]>([])
+  const [documents, setDocuments] = useState<any[]>([])
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -27,10 +28,12 @@ export function ContractFormPage() {
     currency: 'USD',
     payment_terms: 'Net 30',
     file_url: '',
+    document_id: '',
   })
 
   useEffect(() => {
     listClients().then((data) => setClients(data || [])).catch((error) => toast.error(error.message || 'Could not load clients'))
+    listDocuments().then((data) => setDocuments((data || []).filter((document: any) => document.document_type === 'contract'))).catch((error) => toast.error(error.message || 'Could not load documents'))
     if (id) {
       // fetch existing contract
       ;(async () => {
@@ -64,6 +67,7 @@ export function ContractFormPage() {
         value: Number(form.value) || undefined,
         currency: form.currency,
         fileUrl: form.file_url || undefined,
+        documentId: form.document_id || undefined,
       }
       if (id) {
         await updateContract(id, {
@@ -78,6 +82,7 @@ export function ContractFormPage() {
           currency: form.currency,
           payment_terms: form.payment_terms,
           file_url: form.file_url || null,
+          document_id: form.document_id || null,
         })
       } else {
         await createContract(payload)
@@ -111,6 +116,13 @@ export function ContractFormPage() {
           <div className="col-span-2">
             <label className="block text-sm font-medium text-star-700 mb-1">Description</label>
             <Textarea rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Scope of work, deliverables..." />
+          </div>
+          <div className="col-span-2">
+            <label className="block text-sm font-medium text-star-700 mb-1">Attach Document</label>
+            <Select value={form.document_id} onChange={(e) => setForm({ ...form, document_id: e.target.value })}>
+              <option value="">— No document attached —</option>
+              {documents.map((document) => <option key={document.id} value={document.id}>{document.title}</option>)}
+            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium text-star-700 mb-1">Client *</label>

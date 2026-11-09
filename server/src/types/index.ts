@@ -40,6 +40,7 @@ export interface Contract {
   currency?: string
   payment_terms?: string
   file_url?: string
+  document_id?: string
   created_at: string
   updated_at: string
 }
@@ -58,6 +59,7 @@ export interface Invoice {
   user_id: string
   client_id: string
   contract_id?: string
+  document_id?: string
   invoice_number: string
   status: InvoiceStatus
   subtotal: number

@@ -36,6 +36,7 @@ export function ContractDetailPage() {
 
   if (loading) return <div className="p-8 text-center text-star-400">Loading contract details…</div>
   if (!contract) return <div className="p-8 text-center text-star-400">Contract not found.</div>
+  const attachedDocument = Array.isArray(contract.documents) ? contract.documents[0] : contract.documents
 
   return (
     <div className="space-y-6">
@@ -52,6 +53,7 @@ export function ContractDetailPage() {
           </div>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={() => navigate(`/contracts/${contract.id}`)}>Edit</Button>
+            {(attachedDocument?.file_url || contract.file_url) && <Button variant="outline" size="sm" onClick={() => window.open(attachedDocument?.file_url || contract.file_url, '_blank', 'noopener,noreferrer')}>Download Contract</Button>}
             <Button variant="outline" size="sm" onClick={() => navigate(`/invoices/new?contractId=${contract.id}`)}>
               <PlusCircle className="w-4 h-4 mr-1" /> Add invoice
             </Button>
