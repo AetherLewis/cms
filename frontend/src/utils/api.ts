@@ -1,7 +1,17 @@
 import { supabase } from '../utils/supabase'
 import { toast } from 'react-hot-toast'
 
-const API_BASE = import.meta.env.VITE_API_URL || '/api'
+function getApiBase() {
+  const configured = String(import.meta.env.VITE_API_URL || '/api').trim()
+  if (configured === '/api') return configured
+
+  const withProtocol = /^https?:\/\//i.test(configured) ? configured : `https://${configured}`
+  return withProtocol.replace(/\/+$/, '').endsWith('/api')
+    ? withProtocol.replace(/\/+$/, '')
+    : `${withProtocol.replace(/\/+$/, '')}/api`
+}
+
+const API_BASE = getApiBase()
 
 /**
  * Lightweight typed fetch wrapper that attaches the JWT from localStorage.
@@ -26,7 +36,12 @@ async function request<T>(
   }
 
   if (res.status === 204) return undefined as T
-  return res.json()
+
+  const body = await res.json()
+  if (body && typeof body === 'object' && 'success' in body && 'data' in body) {
+    return body.data as T
+  }
+  return body as T
 }
 
 /** ---------- Auth ---------- */

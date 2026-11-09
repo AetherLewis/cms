@@ -37,9 +37,9 @@ export function RootLayout({ children }: { children: ReactNode }) {
   const searchableItems = [...navItems, ...adminItems]
 
   return (
-    <div className="min-h-screen bg-[#f8f9ff] text-[#0b1c30]">
+    <div className="min-h-screen bg-[#f7f9fc] text-slate-950">
       <div className="min-h-screen lg:flex">
-        <aside className="flex w-full shrink-0 flex-col border-b border-slate-200 bg-white lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:border-b-0 lg:border-r">
+        <aside className="flex w-full shrink-0 flex-col border-b border-slate-200/80 bg-white lg:sticky lg:top-0 lg:h-screen lg:w-[248px] lg:border-b-0 lg:border-r">
           <NavLink to="/" className="flex items-center gap-3 border-b border-slate-100 px-5 py-5" end>
             <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-700 text-sm font-bold text-white">SC</span>
             <span><span className="block text-sm font-bold tracking-tight text-slate-900">StarCore</span><span className="block text-xs text-slate-500">Operations Suite</span></span>
