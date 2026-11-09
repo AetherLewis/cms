@@ -2,10 +2,10 @@ CREATE TABLE IF NOT EXISTS automation_logs (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   run_id UUID NOT NULL,
-  contact TEXT NOT NULL,
-  type TEXT NOT NULL CHECK (type IN ('email', 'phone')),
+  contact_identifier TEXT NOT NULL,
+  contact_type TEXT NOT NULL CHECK (contact_type IN ('email', 'phone')),
   generated_message TEXT,
-  status TEXT NOT NULL DEFAULT 'pending',
+  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('sent', 'failed', 'pending')),
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
