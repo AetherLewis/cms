@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { AuthRequest } from '../middleware/auth'
 import { supabase } from '../config/supabase'
 import { badRequest, ok, serverError } from '../utils/response'
+import { sendEmail, sendWhatsApp } from '../services/dispatch'
 
 type Contact = { identifier: string; type: 'email' | 'phone'; name?: string }
 
@@ -10,10 +11,6 @@ const aiClient = new OpenAI({
   baseURL: process.env.OMNIROUTE_API_URL || 'http://localhost:20128/v1',
   apiKey: process.env.OMNIROUTE_API_KEY || 'sk-no-key-required',
 })
-
-async function mockDeliver(_payload: { contact: string; type: Contact['type']; message: string }): Promise<void> {
-  // Replace this adapter with the configured email/SMS provider when one is selected.
-}
 
 export async function runOutreach(req: AuthRequest, res: any): Promise<void> {
   const userId = req.user?.id
@@ -50,23 +47,26 @@ export async function runOutreach(req: AuthRequest, res: any): Promise<void> {
         contact_identifier: contact.identifier.trim(),
         contact_type: contact.type,
         generated_message: generatedMessage,
-        status,
-      }).select('id, run_id, contact_identifier, contact_type, generated_message, status, created_at').single()
+        status: generatedMessage ? 'pending' : 'failed',
+      }).select('id, run_id, contact_identifier, contact_type, generated_message, status, created_at, updated_at').single()
       if (insertError) throw insertError
 
       if (generatedMessage) {
         try {
-          await mockDeliver({ contact: contact.identifier.trim(), type: contact.type, message: generatedMessage })
-          const { data, error } = await supabase.from('automation_logs').update({ status: 'sent' }).eq('id', inserted.id)
-            .select('id, run_id, contact_identifier, contact_type, generated_message, status, created_at').single()
-          if (error) throw error
-          return data
+          if (contact.type === 'email') {
+            await sendEmail(contact.identifier.trim(), 'A quick note from StarCore', generatedMessage)
+          } else {
+            await sendWhatsApp(contact.identifier.trim(), generatedMessage)
+          }
+          status = 'sent'
         } catch {
-          const { data, error } = await supabase.from('automation_logs').update({ status: 'failed' }).eq('id', inserted.id)
-            .select('id, run_id, contact_identifier, contact_type, generated_message, status, created_at').single()
-          if (error) throw error
-          return data
+          status = 'failed'
         }
+
+        const { data, error } = await supabase.from('automation_logs').update({ status, updated_at: new Date().toISOString() }).eq('id', inserted.id)
+          .select('id, run_id, contact_identifier, contact_type, generated_message, status, created_at, updated_at').single()
+        if (error) throw error
+        return data
       }
       return inserted
     }))
@@ -79,7 +79,7 @@ export async function runOutreach(req: AuthRequest, res: any): Promise<void> {
 export async function listOutreachLogs(req: AuthRequest, res: any): Promise<void> {
   try {
     const { data, error } = await supabase.from('automation_logs')
-      .select('id, run_id, contact_identifier, contact_type, generated_message, status, created_at')
+      .select('id, run_id, contact_identifier, contact_type, generated_message, status, created_at, updated_at')
       .eq('user_id', req.user?.id)
       .order('created_at', { ascending: false })
       .limit(100)

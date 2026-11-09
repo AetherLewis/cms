@@ -190,6 +190,7 @@ export type OutreachLog = {
   generated_message: string | null
   status: string
   created_at: string
+  updated_at: string
 }
 export async function runOutreach(payload: { contacts: OutreachContact[]; basePrompt: string }) {
   return request<{ runId: string; results: OutreachLog[] }>('/automations/outreach', { method: 'POST', body: JSON.stringify(payload) })
