@@ -99,13 +99,9 @@ The API is mounted under `/api`. `GET /api/health` is public. All other routes r
 
 ## Deployment
 
-- Build the frontend with `cd frontend && npm run build`; publish `frontend/dist` with SPA fallback to `index.html` (the included `frontend/vercel.json` configures this fallback).
-- Build and run the API with `cd server && npm run build && npm start`.
-- Configure `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, and `VITE_API_URL` as frontend build-time variables.
-- Configure `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `JWT_SECRET`, `PORT`, and `FRONTEND_URL` in the API runtime environment.
-- Run SQL migrations against the target Supabase database before routing traffic to the deployment.
+The API is hosted separately on Render. Deploy the `server/` directory as a Render Web Service and deploy the frontend as a static site (the included `frontend/vercel.json` provides a Vercel SPA fallback). Set the frontend build variable `VITE_API_URL` to the Render service origin, for example `https://your-api.onrender.com`; the frontend adds `/api` automatically. Set the API's `FRONTEND_URL` to the deployed frontend origin. Configure Supabase credentials on both services as appropriate and run database migrations before using the deployment.
 
-For setup, CORS, migrations, and integrations, see [Deployment and configuration](docs/deployment.md).
+See [Deployment and configuration](docs/deployment.md) for Render service settings, environment variables, CORS, and migrations.
 
 ## Security notes
 
