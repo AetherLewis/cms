@@ -8,6 +8,7 @@
     "prebuild": "npm install --include=dev",
     "build": "tsc",
     "start": "node dist/server.js",
+    "test": "node --import tsx --test src/services/workflows/workflows.test.ts",
     "migrate": "psql -f migrations/schema.sql"
   },
   "dependencies": {

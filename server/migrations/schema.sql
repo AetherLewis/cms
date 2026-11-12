@@ -244,5 +244,8 @@ CREATE POLICY "Users can view own monthly reports" ON monthly_reports FOR SELECT
 CREATE POLICY "Users can insert own monthly report" ON monthly_reports FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Users can update own monthly report" ON monthly_reports FOR UPDATE USING (auth.uid() = user_id);
 
--- Default data
-INSERT INTO profiles (id, email, role) VALUES ('00000000-0000-0000-0000-000000000000', 'admin@example.com', 'admin') ON CONFLICT DO NOTHING;
+-- Default data (only when the matching auth user exists, so a fresh database applies cleanly)
+INSERT INTO profiles (id, email, role)
+SELECT '00000000-0000-0000-0000-000000000000'::uuid, 'admin@example.com', 'admin'
+WHERE EXISTS (SELECT 1 FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000000'::uuid)
+ON CONFLICT DO NOTHING;

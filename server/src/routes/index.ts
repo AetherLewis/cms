@@ -10,14 +10,24 @@ import settings from './settings'
 import recurring from './recurring'
 import stats from './stats'
 import automations from './automations'
+import workflows from './workflows'
+import scheduler from './scheduler'
 
 const router = Router()
 
 router.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'StarCoreWeb' })
+  res.json({
+    status: 'ok',
+    service: 'StarCoreWeb',
+    schedulerConfigured: Boolean(process.env.SCHEDULER_SECRET),
+  })
 })
 
+// Deployment cron entry point: authenticated with the scheduler secret, not a user session.
+router.use('/scheduler', scheduler)
+
 router.use(authenticate)
+router.use('/workflows', workflows)
 router.use('/automations', automations)
 router.use('/clients', clients)
 router.use('/contracts', contracts)

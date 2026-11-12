@@ -11,11 +11,7 @@ export async function authenticate(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const JWT_SECRET = process.env.JWT_SECRET
-  if (!JWT_SECRET) {
-    throw new Error('Missing JWT_SECRET. Set it in .env')
-  }
-
+  // Supabase validates the bearer token; no separate JWT secret gate is needed here.
   const header = req.headers.authorization
   if (!header?.startsWith('Bearer ')) {
     unauthorized(res, 'Missing or invalid Authorization header')

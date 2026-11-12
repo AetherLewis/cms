@@ -34,7 +34,7 @@ export function RootLayout({ children }: { children: ReactNode }) {
     { to: '/payments', label: 'Payments', icon: CreditCard },
     { to: '/recurring', label: 'Recurring', icon: Repeat },
     { to: '/documents', label: 'Documents', icon: FolderOpen },
-    { to: '/automations', label: 'Automations', icon: Sparkles },
+    { to: '/automations', label: 'Workflows', icon: Sparkles },
   ]
   const searchableItems = [...navItems, ...adminItems]
 

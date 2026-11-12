@@ -8,8 +8,9 @@ StarCoreWeb is a web application for managing client relationships and billing o
 - Client directory and contract lifecycle management
 - Invoice creation with line items, payments, and invoice status tracking
 - Document records and export endpoint
-- Recurring billing records
-- Audit log, company settings, and outreach automation
+- Guided outreach and billing workflows with previews, pause/resume, and run history
+- Recurring invoice creation from an explicit client and invoice template
+- Audit log and company settings
 - Supabase email/password authentication
 
 ## Project structure
@@ -54,8 +55,9 @@ Create `server/.env`:
 ```dotenv
 SUPABASE_URL=https://YOUR_PROJECT.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=YOUR_SUPABASE_SERVICE_ROLE_KEY
-JWT_SECRET=use-a-long-random-secret
 PORT=3001
+# Shared secret the deployment cron presents to POST /api/scheduler/run
+SCHEDULER_SECRET=use-a-long-random-secret
 # Comma-separated browser origins allowed by CORS. Defaults to permissive CORS if omitted.
 FRONTEND_URL=http://localhost:5173
 ```
