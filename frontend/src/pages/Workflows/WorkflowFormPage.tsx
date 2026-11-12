@@ -6,10 +6,12 @@ import {
   getWorkflow,
   getWorkflowReadiness,
   listClients,
+  listSenders,
   previewWorkflow,
   toast,
   updateWorkflow,
   type ProviderReadiness,
+  type SenderProfile,
   type WorkflowDefinitionInput,
   type WorkflowFrequency,
   type WorkflowPreview,
@@ -45,6 +47,8 @@ interface FormState {
   clientId: string
   daysBeforeDue: string
   message: string
+  senderEmail: string
+  senderWhatsapp: string
   description: string
   quantity: string
   unitPrice: string
@@ -68,6 +72,8 @@ function initialState(type: WorkflowType): FormState {
     clientId: '',
     daysBeforeDue: '0',
     message: DEFAULT_REMINDER_MESSAGE,
+    senderEmail: '',
+    senderWhatsapp: '',
     description: '',
     quantity: '1',
     unitPrice: '',
@@ -95,6 +101,7 @@ export function WorkflowFormPage() {
   const [form, setForm] = useState<FormState>(initialState(requestedTemplate && TEMPLATE_TYPES.includes(requestedTemplate) ? requestedTemplate : 'outreach'))
   const [status, setStatus] = useState<WorkflowStatus>('draft')
   const [clients, setClients] = useState<any[]>([])
+  const [senders, setSenders] = useState<SenderProfile[]>([])
   const [readiness, setReadiness] = useState<ProviderReadiness | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState<'draft' | 'activate' | null>(null)
@@ -106,10 +113,15 @@ export function WorkflowFormPage() {
     let cancelled = false
     async function load() {
       try {
-        const [clientList, readinessData] = await Promise.all([listClients(), getWorkflowReadiness()])
+        const [clientList, readinessData, senderData] = await Promise.all([
+          listClients(),
+          getWorkflowReadiness(),
+          listSenders(),
+        ])
         if (cancelled) return
         setClients(clientList || [])
         setReadiness(readinessData.readiness)
+        setSenders(senderData.senders || [])
         if (id) {
           const workflow = await getWorkflow(id)
           if (cancelled) return
@@ -133,6 +145,8 @@ export function WorkflowFormPage() {
             unitPrice: config.invoice?.unitPrice != null ? String(config.invoice.unitPrice) : '',
             taxRate: String(config.invoice?.taxRate ?? 0),
             dueInDays: String(config.invoice?.dueInDays ?? 30),
+            senderEmail: config.senderIds?.email || '',
+            senderWhatsapp: config.senderIds?.whatsapp || '',
             numberPrefix: config.invoice?.numberPrefix || 'INV',
           })
         }
@@ -163,21 +177,51 @@ export function WorkflowFormPage() {
 
   const missingProviders = readiness ? requiredProviders.filter((key) => !readiness[key]) : []
 
+  // Channels this definition sends from; each needs a connected sender profile.
+  const senderChannels = useMemo<Array<'email' | 'whatsapp'>>(() => {
+    if (form.type === 'invoice_reminder') return ['email']
+    if (form.type !== 'outreach') return []
+    const channels: Array<'email' | 'whatsapp'> = []
+    if (contacts.some((contact) => contact.type === 'email')) channels.push('email')
+    if (contacts.some((contact) => contact.type === 'phone')) channels.push('whatsapp')
+    return channels
+  }, [form.type, contacts])
+
+  const connectedSenders = (channel: 'email' | 'whatsapp') =>
+    senders.filter((sender) => sender.channel === channel && sender.status === 'connected')
+
+  const missingSenderChannels = senderChannels.filter((channel) =>
+    channel === 'email' ? !form.senderEmail : !form.senderWhatsapp,
+  )
+
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }))
     setPreview(null)
   }
 
+  function senderIds() {
+    const ids: Record<string, string> = {}
+    if (form.senderEmail) ids.email = form.senderEmail
+    if (form.senderWhatsapp) ids.whatsapp = form.senderWhatsapp
+    return Object.keys(ids).length > 0 ? ids : undefined
+  }
+
   function buildDefinition(activate = false): WorkflowDefinitionInput {
     const config =
       form.type === 'outreach'
-        ? { contacts, systemPrompt: form.systemPrompt, subject: form.subject }
+        ? {
+            contacts,
+            systemPrompt: form.systemPrompt,
+            subject: form.subject,
+            senderIds: senderIds(),
+          }
         : form.type === 'invoice_reminder'
           ? {
               clientId: form.clientId || null,
               daysBeforeDue: Number(form.daysBeforeDue || 0),
               subject: form.subject,
               message: form.message,
+              senderIds: senderIds(),
             }
           : {
               clientId: form.clientId,
@@ -234,7 +278,7 @@ export function WorkflowFormPage() {
     return <div className="rounded-xl border border-slate-200 bg-white p-12 text-center text-sm text-slate-400">Loading workflow…</div>
   }
 
-  const activateBlocked = missingProviders.length > 0
+  const activateBlocked = missingProviders.length > 0 || missingSenderChannels.length > 0
 
   return (
     <div className="space-y-6">
@@ -323,6 +367,48 @@ export function WorkflowFormPage() {
               </div>
             </div>
           </section>
+
+          {senderChannels.length > 0 && (
+            <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <h2 className="font-semibold text-slate-900">Send from</h2>
+                  <p className="mt-1 text-sm text-slate-500">Choose a connected sender for each channel this workflow uses.</p>
+                </div>
+                <Link to="/senders" className="text-xs font-semibold text-indigo-700 hover:text-indigo-900">
+                  Manage sender profiles
+                </Link>
+              </div>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {senderChannels.map((channel) => {
+                  const options = connectedSenders(channel)
+                  const label = channel === 'email' ? 'Gmail sender' : 'WhatsApp sender'
+                  const field = channel === 'email' ? 'senderEmail' : 'senderWhatsapp'
+                  return (
+                    <div key={channel}>
+                      <Label htmlFor={`workflow-sender-${channel}`} required>{label}</Label>
+                      <Select
+                        id={`workflow-sender-${channel}`}
+                        value={form[field]}
+                        onChange={(event) => update(field, event.target.value)}
+                        className="w-full"
+                      >
+                        <option value="">{options.length === 0 ? `No connected ${label.toLowerCase()}` : `Choose a ${label.toLowerCase()}`}</option>
+                        {options.map((sender) => (
+                          <option key={sender.id} value={sender.id}>{sender.name} · {sender.account}</option>
+                        ))}
+                      </Select>
+                      {options.length === 0 && (
+                        <p className="mt-1.5 text-xs text-amber-700">
+                          Connect a {label.toLowerCase()} in <Link to="/senders" className="font-semibold underline">Sender profiles</Link> first.
+                        </p>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </section>
+          )}
 
           <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <h2 className="font-semibold text-slate-900">{TEMPLATES[form.type].label} details</h2>
@@ -452,11 +538,11 @@ export function WorkflowFormPage() {
                 )}
                 {preview.missingProviders.length > 0 ? (
                   <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
-                    <p className="flex items-center gap-1.5 font-semibold"><AlertTriangle className="h-3.5 w-3.5" /> Missing provider configuration</p>
+                    <p className="flex items-center gap-1.5 font-semibold"><AlertTriangle className="h-3.5 w-3.5" /> Needs setup before it can run</p>
                     <ul className="mt-1 list-disc space-y-0.5 pl-5">
                       {preview.missingProviders.map((provider) => <li key={provider}>{provider}</li>)}
                     </ul>
-                    <p className="mt-1">Add these to your deployment secrets; they are never stored in the CMS.</p>
+                    <p className="mt-1">Connect the missing senders in Sender profiles, and set any deployment secrets listed above.</p>
                   </div>
                 ) : (
                   <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700"><CheckCircle2 className="h-3.5 w-3.5" /> All required providers are configured</p>
@@ -471,7 +557,9 @@ export function WorkflowFormPage() {
             <section className="rounded-xl border border-amber-200 bg-amber-50 p-4">
               <p className="flex items-center gap-1.5 text-sm font-semibold text-amber-900"><AlertTriangle className="h-4 w-4" /> Activation needs provider setup</p>
               <p className="mt-1 text-xs text-amber-800">
-                Missing: {missingProviders.map(providerLabel).join(', ')}. Save as a draft now and activate once the deployment secrets are configured.
+                {missingProviders.length > 0 && <>Missing: {missingProviders.map(providerLabel).join(', ')}. </>}
+                {missingSenderChannels.length > 0 && <>Choose a connected {missingSenderChannels.map((channel) => (channel === 'email' ? 'Gmail' : 'WhatsApp')).join(' and ')} sender. </>}
+                Save as a draft now and activate once everything is connected.
               </p>
             </section>
           )}

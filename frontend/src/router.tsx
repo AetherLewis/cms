@@ -19,6 +19,7 @@ import { LoginPage } from './pages/LoginPage'
 import { WorkflowsPage } from './pages/Workflows/Index'
 import { WorkflowFormPage } from './pages/Workflows/WorkflowFormPage'
 import { WorkflowHistoryPage } from './pages/Workflows/WorkflowHistoryPage'
+import { SendersPage } from './pages/SendersPage'
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,7 @@ export const router = createBrowserRouter([
       { path: 'automations/new', element: <WorkflowFormPage /> },
       { path: 'automations/:id', element: <WorkflowFormPage /> },
       { path: 'automations/:id/history', element: <WorkflowHistoryPage /> },
+      { path: 'senders', element: <SendersPage /> },
     ],
   },
   { path: '/login', element: <LoginPage /> },

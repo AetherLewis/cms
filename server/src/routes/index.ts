@@ -11,6 +11,7 @@ import recurring from './recurring'
 import stats from './stats'
 import automations from './automations'
 import workflows from './workflows'
+import senders from './senders'
 import scheduler from './scheduler'
 
 const router = Router()
@@ -25,6 +26,10 @@ router.get('/health', (_req, res) => {
 
 // Deployment cron entry point: authenticated with the scheduler secret, not a user session.
 router.use('/scheduler', scheduler)
+
+// Sender profiles: the OAuth callback authenticates with its own single-use state, so this mounts
+// before the bearer-token gate; the router applies `authenticate` to its other routes.
+router.use('/senders', senders)
 
 router.use(authenticate)
 router.use('/workflows', workflows)

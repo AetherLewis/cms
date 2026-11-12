@@ -4,7 +4,8 @@ import { badRequest, created, noContent, notFound, ok, serverError } from '../ut
 import { validateWorkflowInput } from '../services/workflows/validation'
 import { computeNextRunAt } from '../services/workflows/schedule'
 import { getProviderReadiness, missingProviderLabels } from '../services/workflows/readiness'
-import { executeWorkflow, previewWorkflow } from '../services/workflows/runner'
+import { connectedChannels, listSenders, senderProblems } from '../services/senders/store'
+import { executeWorkflow, previewWorkflow, workflowBlockers } from '../services/workflows/runner'
 import type { InvoiceReminderConfig, RecurringInvoiceConfig, WorkflowRow } from '../services/workflows/types'
 
 async function clientBelongsToUser(userId: string, clientId: string): Promise<boolean> {
@@ -43,10 +44,17 @@ export async function listWorkflows(req: AuthRequest, res: any): Promise<void> {
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
     if (error) throw error
-    const readiness = getProviderReadiness()
+    const senders = await listSenders(userId)
+    const readiness = getProviderReadiness({
+      email: senders.some((sender) => sender.channel === 'email' && sender.status === 'connected'),
+      whatsapp: senders.some((sender) => sender.channel === 'whatsapp' && sender.status === 'connected'),
+    })
     const workflows = (data || []).map((row: WorkflowRow) => ({
       ...row,
-      missingProviders: missingProviderLabels(row.type, row.config, readiness),
+      missingProviders: [
+        ...missingProviderLabels(row.type, row.config, readiness),
+        ...senderProblems(row.type, row.config, senders),
+      ],
     }))
     ok(res, { workflows, readiness })
   } catch (e: any) {
@@ -56,8 +64,9 @@ export async function listWorkflows(req: AuthRequest, res: any): Promise<void> {
 
 export async function getWorkflowReadiness(req: AuthRequest, res: any): Promise<void> {
   try {
-    if (!req.user?.id) { badRequest(res, 'User ID missing'); return }
-    ok(res, { readiness: getProviderReadiness() })
+    const userId = req.user?.id
+    if (!userId) { badRequest(res, 'User ID missing'); return }
+    ok(res, { readiness: getProviderReadiness(await connectedChannels(userId)) })
   } catch (e: any) {
     serverError(res, e.message)
   }
@@ -69,7 +78,10 @@ export async function getWorkflow(req: AuthRequest, res: any): Promise<void> {
     if (!userId) { badRequest(res, 'User ID missing'); return }
     const workflow = await findOwnedWorkflow(userId, paramId(req))
     if (!workflow) { notFound(res, 'Workflow not found'); return }
-    ok(res, { ...workflow, missingProviders: missingProviderLabels(workflow.type, workflow.config) })
+    ok(res, {
+      ...workflow,
+      missingProviders: await workflowBlockers({ user_id: userId, type: workflow.type, config: workflow.config }),
+    })
   } catch (e: any) {
     serverError(res, e.message)
   }
@@ -91,9 +103,9 @@ export async function createWorkflow(req: AuthRequest, res: any): Promise<void> 
 
     const activate = body.activate === true
     if (activate) {
-      const missing = missingProviderLabels(value.type, value.config)
+      const missing = await workflowBlockers({ user_id: userId, type: value.type, config: value.config })
       if (missing.length > 0) {
-        badRequest(res, `Activation blocked. Configure these deployment secrets first: ${missing.join(', ')}`); return
+        badRequest(res, `Activation blocked. ${missing.join('. ')}`); return
       }
     }
 
@@ -136,9 +148,9 @@ export async function updateWorkflow(req: AuthRequest, res: any): Promise<void> 
 
     const activate = req.body?.activate === true
     if (activate) {
-      const missing = missingProviderLabels(value.type, value.config)
+      const missing = await workflowBlockers({ user_id: userId, type: value.type, config: value.config })
       if (missing.length > 0) {
-        badRequest(res, `Activation blocked. Configure these deployment secrets first: ${missing.join(', ')}`); return
+        badRequest(res, `Activation blocked. ${missing.join('. ')}`); return
       }
     }
 
@@ -184,9 +196,9 @@ export async function activateWorkflow(req: AuthRequest, res: any): Promise<void
     })
     if (!validation.ok) { badRequest(res, `Workflow is incomplete: ${validation.errors.join('. ')}`); return }
 
-    const missing = missingProviderLabels(workflow.type, workflow.config)
+    const missing = await workflowBlockers({ user_id: userId, type: workflow.type, config: workflow.config })
     if (missing.length > 0) {
-      badRequest(res, `Activation blocked. Configure these deployment secrets first: ${missing.join(', ')}`); return
+      badRequest(res, `Activation blocked. ${missing.join('. ')}`); return
     }
 
     const { data, error } = await supabase
@@ -285,9 +297,9 @@ export async function runWorkflowNow(req: AuthRequest, res: any): Promise<void> 
     const workflow = await findOwnedWorkflow(userId, paramId(req))
     if (!workflow) { notFound(res, 'Workflow not found'); return }
 
-    const missing = missingProviderLabels(workflow.type, workflow.config)
+    const missing = await workflowBlockers({ user_id: userId, type: workflow.type, config: workflow.config })
     if (missing.length > 0) {
-      badRequest(res, `Cannot run. Configure these deployment secrets first: ${missing.join(', ')}`); return
+      badRequest(res, `Cannot run. ${missing.join('. ')}`); return
     }
 
     const outcome = await executeWorkflow({ workflow, trigger: 'manual' })
@@ -329,7 +341,10 @@ export async function listWorkflowRuns(req: AuthRequest, res: any): Promise<void
     }
 
     ok(res, {
-      workflow: { ...workflow, missingProviders: missingProviderLabels(workflow.type, workflow.config) },
+      workflow: {
+        ...workflow,
+        missingProviders: await workflowBlockers({ user_id: userId, type: workflow.type, config: workflow.config }),
+      },
       runs: (runs || []).map((run: any) => ({ ...run, items: itemsByRun[run.id] || [] })),
     })
   } catch (e: any) {

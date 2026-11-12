@@ -7,7 +7,7 @@ import type {
   RunItem,
   WorkflowTarget,
 } from './types'
-import { describeProvider, getProviderReadiness } from './readiness'
+import { aiProviderReady, describeProvider } from './readiness'
 import { reminderTarget, renderReminderMessage, type ReminderInvoice } from './targets'
 
 export const OUTREACH_CONCURRENCY = 3
@@ -27,6 +27,8 @@ export interface WorkflowDeps {
   sendEmail: (to: string, subject: string, body: string) => Promise<void>
   sendWhatsApp: (to: string, body: string) => Promise<void>
   createInvoice: (input: CreateInvoiceInput) => Promise<{ invoiceId: string; invoiceNumber: string }>
+  /** User-facing blocker per channel when no usable sender is connected (empty when ready). */
+  delivery?: Partial<Record<'email' | 'whatsapp', string>>
 }
 
 export interface ItemContext {
@@ -61,11 +63,9 @@ function errorMessage(error: unknown, fallback: string): string {
   return error instanceof Error && error.message ? error.message : fallback
 }
 
-function providerProblem(keys: Array<'email' | 'whatsapp' | 'ai'>): string | null {
-  const readiness = getProviderReadiness()
-  const missing = keys.filter((key) => !readiness[key])
-  if (missing.length === 0) return null
-  return `${missing.map(describeProvider).join(' and ')} is not configured in deployment secrets`
+function providerProblem(channel: 'email' | 'whatsapp', deps: WorkflowDeps, requiresAi = false): string | null {
+  if (requiresAi && !aiProviderReady()) return `${describeProvider('ai')} is not configured in deployment secrets`
+  return deps.delivery?.[channel] || null
 }
 
 export async function runOutreachItems(
@@ -76,7 +76,7 @@ export async function runOutreachItems(
 ): Promise<RunItem[]> {
   return mapWithConcurrency(targets, OUTREACH_CONCURRENCY, async (target) => {
     const contact = target.contact
-    const problem = providerProblem(contact.type === 'email' ? ['ai', 'email'] : ['ai', 'whatsapp'])
+    const problem = providerProblem(contact.type === 'email' ? 'email' : 'whatsapp', deps, true)
     if (problem) {
       const failed: RunItem = { ...target, status: 'failed', detail: problem }
       await ctx.record(failed, { reserve: false })
@@ -107,7 +107,7 @@ export async function runReminderItems(
   now: Date,
   dedupeKeyFor: (invoice: ReminderInvoice) => string,
 ): Promise<RunItem[]> {
-  const problem = providerProblem(['email'])
+  const problem = providerProblem('email', deps)
   return mapWithConcurrency(invoices, OUTREACH_CONCURRENCY, async (invoice) => {
     const target = reminderTarget(invoice, dedupeKeyFor(invoice), now)
     if (!invoice.clientEmail) {

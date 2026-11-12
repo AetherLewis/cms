@@ -116,8 +116,10 @@ export function WorkflowsPage() {
           })}
         </div>
         <p className="mt-3 text-xs text-slate-500">
-          Provider credentials live in your deployment secrets (SMTP, WhatsApp, OmniRoute) and are never stored in the CMS.
-          A workflow cannot be activated or run while a provider it needs is missing.
+          Email and WhatsApp send from your connected{' '}
+          <Link to="/senders" className="font-semibold text-indigo-700 hover:text-indigo-900">sender profiles</Link>
+          {' '}— access is granted through the provider and never stored in the CMS. AI writing uses deployment secrets.
+          A workflow cannot be activated or run until it has a connected sender for every channel it uses.
         </p>
       </section>
 

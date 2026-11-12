@@ -1,4 +1,46 @@
 export type WorkflowType = 'outreach' | 'invoice_reminder' | 'recurring_invoice'
+export type SenderChannel = 'email' | 'whatsapp'
+export type SenderProvider = 'google' | 'meta'
+export type SenderStatus = 'connected' | 'expired' | 'revoked'
+
+/** Sender profiles assigned per channel, e.g. one Gmail sender and one WhatsApp sender. */
+export interface SenderAssignments {
+  email?: string
+  whatsapp?: string
+}
+
+export interface SenderRow {
+  id: string
+  user_id: string
+  name: string
+  channel: SenderChannel
+  provider: SenderProvider
+  account: string
+  status: SenderStatus
+  scopes: string[]
+  access_token: string | null
+  refresh_token: string | null
+  token_expires_at: string | null
+  provider_data: Record<string, unknown>
+  last_connected_at: string | null
+  last_error: string | null
+  created_at: string
+  updated_at: string
+}
+
+/** Sender shape returned to the CMS — never includes token material. */
+export interface SenderSummary {
+  id: string
+  name: string
+  channel: SenderChannel
+  provider: SenderProvider
+  account: string
+  status: SenderStatus
+  scopes: string[]
+  last_connected_at: string | null
+  last_error: string | null
+  created_at: string
+}
 export type WorkflowStatus = 'draft' | 'active' | 'paused'
 export type WorkflowFrequency = 'daily' | 'weekly' | 'monthly'
 export type RunTrigger = 'manual' | 'schedule'
@@ -15,6 +57,7 @@ export interface OutreachConfig {
   contacts: OutreachContact[]
   systemPrompt: string
   subject: string
+  senderIds?: SenderAssignments
 }
 
 export interface InvoiceReminderConfig {
@@ -22,6 +65,7 @@ export interface InvoiceReminderConfig {
   daysBeforeDue: number
   subject: string
   message: string
+  senderIds?: SenderAssignments
 }
 
 export interface RecurringInvoiceConfig {

@@ -12,7 +12,8 @@ import type {
   WorkflowTarget,
 } from './types'
 import { computeNextRunAt, dateKeyInZone, periodKeyInZone } from './schedule'
-import { missingProviderLabels } from './readiness'
+import { getProviderReadiness, missingProviderLabels } from './readiness'
+import { connectedChannels, resolveSenderAssignments } from '../senders/store'
 import { buildReminderTargets, formatDate, recurringInvoiceTarget, type ReminderInvoice } from './targets'
 import {
   runOutreachItems,
@@ -21,7 +22,7 @@ import {
   type ItemContext,
   type WorkflowDeps,
 } from './executors'
-import { buildWorkflowDeps } from './deps'
+import { buildWorkflowDeps, loadWorkflowSenders } from './deps'
 
 export interface WorkflowDefinition {
   id?: string
@@ -129,10 +130,19 @@ export interface PreviewOutcome {
   nextRunAt: string | null
 }
 
+/** Provider blockers for a workflow: missing AI configuration plus unusable sender assignments. */
+export async function workflowBlockers(workflow: { user_id: string; type: string; config: any }): Promise<string[]> {
+  const connected = await connectedChannels(workflow.user_id)
+  const missing = missingProviderLabels(workflow.type, workflow.config, getProviderReadiness(connected))
+  const senders = await resolveSenderAssignments(workflow.user_id, workflow.type, workflow.config)
+  const senderIssues = Object.values(senders.issues).filter((issue): issue is string => Boolean(issue))
+  return [...missing, ...senderIssues]
+}
+
 export async function previewWorkflow(workflow: WorkflowDefinition, now = new Date()): Promise<PreviewOutcome> {
   const loaded = await loadWorkflowTargets(workflow, 'manual', now)
   const next = computeNextRunAt(workflow.frequency, workflow.run_time, workflow.timezone, now)
-  const missingProviders = missingProviderLabels(workflow.type, workflow.config)
+  const missingProviders = await workflowBlockers(workflow)
   const items = loaded.targets.map((target) => {
     if (workflow.type === 'outreach') return { label: target.label, detail: 'AI writes a personalised message, then sends it' }
     if (workflow.type === 'invoice_reminder') return { label: target.label, detail: `${target.detail} · reminder email` }
@@ -180,7 +190,9 @@ export async function executeWorkflow(options: {
 }): Promise<RunOutcome> {
   const { workflow, trigger } = options
   const now = options.now || new Date()
-  const deps = options.deps || buildWorkflowDeps(workflow.user_id)
+  const deps =
+    options.deps ||
+    buildWorkflowDeps(workflow.user_id, await loadWorkflowSenders(workflow.user_id, workflow.type, workflow.config))
   const runId = randomUUID()
 
   const loaded = await loadWorkflowTargets(workflow, trigger, now)

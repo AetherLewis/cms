@@ -3,6 +3,7 @@ import type {
   OutreachConfig,
   OutreachContact,
   RecurringInvoiceConfig,
+  SenderAssignments,
   WorkflowConfig,
   WorkflowFrequency,
   WorkflowType,
@@ -61,6 +62,15 @@ export function normalizeContacts(input: unknown): OutreachContact[] {
     .filter((contact) => contact.identifier.length > 0)
 }
 
+/** Sender assignments are ids only; credentials live server-side on the sender profile. */
+function normalizeSenderIds(raw: any): SenderAssignments | undefined {
+  if (!raw || typeof raw !== 'object') return undefined
+  const ids: SenderAssignments = {}
+  if (typeof raw.email === 'string' && raw.email.trim()) ids.email = raw.email.trim()
+  if (typeof raw.whatsapp === 'string' && raw.whatsapp.trim()) ids.whatsapp = raw.whatsapp.trim()
+  return Object.keys(ids).length > 0 ? ids : undefined
+}
+
 function validateOutreach(raw: any, errors: string[]): OutreachConfig {
   const contacts = normalizeContacts(raw?.contacts)
   if (contacts.length === 0) errors.push('Add at least one outreach contact')
@@ -76,7 +86,8 @@ function validateOutreach(raw: any, errors: string[]): OutreachConfig {
   const systemPrompt = text(raw?.systemPrompt)
   if (!systemPrompt) errors.push('System instructions for the AI message writer are required')
   const subject = text(raw?.subject) || 'A quick note from your team'
-  return { contacts, systemPrompt, subject }
+  const senderIds = normalizeSenderIds(raw?.senderIds)
+  return { contacts, systemPrompt, subject, ...(senderIds ? { senderIds } : {}) }
 }
 
 function validateInvoiceReminder(raw: any, errors: string[]): InvoiceReminderConfig {
@@ -87,11 +98,13 @@ function validateInvoiceReminder(raw: any, errors: string[]): InvoiceReminderCon
   const message = text(raw?.message)
   if (!message) errors.push('Reminder message is required')
   const clientId = text(raw?.clientId)
+  const senderIds = normalizeSenderIds(raw?.senderIds)
   return {
     clientId: clientId || null,
     daysBeforeDue,
     subject,
     message,
+    ...(senderIds ? { senderIds } : {}),
   }
 }
 
