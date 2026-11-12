@@ -16,7 +16,9 @@ import { SettingsPage } from './pages/SettingsPage'
 import { RecurringPage } from './pages/RecurringPage'
 import { ReportsPage } from './pages/ReportsPage'
 import { LoginPage } from './pages/LoginPage'
-import { AutomationsPage } from './pages/Automations/Index'
+import { WorkflowsPage } from './pages/Workflows/Index'
+import { WorkflowFormPage } from './pages/Workflows/WorkflowFormPage'
+import { WorkflowHistoryPage } from './pages/Workflows/WorkflowHistoryPage'
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +43,10 @@ export const router = createBrowserRouter([
       { path: 'settings', element: <SettingsPage /> },
       { path: 'recurring', element: <RecurringPage /> },
       { path: 'reports', element: <ReportsPage /> },
-      { path: 'automations', element: <AutomationsPage /> },
+      { path: 'automations', element: <WorkflowsPage /> },
+      { path: 'automations/new', element: <WorkflowFormPage /> },
+      { path: 'automations/:id', element: <WorkflowFormPage /> },
+      { path: 'automations/:id/history', element: <WorkflowHistoryPage /> },
     ],
   },
   { path: '/login', element: <LoginPage /> },

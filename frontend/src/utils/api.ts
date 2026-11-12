@@ -199,6 +199,103 @@ export async function listOutreachLogs() {
   return request<OutreachLog[]>('/automations/logs')
 }
 
+/** ---------- Workflows ---------- */
+export type WorkflowType = 'outreach' | 'invoice_reminder' | 'recurring_invoice'
+export type WorkflowStatus = 'draft' | 'active' | 'paused'
+export type WorkflowFrequency = 'daily' | 'weekly' | 'monthly'
+export type ProviderReadiness = { email: boolean; whatsapp: boolean; ai: boolean }
+
+export type WorkflowRecord = {
+  id: string
+  name: string
+  type: WorkflowType
+  status: WorkflowStatus
+  timezone: string
+  frequency: WorkflowFrequency
+  run_time: string
+  config: any
+  next_run_at: string | null
+  last_run_at: string | null
+  last_run_status: string | null
+  missingProviders: string[]
+  created_at: string
+  updated_at: string
+}
+
+export type WorkflowDefinitionInput = {
+  name: string
+  type: WorkflowType
+  timezone: string
+  frequency: WorkflowFrequency
+  runTime: string
+  config: any
+  activate?: boolean
+}
+
+export type WorkflowPreview = {
+  items: Array<{ label: string; detail: string }>
+  missingProviders: string[]
+  readyToRun: boolean
+  nextRunAt: string | null
+}
+
+export type WorkflowRunItem = {
+  id: string
+  run_id: string
+  label: string
+  status: 'sent' | 'created' | 'failed' | 'skipped'
+  detail: string | null
+  created_at: string
+}
+
+export type WorkflowRun = {
+  id: string
+  trigger: 'manual' | 'schedule'
+  status: 'running' | 'succeeded' | 'partial' | 'failed' | 'empty'
+  total_items: number
+  succeeded_items: number
+  failed_items: number
+  skipped_items: number
+  summary: string | null
+  started_at: string
+  finished_at: string | null
+  items: WorkflowRunItem[]
+}
+
+export async function listWorkflows() {
+  return request<{ workflows: WorkflowRecord[]; readiness: ProviderReadiness }>('/workflows')
+}
+export async function getWorkflowReadiness() {
+  return request<{ readiness: ProviderReadiness }>('/workflows/readiness')
+}
+export async function getWorkflow(id: string) {
+  return request<WorkflowRecord>(`/workflows/${id}`)
+}
+export async function createWorkflow(payload: WorkflowDefinitionInput) {
+  return request<WorkflowRecord>('/workflows', { method: 'POST', body: JSON.stringify(payload) })
+}
+export async function updateWorkflow(id: string, payload: WorkflowDefinitionInput) {
+  return request<WorkflowRecord>(`/workflows/${id}`, { method: 'PUT', body: JSON.stringify(payload) })
+}
+export async function previewWorkflow(payload: WorkflowDefinitionInput) {
+  return request<WorkflowPreview>('/workflows/preview', { method: 'POST', body: JSON.stringify(payload) })
+}
+export async function activateWorkflow(id: string) {
+  return request<WorkflowRecord>(`/workflows/${id}/activate`, { method: 'POST' })
+}
+export async function pauseWorkflow(id: string) {
+  return request<WorkflowRecord>(`/workflows/${id}/pause`, { method: 'POST' })
+}
+export async function runWorkflowNow(id: string) {
+  return request<{ runId: string; status: string; totals: { total: number; succeeded: number; failed: number; skipped: number } }>(`/workflows/${id}/run`, { method: 'POST' })
+}
+export async function listWorkflowRuns(id: string) {
+  return request<{ workflow: WorkflowRecord; runs: WorkflowRun[] }>(`/workflows/${id}/runs`)
+}
+export async function deleteWorkflow(id: string) {
+  return request(`/workflows/${id}`, { method: 'DELETE' })
+}
+
 /** ---------- Helper ---------- */
 export function currency(amount: number) {
   return new Intl.NumberFormat('en-US', {

@@ -11,9 +11,11 @@ export default defineConfig({
     },
   },
   server: {
+    host: '0.0.0.0',
     port: 5173,
+    // The API listens on PORT (default 3001); keep the dev proxy aligned with it.
     proxy: {
-      '/api': 'http://localhost:4000',
+      '/api': process.env.VITE_API_PROXY_TARGET || 'http://localhost:3001',
     },
   },
 })

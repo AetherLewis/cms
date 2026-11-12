@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { listRecurring, createRecurring, toggleRecurring } from '../utils/api'
 import { toast } from 'react-hot-toast'
 import { Button } from '../components/ui/Button'
@@ -58,6 +59,17 @@ export function RecurringPage() {
           <p className="text-star-500 mt-1">Schedule automatic billing — monthly, quarterly, annual.</p>
         </div>
         <Button onClick={() => setModalOpen(true)}><Plus className="w-4 h-4 mr-2" /> Create Recurring</Button>
+      </div>
+      <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4 text-sm text-indigo-900">
+        <p className="font-semibold">Recurring invoices now run as a workflow</p>
+        <p className="mt-1 text-indigo-800">
+          Choose a client and an explicit invoice template, preview exactly what will be created, then let the server create each
+          period&rsquo;s invoice without a browser open.{' '}
+          <Link to="/automations/new?template=recurring_invoice" className="font-semibold underline">
+            Set up a recurring invoice workflow
+          </Link>
+          .
+        </p>
       </div>
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 p-4" onMouseDown={(event) => { if (event.target === event.currentTarget) setModalOpen(false) }}>
