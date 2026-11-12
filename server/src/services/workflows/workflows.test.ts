@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { computeNextRunAt, dateKeyInZone, parseRunTime, periodKeyInZone } from './schedule'
 import { validateWorkflowInput } from './validation'
-import { getProviderReadiness, missingProviders } from './readiness'
+import { getProviderReadiness, missingProviders, requiredChannels } from './readiness'
 import { buildReminderTargets, renderReminderMessage, type ReminderInvoice } from './targets'
 import {
   runOutreachItems,
@@ -154,24 +154,20 @@ test('validation: billing templates require the client and invoice source', () =
   assert.ok(recurring.errors.some((message) => message.includes('Payment terms')))
 })
 
-test('readiness: reports missing providers per template without exposing values', async () => {
-  await withEnv(
-    { SMTP_HOST: undefined, SMTP_USER: undefined, SMTP_PASS: undefined, WHATSAPP_API_URL: undefined, WHATSAPP_ACCESS_TOKEN: undefined, OMNIROUTE_API_URL: 'sk-no-key-required' },
-    () => {
-      const readiness = getProviderReadiness()
-      assert.deepEqual(readiness, { email: false, whatsapp: false, ai: false })
-      assert.deepEqual(missingProviders('invoice_reminder', {}, readiness), ['email'])
-      assert.deepEqual(
-        missingProviders('outreach', { contacts: [{ type: 'email' }, { type: 'phone' }] }, readiness),
-        ['ai', 'email', 'whatsapp'],
-      )
-      assert.deepEqual(missingProviders('recurring_invoice', {}, readiness), [])
-    },
+test('readiness: delivery readiness comes from connected senders, AI from deployment secrets', () => {
+  const noSenders = getProviderReadiness({}, { OMNIROUTE_API_URL: 'sk-no-key-required' })
+  assert.deepEqual(noSenders, { email: false, whatsapp: false, ai: false })
+  assert.deepEqual(missingProviders('invoice_reminder', {}, noSenders), ['email'])
+  assert.deepEqual(
+    missingProviders('outreach', { contacts: [{ type: 'email' }, { type: 'phone' }] }, noSenders),
+    ['ai', 'email', 'whatsapp'],
   )
+  assert.deepEqual(missingProviders('recurring_invoice', {}, noSenders), [])
 
-  await withEnv(SEND_ENV, () => {
-    assert.deepEqual(getProviderReadiness(), { email: true, whatsapp: true, ai: true })
-  })
+  const ready = getProviderReadiness({ email: true, whatsapp: true }, { OMNIROUTE_API_URL: 'http://ai.internal/v1' })
+  assert.deepEqual(ready, { email: true, whatsapp: true, ai: true })
+  assert.deepEqual(requiredChannels('outreach', { contacts: [{ type: 'phone' }] }), ['whatsapp'])
+  assert.deepEqual(requiredChannels('invoice_reminder', {}), ['email'])
 })
 
 test('reminder targets: unpaid invoices inside the window, message placeholders resolved', () => {
@@ -200,10 +196,11 @@ test('executors: outreach records failures when providers are missing and partia
       sendEmail: async () => undefined,
       sendWhatsApp: async () => undefined,
       createInvoice: async () => ({ invoiceId: 'x', invoiceNumber: 'INV-X' }),
+      delivery: { email: 'Choose a connected Gmail sender for this workflow' },
     }
     const items = await runOutreachItems([outreachTarget('a@example.com', 'email')], outreachConfig, deps, ctx)
     assert.equal(items[0].status, 'failed')
-    assert.match(String(items[0].detail), /not configured in deployment secrets/)
+    assert.match(String(items[0].detail), /Choose a connected Gmail sender/)
   })
 
   await withEnv(SEND_ENV, async () => {

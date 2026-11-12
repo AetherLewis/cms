@@ -116,7 +116,7 @@ export function itemStatusTone(status: string): string {
 }
 
 export function providerLabel(key: keyof { email: boolean; whatsapp: boolean; ai: boolean }): string {
-  if (key === 'email') return 'Email (SMTP)'
-  if (key === 'whatsapp') return 'WhatsApp Cloud API'
+  if (key === 'email') return 'Gmail sender'
+  if (key === 'whatsapp') return 'WhatsApp sender'
   return 'AI generation (OmniRoute)'
 }

@@ -296,6 +296,47 @@ export async function deleteWorkflow(id: string) {
   return request(`/workflows/${id}`, { method: 'DELETE' })
 }
 
+/** ---------- Sender profiles (OAuth) ---------- */
+export type SenderChannel = 'email' | 'whatsapp'
+export type SenderProvider = 'google' | 'meta'
+export type SenderStatus = 'connected' | 'expired' | 'revoked'
+
+export type SenderProfile = {
+  id: string
+  name: string
+  channel: SenderChannel
+  provider: SenderProvider
+  account: string
+  status: SenderStatus
+  scopes: string[]
+  last_connected_at: string | null
+  last_error: string | null
+  created_at: string
+}
+
+export type SenderProviderInfo = {
+  provider: SenderProvider
+  channel: SenderChannel
+  label: string
+  configured: boolean
+}
+
+export async function listSenders() {
+  return request<{ senders: SenderProfile[]; providers: SenderProviderInfo[] }>('/senders')
+}
+export async function startSenderAuthorization(payload: { channel: SenderChannel; senderId?: string }) {
+  return request<{ authorizationUrl: string; provider: SenderProvider }>('/senders/authorize', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+export async function renameSender(id: string, name: string) {
+  return request<SenderProfile>(`/senders/${id}`, { method: 'PATCH', body: JSON.stringify({ name }) })
+}
+export async function disconnectSender(id: string) {
+  return request<SenderProfile>(`/senders/${id}/disconnect`, { method: 'POST' })
+}
+
 /** ---------- Helper ---------- */
 export function currency(amount: number) {
   return new Intl.NumberFormat('en-US', {

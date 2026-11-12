@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Repeat,
   Sparkles,
+  AtSign,
   Search,
   Bell,
   ChevronDown,
@@ -35,6 +36,7 @@ export function RootLayout({ children }: { children: ReactNode }) {
     { to: '/recurring', label: 'Recurring', icon: Repeat },
     { to: '/documents', label: 'Documents', icon: FolderOpen },
     { to: '/automations', label: 'Workflows', icon: Sparkles },
+    { to: '/senders', label: 'Senders', icon: AtSign },
   ]
   const searchableItems = [...navItems, ...adminItems]
 
