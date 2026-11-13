@@ -1,5 +1,5 @@
 import { supabase } from '../../config/supabase'
-import { decryptSecret, encryptSecret, refreshGoogleToken } from '../senderOAuth'
+import { createOAuthState as signOAuthState, decryptSecret, encryptSecret, refreshGoogleToken, verifyOAuthState } from '../senderOAuth.js'
 import { fetchProviderIdentity, revokeProviderToken, type ProviderIdentity, type TokenSet } from './providers'
 import { requiredChannels } from '../workflows/readiness'
 import type { SenderAssignments, SenderChannel, SenderProvider, SenderRow, SenderSummary } from '../workflows/types'
@@ -32,11 +32,9 @@ export async function findSender(userId: string, id: string): Promise<SenderRow 
   return data ? fromProfile(data) : null
 }
 export async function createOAuthState(input: { userId: string; provider: SenderProvider; channel: SenderChannel; senderId?: string | null }): Promise<string> {
-  const { createOAuthState } = await import('../senderOAuth')
-  return createOAuthState({ user_id: input.userId, provider: input.provider === 'google' ? 'gmail' : 'whatsapp', ...(input.senderId ? { sender_profile_id: input.senderId } : {}) })
+  return signOAuthState({ user_id: input.userId, provider: input.provider === 'google' ? 'gmail' : 'whatsapp', ...(input.senderId ? { sender_profile_id: input.senderId } : {}) })
 }
 export async function consumeOAuthState(state: string, provider: SenderProvider) {
-  const { verifyOAuthState } = await import('../senderOAuth')
   const value = verifyOAuthState(state, provider === 'google' ? 'gmail' : 'whatsapp')
   return value ? { user_id: value.user_id, provider, channel: provider === 'google' ? 'email' as const : 'whatsapp' as const, sender_id: value.sender_profile_id || null } : null
 }
