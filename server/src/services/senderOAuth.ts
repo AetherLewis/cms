@@ -56,7 +56,15 @@ export function getGoogleAuthUrl(state: string): string {
 }
 export function getWhatsAppAuthUrl(state: string): string {
   const url = new URL('https://www.facebook.com/v21.0/dialog/oauth')
-  url.search = new URLSearchParams({ client_id: required('META_APP_ID'), redirect_uri: redirectUri('whatsapp'), response_type: 'code', scope: 'whatsapp_business_messaging,whatsapp_business_management,business_management', state }).toString()
+  url.search = new URLSearchParams({
+    client_id: required('META_APP_ID'),
+    redirect_uri: redirectUri('whatsapp'),
+    config_id: required('META_EMBEDDED_CONFIG_ID'),
+    response_type: 'code',
+    override_default_response_type: 'true',
+    scope: 'whatsapp_business_management,whatsapp_business_messaging',
+    state,
+  }).toString()
   return url.toString()
 }
 async function exchangeCode(provider: OAuthProvider, code: string): Promise<any> {
