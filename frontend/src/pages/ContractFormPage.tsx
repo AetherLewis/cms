@@ -25,7 +25,7 @@ export function ContractFormPage() {
     start_date: '',
     end_date: '',
     value: '',
-    currency: 'USD',
+    currency: 'KES',
     payment_terms: 'Net 30',
     file_url: '',
     document_id: '',
@@ -161,6 +161,7 @@ export function ContractFormPage() {
           <div>
             <label className="block text-sm font-medium text-star-700 mb-1">Currency</label>
             <Select value={form.currency} onChange={(e) => setForm({ ...form, currency: e.target.value })}>
+              <option value="KES">KES · Kenyan Shilling</option>
               <option>USD</option>
               <option>EUR</option>
               <option>GBP</option>

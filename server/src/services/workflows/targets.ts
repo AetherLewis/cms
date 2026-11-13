@@ -13,7 +13,7 @@ export interface ReminderInvoice {
 const DAY_MS = 86_400_000
 
 export function money(value: number): string {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
+  return new Intl.NumberFormat('en-KE', { style: 'currency', currency: 'KES' }).format(value)
 }
 
 export function formatDate(value: string | null): string {

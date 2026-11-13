@@ -340,9 +340,9 @@ export async function disconnectSender(id: string) {
 
 /** ---------- Helper ---------- */
 export function currency(amount: number) {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-KE', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'KES',
   }).format(amount)
 }
 

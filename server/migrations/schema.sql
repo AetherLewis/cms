@@ -41,7 +41,7 @@ CREATE TABLE contracts (
   start_date TIMESTAMP WITH TIME ZONE,
   end_date TIMESTAMP WITH TIME ZONE,
   value NUMERIC(12, 2),
-  currency TEXT NOT NULL DEFAULT 'USD',
+  currency TEXT NOT NULL DEFAULT 'KES',
   payment_terms TEXT,
   file_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),

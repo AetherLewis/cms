@@ -19,7 +19,7 @@ type SettingsForm = {
 
 const initialForm: SettingsForm = {
   company_name: '', company_address: '', company_email: '', company_logo: '', tax_pin: '',
-  invoice_prefix: 'INV', currency: 'USD', tax_rate: 0, payment_terms: 'Net 30',
+  invoice_prefix: 'INV', currency: 'KES', tax_rate: 0, payment_terms: 'Net 30',
 }
 
 export function SettingsPage() {

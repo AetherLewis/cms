@@ -60,7 +60,7 @@ export async function createContract(req: AuthRequest, res: any): Promise<void> 
       start_date: body.startDate || null,
       end_date: body.endDate || null,
       value: body.value || null,
-      currency: body.currency || 'USD',
+      currency: body.currency || 'KES',
       payment_terms: body.paymentTerms || null,
       file_url: body.fileUrl || null,
       document_id: documentId,

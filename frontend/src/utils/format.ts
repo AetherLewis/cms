@@ -1,6 +1,6 @@
 export const formatCurrency = (n?: number | null) => {
   const amount = Number(n) || 0
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
+  return new Intl.NumberFormat('en-KE', { style: 'currency', currency: 'KES' }).format(amount)
 }
 
 export const currency = formatCurrency

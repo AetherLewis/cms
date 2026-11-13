@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS settings (
   company_logo TEXT,
   tax_pin TEXT,
   invoice_prefix TEXT NOT NULL DEFAULT 'INV',
-  currency TEXT NOT NULL DEFAULT 'USD',
+  currency TEXT NOT NULL DEFAULT 'KES',
   tax_rate NUMERIC(5, 2) NOT NULL DEFAULT 0,
   payment_terms TEXT NOT NULL DEFAULT 'Net 30',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
