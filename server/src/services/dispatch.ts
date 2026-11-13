@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer'
+import { supabase } from '../config/supabase'
+import { encryptSecret, refreshGoogleToken } from './senderOAuth'
 import type { SenderChannel } from './workflows/types'
 
 /** Resolved OAuth credentials for one connected sender profile. */
@@ -8,6 +10,8 @@ export interface DispatchCredentials {
   accessToken: string
   /** WhatsApp Cloud API phone number ID (the sending number). */
   phoneNumberId?: string | null
+  senderProfileId?: string
+  encryptedRefreshToken?: string | null
 }
 
 export async function sendEmail(recipient: string, subject: string, body: string): Promise<void> {
@@ -83,7 +87,7 @@ export async function sendEmailWithSender(
     body,
   ].join('\r\n')
 
-  const response = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+  const request = () => fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${credentials.accessToken}`,
@@ -91,6 +95,24 @@ export async function sendEmailWithSender(
     },
     body: JSON.stringify({ raw: Buffer.from(message, 'utf8').toString('base64url') }),
   })
+  let response = await request()
+  if (response.status === 401 && credentials.senderProfileId && !credentials.encryptedRefreshToken) {
+    await supabase.from('sender_profiles').update({ status: 'expired', updated_at: new Date().toISOString() }).eq('id', credentials.senderProfileId)
+    throw new Error('Gmail authorization expired or was revoked and has no refresh token. Reconnect this sender profile; no retry was attempted.')
+  }
+  if (response.status === 401 && credentials.senderProfileId && credentials.encryptedRefreshToken) {
+    try {
+      const refreshed = await refreshGoogleToken(credentials.encryptedRefreshToken)
+      const { error } = await supabase.from('sender_profiles').update({ encrypted_access_token: encryptSecret(refreshed.accessToken), token_expires_at: refreshed.expiresAt, updated_at: new Date().toISOString() }).eq('id', credentials.senderProfileId)
+      if (error) throw error
+      credentials.accessToken = refreshed.accessToken
+      response = await request()
+      if (response.status === 401) throw new Error('Google rejected the refreshed authorization')
+    } catch {
+      await supabase.from('sender_profiles').update({ status: 'expired', updated_at: new Date().toISOString() }).eq('id', credentials.senderProfileId)
+      throw new Error('Gmail authorization expired or was revoked. Reconnect this sender profile; this item was not retried after the authorization failure.')
+    }
+  }
 
   if (!response.ok) {
     const detail = await response.text().catch(() => '')

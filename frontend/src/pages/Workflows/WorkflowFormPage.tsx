@@ -190,9 +190,10 @@ export function WorkflowFormPage() {
   const connectedSenders = (channel: 'email' | 'whatsapp') =>
     senders.filter((sender) => sender.channel === channel && sender.status === 'connected')
 
-  const missingSenderChannels = senderChannels.filter((channel) =>
-    channel === 'email' ? !form.senderEmail : !form.senderWhatsapp,
-  )
+  const missingSenderChannels = senderChannels.filter((channel) => {
+    const selected = channel === 'email' ? form.senderEmail : form.senderWhatsapp
+    return !selected || !connectedSenders(channel).some((sender) => sender.id === selected)
+  })
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }))

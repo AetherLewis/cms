@@ -298,8 +298,8 @@ export async function deleteWorkflow(id: string) {
 
 /** ---------- Sender profiles (OAuth) ---------- */
 export type SenderChannel = 'email' | 'whatsapp'
-export type SenderProvider = 'google' | 'meta'
-export type SenderStatus = 'connected' | 'expired' | 'revoked'
+export type SenderProvider = 'gmail' | 'whatsapp'
+export type SenderStatus = 'connected' | 'expired' | 'disconnected'
 
 export type SenderProfile = {
   id: string
@@ -325,9 +325,10 @@ export async function listSenders() {
   return request<{ senders: SenderProfile[]; providers: SenderProviderInfo[] }>('/senders')
 }
 export async function startSenderAuthorization(payload: { channel: SenderChannel; senderId?: string }) {
-  return request<{ authorizationUrl: string; provider: SenderProvider }>('/senders/authorize', {
+  const provider = payload.channel === 'email' ? 'gmail' : 'whatsapp'
+  return request<{ authorizationUrl: string; provider: SenderProvider }>(`/senders/oauth/${provider}/init`, {
     method: 'POST',
-    body: JSON.stringify(payload),
+    body: JSON.stringify({ sender_profile_id: payload.senderId }),
   })
 }
 export async function renameSender(id: string, name: string) {

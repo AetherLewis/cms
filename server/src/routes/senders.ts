@@ -9,6 +9,7 @@ router.get('/oauth/:provider/callback', sendersController.oauthCallback)
 
 router.use(authenticate)
 router.get('/', sendersController.listSendersHandler)
+router.post('/oauth/:provider/init', sendersController.initOAuth)
 router.post('/authorize', sendersController.startAuthorization)
 router.patch('/:id', sendersController.renameSenderHandler)
 router.post('/:id/disconnect', sendersController.disconnectSenderHandler)

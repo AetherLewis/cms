@@ -33,9 +33,9 @@ export interface SenderSummary {
   id: string
   name: string
   channel: SenderChannel
-  provider: SenderProvider
+  provider: 'gmail' | 'whatsapp'
   account: string
-  status: SenderStatus
+  status: 'connected' | 'expired' | 'disconnected'
   scopes: string[]
   last_connected_at: string | null
   last_error: string | null

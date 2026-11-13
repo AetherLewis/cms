@@ -1,299 +1,123 @@
-import { randomBytes } from 'node:crypto'
 import { supabase } from '../../config/supabase'
-import { decryptToken, encryptToken } from './crypto'
-import {
-  PROVIDERS,
-  fetchProviderIdentity,
-  refreshAccessToken,
-  revokeProviderToken,
-  type ProviderIdentity,
-  type TokenSet,
-} from './providers'
+import { decryptSecret, encryptSecret, refreshGoogleToken } from '../senderOAuth'
+import { fetchProviderIdentity, revokeProviderToken, type ProviderIdentity, type TokenSet } from './providers'
 import { requiredChannels } from '../workflows/readiness'
-import type {
-  SenderAssignments,
-  SenderChannel,
-  SenderProvider,
-  SenderRow,
-  SenderSummary,
-} from '../workflows/types'
+import type { SenderAssignments, SenderChannel, SenderProvider, SenderRow, SenderSummary } from '../workflows/types'
 
-const STATE_TTL_MS = 10 * 60 * 1000
-const REFRESH_WINDOW_MS = 60 * 1000
-
-export function toSummary(row: SenderRow): SenderSummary {
+type Profile = any
+function fromProfile(row: Profile): SenderRow {
   return {
-    id: row.id,
-    name: row.name,
-    channel: row.channel,
-    provider: row.provider,
-    account: row.account,
-    status: row.status,
-    scopes: row.scopes || [],
-    last_connected_at: row.last_connected_at,
-    last_error: row.last_error,
-    created_at: row.created_at,
-  }
+    id: row.id, user_id: row.user_id, name: row.name,
+    channel: row.provider === 'gmail' ? 'email' : 'whatsapp',
+    provider: row.provider === 'gmail' ? 'google' : 'meta', account: row.provider_account_id,
+    status: row.status === 'disconnected' ? 'revoked' : row.status, scopes: [],
+    access_token: row.encrypted_access_token, refresh_token: row.encrypted_refresh_token,
+    token_expires_at: row.token_expires_at,
+    provider_data: { wabaId: row.waba_id, phoneNumberId: row.phone_number_id },
+    last_connected_at: row.last_connected_at, last_error: null, created_at: row.created_at, updated_at: row.updated_at,
+  } as SenderRow
 }
-
+export function toSummary(row: SenderRow): SenderSummary {
+  return { id: row.id, name: row.name, channel: row.channel, provider: row.provider === 'google' ? 'gmail' : 'whatsapp', account: row.account,
+    status: row.status === 'revoked' ? 'disconnected' : row.status, scopes: [], last_connected_at: row.last_connected_at, last_error: row.last_error, created_at: row.created_at }
+}
 export async function listSenders(userId: string): Promise<SenderRow[]> {
-  const { data, error } = await supabase
-    .from('senders')
-    .select('*')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: true })
+  const { data, error } = await supabase.from('sender_profiles').select('*').eq('user_id', userId).order('created_at')
   if (error) throw error
-  return (data || []) as SenderRow[]
+  return (data || []).map(fromProfile)
 }
-
 export async function findSender(userId: string, id: string): Promise<SenderRow | null> {
-  const { data, error } = await supabase.from('senders').select('*').eq('id', id).eq('user_id', userId).maybeSingle()
+  const { data, error } = await supabase.from('sender_profiles').select('*').eq('id', id).eq('user_id', userId).maybeSingle()
   if (error) throw error
-  return (data as SenderRow) || null
+  return data ? fromProfile(data) : null
 }
-
-export async function createOAuthState(input: {
-  userId: string
-  provider: SenderProvider
-  channel: SenderChannel
-  senderId?: string | null
-}): Promise<string> {
-  const state = randomBytes(24).toString('base64url')
-  const { error } = await supabase.from('oauth_states').insert({
-    state,
-    user_id: input.userId,
-    provider: input.provider,
-    channel: input.channel,
-    sender_id: input.senderId || null,
-    expires_at: new Date(Date.now() + STATE_TTL_MS).toISOString(),
-  })
-  if (error) throw error
-  return state
+export async function createOAuthState(input: { userId: string; provider: SenderProvider; channel: SenderChannel; senderId?: string | null }): Promise<string> {
+  const { createOAuthState } = await import('../senderOAuth')
+  return createOAuthState({ user_id: input.userId, provider: input.provider === 'google' ? 'gmail' : 'whatsapp', ...(input.senderId ? { sender_profile_id: input.senderId } : {}) })
 }
-
-/** Validate and consume a callback state; returns null for unknown, expired or mismatched states. */
 export async function consumeOAuthState(state: string, provider: SenderProvider) {
-  if (!state) return null
-  const { data, error } = await supabase.from('oauth_states').select('*').eq('state', state).maybeSingle()
-  if (error || !data) return null
-  await supabase.from('oauth_states').delete().eq('state', state)
-  if (data.provider !== provider) return null
-  if (new Date(data.expires_at).getTime() < Date.now()) return null
-  return data as { user_id: string; provider: SenderProvider; channel: SenderChannel; sender_id: string | null }
+  const { verifyOAuthState } = await import('../senderOAuth')
+  const value = verifyOAuthState(state, provider === 'google' ? 'gmail' : 'whatsapp')
+  return value ? { user_id: value.user_id, provider, channel: provider === 'google' ? 'email' as const : 'whatsapp' as const, sender_id: value.sender_profile_id || null } : null
 }
-
-/** Persist the result of a completed authorization redirect (insert or reconnect). */
-export async function saveConnectedSender(input: {
-  userId: string
-  provider: SenderProvider
-  channel: SenderChannel
-  tokens: TokenSet
-  identity?: ProviderIdentity
-  senderId?: string | null
-}): Promise<SenderRow> {
-  const { userId, provider, channel, tokens } = input
-  const identity = input.identity || (await fetchProviderIdentity(provider, tokens.accessToken))
-  const providerData = identity.providerData
-  const now = new Date().toISOString()
-
-  let existing: SenderRow | null = null
+export async function saveConnectedSender(input: { userId: string; provider: SenderProvider; channel: SenderChannel; tokens: TokenSet; identity?: ProviderIdentity; senderId?: string | null }): Promise<SenderRow> {
+  const provider = input.provider === 'google' ? 'gmail' : 'whatsapp'
+  const identity = input.identity || await fetchProviderIdentity(input.provider, input.tokens.accessToken)
+  let existing: any = null
   if (input.senderId) {
-    existing = await findSender(userId, input.senderId)
-    if (existing && (existing.provider !== provider || existing.channel !== channel)) existing = null
+    const { data } = await supabase.from('sender_profiles').select('*').eq('id', input.senderId).eq('user_id', input.userId).maybeSingle()
+    existing = data
   }
-  if (!existing) {
-    const { data } = await supabase
-      .from('senders')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('provider', provider)
-      .eq('account', identity.account)
-      .maybeSingle()
-    existing = (data as SenderRow) || null
-  }
-
   const payload = {
-    user_id: userId,
-    name: existing?.name || (provider === 'google' ? identity.account : `WhatsApp ${identity.account}`),
-    channel,
-    provider,
-    account: identity.account,
-    status: 'connected',
-    scopes: tokens.scopes.length > 0 ? tokens.scopes : PROVIDERS[provider].scopes,
-    access_token: encryptToken(tokens.accessToken),
-    refresh_token: tokens.refreshToken ? encryptToken(tokens.refreshToken) : existing?.refresh_token || null,
-    token_expires_at: tokens.expiresAt,
-    provider_data: providerData,
-    last_connected_at: now,
-    last_error: null,
-    updated_at: now,
+    user_id: input.userId, name: existing?.name || (provider === 'gmail' ? identity.account : `WhatsApp ${identity.account}`), provider,
+    provider_account_id: identity.account, waba_id: (identity.providerData.wabaId as string) || null,
+    phone_number_id: (identity.providerData.phoneNumberId as string) || null, status: 'connected',
+    encrypted_access_token: encryptSecret(input.tokens.accessToken),
+    encrypted_refresh_token: input.tokens.refreshToken ? encryptSecret(input.tokens.refreshToken) : existing?.encrypted_refresh_token || null,
+    token_expires_at: input.tokens.expiresAt, last_connected_at: new Date().toISOString(), updated_at: new Date().toISOString(),
   }
-
-  const query = existing
-    ? supabase.from('senders').update(payload).eq('id', existing.id)
-    : supabase.from('senders').insert(payload)
+  const query = existing ? supabase.from('sender_profiles').update(payload).eq('id', existing.id) : supabase.from('sender_profiles').upsert(payload, { onConflict: 'user_id,provider,provider_account_id' })
   const { data, error } = await query.select().single()
   if (error) throw error
-  return data as SenderRow
+  return fromProfile(data)
 }
-
 export async function renameSender(userId: string, id: string, name: string): Promise<SenderRow | null> {
-  const { data, error } = await supabase
-    .from('senders')
-    .update({ name, updated_at: new Date().toISOString() })
-    .eq('id', id)
-    .eq('user_id', userId)
-    .select()
-    .maybeSingle()
+  const { data, error } = await supabase.from('sender_profiles').update({ name, updated_at: new Date().toISOString() }).eq('id', id).eq('user_id', userId).select().maybeSingle()
   if (error) throw error
-  return (data as SenderRow) || null
+  return data ? fromProfile(data) : null
 }
-
-/** Disconnect: revoke at the provider when possible, then drop the stored credentials. */
 export async function disconnectSender(userId: string, id: string): Promise<SenderRow | null> {
-  const row = await findSender(userId, id)
-  if (!row) return null
-  const token = decryptToken(row.refresh_token) || decryptToken(row.access_token)
-  await revokeProviderToken(row.provider, token)
-  const { data, error } = await supabase
-    .from('senders')
-    .update({
-      status: 'revoked',
-      access_token: null,
-      refresh_token: null,
-      token_expires_at: null,
-      last_error: 'Disconnected from the CMS',
-      updated_at: new Date().toISOString(),
-    })
-    .eq('id', row.id)
-    .eq('user_id', userId)
-    .select()
-    .single()
+  const { data: profile, error: readError } = await supabase.from('sender_profiles').select('*').eq('id', id).eq('user_id', userId).maybeSingle()
+  if (readError) throw readError
+  if (!profile) return null
+  const row = fromProfile(profile)
+  try { await revokeProviderToken(row.provider, profile.encrypted_refresh_token ? decryptSecret(profile.encrypted_refresh_token) : decryptSecret(profile.encrypted_access_token)) } catch { /* local disconnect still clears credentials */ }
+  const { data, error } = await supabase.from('sender_profiles').update({ status: 'disconnected', encrypted_access_token: null, encrypted_refresh_token: null, token_expires_at: null, updated_at: new Date().toISOString() }).eq('id', id).eq('user_id', userId).select().single()
   if (error) throw error
-  return data as SenderRow
+  return fromProfile(data)
 }
-
-async function markExpired(row: SenderRow, message: string): Promise<void> {
-  await supabase
-    .from('senders')
-    .update({ status: 'expired', last_error: message, updated_at: new Date().toISOString() })
-    .eq('id', row.id)
+async function markExpired(row: SenderRow): Promise<void> {
+  await supabase.from('sender_profiles').update({ status: 'expired', updated_at: new Date().toISOString() }).eq('id', row.id)
 }
-
-/** A usable access token for a connected sender, refreshed when it is about to expire. */
 export async function accessTokenForSender(row: SenderRow): Promise<string> {
-  if (row.status !== 'connected') {
-    throw new Error(`The ${PROVIDERS[row.provider].label} sender "${row.name}" is ${row.status}. Reconnect it to send again`)
+  if (row.status !== 'connected') throw new Error(`The sender "${row.name}" is ${row.status}. Reconnect it before sending`)
+  if (!row.access_token) throw new Error(`The sender "${row.name}" has no stored authorization. Reconnect it`)
+  const expired = row.token_expires_at && new Date(row.token_expires_at).getTime() <= Date.now() + 60_000
+  if (!expired) return decryptSecret(row.access_token)
+  if (row.provider !== 'google' || !row.refresh_token) { await markExpired(row); throw new Error(`The sender "${row.name}" authorization expired. Reconnect it`) }
+  try {
+    const refreshed = await refreshGoogleToken(row.refresh_token)
+    const { error } = await supabase.from('sender_profiles').update({ encrypted_access_token: encryptSecret(refreshed.accessToken), token_expires_at: refreshed.expiresAt, updated_at: new Date().toISOString() }).eq('id', row.id)
+    if (error) throw error
+    return refreshed.accessToken
+  } catch {
+    await markExpired(row)
+    throw new Error(`The sender "${row.name}" authorization could not be refreshed. Reconnect it`)
   }
-
-  const accessToken = decryptToken(row.access_token)
-  if (!accessToken) throw new Error(`The ${PROVIDERS[row.provider].label} sender "${row.name}" has no stored authorization. Reconnect it`)
-
-  const expiresAt = row.token_expires_at ? new Date(row.token_expires_at).getTime() : null
-  if (expiresAt === null || expiresAt - Date.now() > REFRESH_WINDOW_MS) return accessToken
-
-  const refreshToken = decryptToken(row.refresh_token)
-  if (!refreshToken) {
-    const message = `The ${PROVIDERS[row.provider].label} sender "${row.name}" authorization expired. Reconnect it to send again`
-    await markExpired(row, message)
-    throw new Error(message)
-  }
-
-  const refreshed = await refreshAccessToken(row.provider, refreshToken)
-  if (!refreshed) {
-    const message = `The ${PROVIDERS[row.provider].label} sender "${row.name}" authorization could not be refreshed. Reconnect it to send again`
-    await markExpired(row, message)
-    throw new Error(message)
-  }
-
-  await supabase
-    .from('senders')
-    .update({
-      access_token: encryptToken(refreshed.accessToken),
-      refresh_token: refreshed.refreshToken ? encryptToken(refreshed.refreshToken) : row.refresh_token,
-      token_expires_at: refreshed.expiresAt,
-      last_error: null,
-      updated_at: new Date().toISOString(),
-    })
-    .eq('id', row.id)
-  return refreshed.accessToken
 }
-
-export function phoneNumberIdFor(row: SenderRow): string | null {
-  const value = row.provider_data?.phoneNumberId
-  return typeof value === 'string' && value ? value : null
-}
-
-export interface ResolvedSenders {
-  assignments: Partial<Record<SenderChannel, SenderRow>>
-  /** User-facing blocker per channel, e.g. "no sender selected" or "sender disconnected". */
-  issues: Partial<Record<SenderChannel, string>>
-}
-
+export function phoneNumberIdFor(row: SenderRow): string | null { const value = row.provider_data?.phoneNumberId; return typeof value === 'string' ? value : null }
+export interface ResolvedSenders { assignments: Partial<Record<SenderChannel, SenderRow>>; issues: Partial<Record<SenderChannel, string>> }
 export function assignedSenderIds(config: any): SenderAssignments {
-  const raw = config?.senderIds
-  if (!raw || typeof raw !== 'object') return {}
-  const ids: SenderAssignments = {}
-  if (typeof raw.email === 'string' && raw.email.trim()) ids.email = raw.email.trim()
-  if (typeof raw.whatsapp === 'string' && raw.whatsapp.trim()) ids.whatsapp = raw.whatsapp.trim()
-  return ids
+  const raw = config?.senderIds || {}
+  return { ...(typeof raw.email === 'string' && raw.email.trim() ? { email: raw.email.trim() } : {}), ...(typeof raw.whatsapp === 'string' && raw.whatsapp.trim() ? { whatsapp: raw.whatsapp.trim() } : {}) }
 }
-
-/** Match a workflow's sender assignments against loaded sender rows (ownership enforced by the query). */
-export function assignmentsFrom(
-  channels: SenderChannel[],
-  config: any,
-  rows: SenderRow[],
-): ResolvedSenders {
-  const ids = assignedSenderIds(config)
-  const assignments: ResolvedSenders['assignments'] = {}
-  const issues: ResolvedSenders['issues'] = {}
-
+export function assignmentsFrom(channels: SenderChannel[], config: any, rows: SenderRow[]): ResolvedSenders {
+  const ids = assignedSenderIds(config), assignments: ResolvedSenders['assignments'] = {}, issues: ResolvedSenders['issues'] = {}
   for (const channel of channels) {
-    const label = channel === 'email' ? 'Gmail' : 'WhatsApp'
-    const senderId = ids[channel]
-    if (!senderId) {
-      issues[channel] = `Choose a connected ${label} sender for this workflow`
-      continue
-    }
-    const row = rows.find((candidate) => candidate.id === senderId)
-    if (!row || row.channel !== channel) {
-      issues[channel] = `The selected ${label} sender is not available. Choose another connected sender`
-      continue
-    }
-    if (row.status !== 'connected') {
-      issues[channel] = `The ${label} sender "${row.name}" is ${row.status}. Reconnect it before running`
-      continue
-    }
-    assignments[channel] = row
+    const label = channel === 'email' ? 'Gmail' : 'WhatsApp', row = rows.find((item) => item.id === ids[channel])
+    if (!ids[channel]) issues[channel] = `Choose a connected ${label} sender for this workflow`
+    else if (!row || row.channel !== channel) issues[channel] = `The selected ${label} sender is not available. Choose another connected sender`
+    else if (row.status !== 'connected') issues[channel] = `The ${label} sender "${row.name}" is ${row.status}. Reconnect it before running`
+    else assignments[channel] = row
   }
   return { assignments, issues }
 }
-
-/**
- * Resolve the senders assigned to a workflow for its owner.
- * Records a blocker per channel instead of throwing so previews can explain what is missing.
- */
-export async function resolveSenderAssignments(
-  userId: string,
-  type: string,
-  config: any,
-): Promise<ResolvedSenders> {
+export async function resolveSenderAssignments(userId: string, type: string, config: any): Promise<ResolvedSenders> {
   const channels = requiredChannels(type, config)
-  if (channels.length === 0) return { assignments: {}, issues: {} }
-  return assignmentsFrom(channels, config, await listSenders(userId))
+  return channels.length ? assignmentsFrom(channels, config, await listSenders(userId)) : { assignments: {}, issues: {} }
 }
-
 export async function connectedChannels(userId: string): Promise<Partial<Record<SenderChannel, boolean>>> {
   const rows = await listSenders(userId)
-  return {
-    email: rows.some((row) => row.channel === 'email' && row.status === 'connected'),
-    whatsapp: rows.some((row) => row.channel === 'whatsapp' && row.status === 'connected'),
-  }
+  return { email: rows.some((row) => row.channel === 'email' && row.status === 'connected'), whatsapp: rows.some((row) => row.channel === 'whatsapp' && row.status === 'connected') }
 }
-
-/** User-facing blockers for a workflow definition given already-loaded sender rows. */
-export function senderProblems(type: string, config: any, rows: SenderRow[]): string[] {
-  const { issues } = assignmentsFrom(requiredChannels(type, config), config, rows)
-  return Object.values(issues).filter((issue): issue is string => Boolean(issue))
-}
+export function senderProblems(type: string, config: any, rows: SenderRow[]): string[] { return Object.values(assignmentsFrom(requiredChannels(type, config), config, rows).issues).filter((v): v is string => Boolean(v)) }

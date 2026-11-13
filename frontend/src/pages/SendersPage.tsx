@@ -70,7 +70,7 @@ export function SendersPage() {
   useEffect(() => {
     const connected = searchParams.get('connected')
     const error = searchParams.get('error')
-    if (connected) toast.success(`Connected “${connected}”`)
+    if (connected) toast.success(connected === '1' ? 'Sender connected' : `Connected “${connected}”`)
     if (error) toast.error(error)
     if (connected || error) {
       const next = new URLSearchParams(searchParams)
@@ -208,7 +208,7 @@ export function SendersPage() {
                         <p className="truncate font-semibold text-slate-900">{sender.name}</p>
                         <span className={`rounded-full px-2 py-0.5 text-xs font-semibold capitalize ${statusTone(sender.status)}`}>{sender.status}</span>
                         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
-                          {sender.provider === 'google' ? 'Gmail' : 'WhatsApp'}
+                          {sender.provider === 'gmail' ? 'Gmail' : 'WhatsApp'}
                         </span>
                       </div>
                     )}
@@ -240,7 +240,7 @@ export function SendersPage() {
                       {busy === sender.id ? 'Opening provider…' : 'Reconnect'}
                     </Button>
                   )}
-                  {sender.status === 'revoked' && (
+                  {sender.status === 'disconnected' && (
                     <span className="inline-flex items-center gap-1 text-xs text-slate-400">
                       <Trash2 className="h-3.5 w-3.5" /> credentials removed
                     </span>

@@ -24,6 +24,8 @@ async function resolveCredentials(channel: SenderChannel, sender: SenderRow): Pr
     account: sender.account,
     accessToken,
     phoneNumberId: phoneNumberIdFor(sender),
+    senderProfileId: sender.id,
+    encryptedRefreshToken: sender.refresh_token,
   }
 }
 

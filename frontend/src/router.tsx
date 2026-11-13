@@ -19,7 +19,7 @@ import { LoginPage } from './pages/LoginPage'
 import { WorkflowsPage } from './pages/Workflows/Index'
 import { WorkflowFormPage } from './pages/Workflows/WorkflowFormPage'
 import { WorkflowHistoryPage } from './pages/Workflows/WorkflowHistoryPage'
-import { SendersPage } from './pages/SendersPage'
+import SendersPage from './pages/Senders/Index'
 
 export const router = createBrowserRouter([
   {
