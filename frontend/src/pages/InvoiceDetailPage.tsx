@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { getInvoice } from '../utils/api'
+import { getInvoice, getSettings } from '../utils/api'
 import { toast } from 'react-hot-toast'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
@@ -11,6 +11,7 @@ export function InvoiceDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const [invoice, setInvoice] = useState<any>(null)
+  const [businessProfile, setBusinessProfile] = useState<any>({})
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -27,6 +28,10 @@ export function InvoiceDetailPage() {
     })()
   }, [id])
 
+  useEffect(() => {
+    getSettings().then(setBusinessProfile).catch(() => undefined)
+  }, [])
+
   if (loading) return <div className="p-8 text-center text-star-400">Loading invoice…</div>
   if (!invoice) return <div className="p-8 text-center text-star-400">Invoice not found.</div>
 
@@ -35,7 +40,8 @@ export function InvoiceDetailPage() {
   const attachedDocument = Array.isArray(invoice.documents) ? invoice.documents[0] : invoice.documents
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <>
+    <div className="max-w-4xl mx-auto space-y-6 print:hidden">
       <div className="flex items-center justify-between">
         <Button variant="outline" asChild onClick={() => navigate('/invoices')}>
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to invoices
@@ -141,6 +147,75 @@ export function InvoiceDetailPage() {
         </div>
       )}
     </div>
+
+    <article className="invoice-print hidden bg-white text-slate-900 font-sans print:block">
+      <header className="flex justify-between gap-8 border-b-2 border-slate-800 pb-6">
+        <div className="min-w-0">
+          {businessProfile.company_logo && <img src={businessProfile.company_logo} alt="Company logo" className="mb-4 max-h-16 max-w-48 object-contain object-left" />}
+          <h1 className="text-xl font-bold">{businessProfile.company_name || 'StarCore'}</h1>
+          {businessProfile.company_address && <p className="mt-1 whitespace-pre-line text-sm text-slate-600">{businessProfile.company_address}</p>}
+          {businessProfile.company_email && <p className="text-sm text-slate-600">{businessProfile.company_email}</p>}
+          {businessProfile.tax_pin && <p className="text-sm text-slate-600">Tax PIN: {businessProfile.tax_pin}</p>}
+        </div>
+        <div className="shrink-0 text-right">
+          <h2 className="text-3xl font-extrabold tracking-tight">INVOICE</h2>
+          <table className="mt-3 ml-auto text-left text-sm">
+            <tbody>
+              <tr><td className="pr-4 font-semibold text-slate-600">Invoice No:</td><td className="font-mono font-medium">{invoice.invoice_number}</td></tr>
+              <tr><td className="pr-4 font-semibold text-slate-600">Date:</td><td>{formatDate(invoice.issued_date, false)}</td></tr>
+              <tr><td className="pr-4 font-semibold text-slate-600">Due Date:</td><td>{formatDate(invoice.due_date, false)}</td></tr>
+              <tr><td className="pr-4 font-semibold text-slate-600">Status:</td><td className="capitalize">{invoice.status}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </header>
+
+      <section className="my-7">
+        <p className="mb-1 text-xs font-bold uppercase tracking-wider text-slate-500">Billed To</p>
+        <p className="text-base font-bold">{client?.name || 'Unknown Client'}</p>
+        {client?.address && <p className="whitespace-pre-line text-sm text-slate-600">{client.address}</p>}
+        {client?.email && <p className="text-sm text-slate-600">{client.email}</p>}
+        {client?.phone && <p className="text-sm text-slate-600">{client.phone}</p>}
+      </section>
+
+      <table className="w-full border-collapse text-sm">
+        <thead className="bg-slate-900 text-white">
+          <tr>
+            <th className="px-3 py-2.5 text-left font-semibold">DESCRIPTION</th>
+            <th className="w-20 px-3 py-2.5 text-right font-semibold">QTY</th>
+            <th className="w-32 px-3 py-2.5 text-right font-semibold">UNIT PRICE</th>
+            <th className="w-32 px-3 py-2.5 text-right font-semibold">AMOUNT DUE</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-200 border-b border-slate-300">
+          {(invoice.items || []).map((item: any) => (
+            <tr key={item.id || item.description} className="break-inside-avoid">
+              <td className="px-3 py-3">{item.description}</td>
+              <td className="px-3 py-3 text-right align-top">{item.quantity}</td>
+              <td className="px-3 py-3 text-right align-top">{formatCurrency(item.unit_price)}</td>
+              <td className="px-3 py-3 text-right align-top font-medium">{formatCurrency(item.total ?? item.quantity * item.unit_price)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <section className="mt-6 flex justify-end">
+        <table className="w-64 text-sm">
+          <tbody>
+            <tr><td className="py-1 text-slate-600">Subtotal</td><td className="py-1 text-right">{formatCurrency(invoice.subtotal)}</td></tr>
+            <tr><td className="py-1 text-slate-600">Tax / VAT ({invoice.tax_rate}%)</td><td className="py-1 text-right">{formatCurrency(invoice.tax_amount)}</td></tr>
+            <tr className="border-t-2 border-slate-900 text-base font-bold"><td className="pt-2">Total Due</td><td className="pt-2 text-right">{formatCurrency(invoice.total)}</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer className="mt-12 space-y-1.5 border-t border-slate-200 pt-4 text-xs text-slate-700">
+        <p className="text-sm font-bold text-slate-900">Payment Terms</p>
+        <p>{invoice.payment_terms || businessProfile.payment_terms || 'Please use the invoice number as your payment reference.'}</p>
+        {invoice.notes && <p className="pt-2 italic text-slate-600">Note: {invoice.notes}</p>}
+      </footer>
+    </article>
+    </>
   )
 }
 

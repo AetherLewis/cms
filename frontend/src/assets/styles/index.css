@@ -50,3 +50,58 @@
     text-wrap: balance;
   }
 }
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  html,
+  body,
+  #root,
+  main {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  #root .min-h-screen {
+    min-height: 0 !important;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  main {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .invoice-print {
+    width: 100%;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 0;
+    color: #0f172a;
+    background: #ffffff;
+  }
+
+  .invoice-print thead {
+    display: table-header-group;
+  }
+
+  .invoice-print tr,
+  .invoice-print img {
+    break-inside: avoid;
+  }
+}
